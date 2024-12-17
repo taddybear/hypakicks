@@ -24,11 +24,11 @@ export default function ProductPrice({
   return (
     <div className="flex flex-col text-ui-fg-base">
       <span
-        className={clx("text-xl-semi", {
+        className={clx("text-[1.063rem] Poppins700 text-[#4D4D4D]", {
           "text-ui-fg-interactive": selectedPrice.price_type === "sale",
         })}
       >
-        {!variant && "From "}
+        {!variant && ""}
         <span
           data-testid="product-price"
           data-value={selectedPrice.calculated_price_number}

@@ -63,17 +63,80 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
-                  <div
+                <PopoverPanel
+                  className="bg-white w-[78%]  p-6 border-r flex flex-col z-[99999] absolute top-0 w-full h-[100vh] sm:min-w-min z-30 inset-x-0 text-sm backdrop-blur-2xl"
+                  style={{ boxShadow: "2px 0 5px rgba(0, 0, 0, 0.5)" }}
+                >
+                  <div>
+                    <div className="flex justify-between">
+                      <h1 className="text-xl	py-[0.625rem] Poppins500">
+                        Mobile Menu
+                      </h1>
+                      <div className=" rounded-full border-2 border-[#44b865] ">
+                        <button
+                          data-testid="close-menu-button"
+                          onClick={close}
+                          className="px-4 py-1.5 text-[#44b865] h-full w-full text-lg Poppins600"
+                        >
+                          X
+                        </button>
+                      </div>
+                    </div>
+                    <ul className="flex flex-col">
+                      <a
+                        href="/"
+                        className="py-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        Home
+                      </a>
+                      <a
+                        href="/shop"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        Shop
+                      </a>
+                      <a
+                        href="/about-us"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        About Us
+                      </a>
+                      <a
+                        href="/contact-us"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        Contact Us
+                      </a>
+                      <a
+                        href="/shipping-and-delivery"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        Shipping & Delivery
+                      </a>
+                      <a
+                        href="/faq"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        FAQ
+                      </a>
+                      <a
+                        href="/orders-tracking"
+                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
+                      >
+                        Order Tracking
+                      </a>
+                    </ul>
+                  </div>
+                  {/* <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
-                  >
-                    <div className="flex justify-end" id="xmark">
+                    className="flex flex-col h-full  rounded-rounded justify-between p-6"
+                  > */}
+                  {/* <div className="flex justify-end" id="xmark">
                       <button data-testid="close-menu-button" onClick={close}>
                         <XMark />
                       </button>
-                    </div>
-                    <ul className="flex flex-col gap-6 items-start justify-start">
+                    </div> */}
+                  {/* <ul className="flex flex-col gap-6 items-start justify-start">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
                           <li key={name}>
@@ -88,8 +151,8 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                           </li>
                         )
                       })}
-                    </ul>
-                    <div className="flex flex-col gap-y-6">
+                    </ul> */}
+                  {/* <div className="flex flex-col gap-y-6">
                       <div
                         className="flex justify-between"
                         onMouseEnter={toggleState.open}
@@ -112,8 +175,8 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         © {new Date().getFullYear()} Medusa Store. All rights
                         reserved.
                       </Text>
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
                 </PopoverPanel>
               </Transition>
             </>

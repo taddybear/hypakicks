@@ -37,8 +37,8 @@ const Aboutus = () => {
   ]
 
   return (
-    <section className="container px-3">
-      <div className="lg:px-3">
+    <section className="container ">
+      <div className="px-3">
         <h1 className="text-center uppercase my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           ABout us
         </h1>
@@ -94,7 +94,7 @@ const Aboutus = () => {
             {teamMembers.map((member) => (
               <div
                 key={member.id}
-                className="my-5 lg:my-[0.625rem] mx-2 rounded-[0.5rem] border-[1px] border-[#efefef]"
+                className="my-5 lg:my-[0.625rem] lg:mx-2 rounded-[0.5rem] border-[1px] border-[#efefef]"
               >
                 <Image
                   src={member.imageSrc}

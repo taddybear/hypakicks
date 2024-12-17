@@ -14,7 +14,7 @@ export default async function Footer() {
 
   return (
     <>
-      <footer className="container py-6">
+      <footer className="container px-3 py-6">
         <a href="/" className="w-[150px] lg:w-[200px] block">
           <Image src={Hypakicks} width={200} height={41} alt="" className="" />
         </a>
@@ -42,19 +42,19 @@ export default async function Footer() {
                 Information
               </li>
               <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                About Us
+                <a href="/about-us">About Us</a>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                Contact Us
+                <a href="/contact-us">Contact Us</a>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                Order Tracking
+                <a href="/orders-tracking">Order Tracking</a>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                Privacy Policy
+                <a href="">Privacy Policy</a>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                Term and Conditions
+                <a href="">Term and Conditions</a>
               </li>
             </ul>
           </div>

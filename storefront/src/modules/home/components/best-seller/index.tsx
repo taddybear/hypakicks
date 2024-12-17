@@ -43,14 +43,18 @@ export default async function BestSeller({
   })
   return (
     <>
-      <section className="container px-3 lg:px-6">
+      <section className="container px-3">
         <div className="flex justify-between items-center">
           <h1 className="leading-[2.5rem] my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
-            Best <span className="text-[#44B865]">sellers</span>
+            Best
+            <span className="text-[#44B865]">
+              <br className="lg:hidden" />
+              sellers
+            </span>
           </h1>
           <div>
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
-              <a href="" className=" whitespace-nowrap	">
+              <a href="/shop" className=" whitespace-nowrap	">
                 VIEW BEST SELLERS
               </a>
               <svg

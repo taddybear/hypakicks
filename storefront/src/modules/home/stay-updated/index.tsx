@@ -1,7 +1,7 @@
 const StayUpdated = () => {
   return (
     <>
-      <section className="container pt-[0.625rem] px-3 lg:px-0">
+      <section className="container pt-[0.625rem] px-3 lg:px-3">
         <div
           className="my-[1.25rem] py-10 px-5 rounded-[2rem] text-white flex flex-col items-center "
           style={{
@@ -25,7 +25,7 @@ const StayUpdated = () => {
               placeholder="Enter your email"
               required
             />
-            <button className="bg-[#44b865] Poppins600 text-[1.063rem] w-full lg:w-[30%] m-auto text-white p-[0.938rem] rounded-[0.625rem]">
+            <button className="hover:bg-[#353535] bg-[#44b865] Poppins600 text-[1.063rem] w-full lg:w-[30%] m-auto text-white p-[0.938rem] rounded-[0.625rem]">
               Submit
             </button>
           </form>

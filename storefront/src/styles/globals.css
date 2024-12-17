@@ -192,20 +192,18 @@
 /* review */
 @keyframes review-scroll-left {
   0% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
-
   100% {
-    transform: translateX(-35%);
+    transform: translateX(-100%);
   }
 }
 @keyframes review-scroll-right {
   0% {
-    transform: translateX(-40%);
+    transform: translateX(-100%);
   }
-
   100% {
-    transform: translateX(0%);
+    transform: translateX(100);
   }
 }
 
@@ -244,3 +242,5 @@
     transform: rotate(-30deg);
   }
 }
+
+/*  */

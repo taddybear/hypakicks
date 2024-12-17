@@ -1,7 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@medusajs/ui"
 import Image from "next/image"
-
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
 }

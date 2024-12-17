@@ -71,7 +71,7 @@ export default async function Nav() {
             </a>
           ))}
         </ul>
-        <div className="flex items-center lg:w-[16.66666667%]">
+        <div className="flex justify-end items-center lg:w-[16.66666667%]">
           <Search />
           <LocalizedClientLink
             className="hover:text-ui-fg-base"

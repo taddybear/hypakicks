@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <>
       <section className="container px-3">
-        <div className="px-3 py-5">
+        <div className="py-5">
           <h1 className=" text-[#4D4D4D] text-[2.5rem] leading-[2.5rem] lg:leading-[5.75rem] lg:text-[5.75rem] Poppins700 ">
             Discover Our <br />
             <span className="text-[#44b865] relative flex">
@@ -34,7 +34,7 @@ const Hero = () => {
           </p>
           <div className=" flex items-center space-x-2">
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <a href="" className=" whitespace-nowrap	">
+              <a href="/shop" className=" whitespace-nowrap	">
                 SHOP SNEAKERS
               </a>
               <svg
@@ -55,7 +55,7 @@ const Hero = () => {
               </svg>
             </li>
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <a href="" className="whitespace-nowrap	">
+              <a href="/about-us" className="whitespace-nowrap	">
                 About Us
               </a>
               <svg
@@ -106,7 +106,7 @@ const Hero = () => {
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
           </div>
-          <p className="relative ml-[0.625rem] mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
+          <p className="Poppins400 relative ml-[0.625rem] mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
             Already trusted by 1.2k+ people
             <div className="lg:hidden absolute top-10 right-3">
               <Image
@@ -114,7 +114,7 @@ const Hero = () => {
                 alt=""
                 width={232}
                 height={113}
-                className="rotate-animation w-full"
+                className="rotate-animation w-full w-[232px] h-[113px]"
               />
             </div>
           </p>

@@ -44,15 +44,15 @@ const Testimonials = () => {
 
   return (
     <>
-      <div className="px-3 container">
-        <h1 className="my-4 px-3 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+      <div className=" container">
+        <h1 className="px-3 my-4  text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           Testimonials
         </h1>
 
         {/* slider One */}
-        <div className="mx-3 lg:mx-6 overflow-hidden">
-          <div className="flex lg:grid lg:grid-cols-3 animate-[review-scroll-left_10s_linear_infinite]">
-            <div className="shrink-0  w-[100%] flex mr-[0.625rem]">
+        <div className="mx-3 lg:mx-3 overflow-hidden">
+          <div className="flex animate-[review-scroll-left_50s_linear_infinite]">
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
@@ -130,7 +130,7 @@ const Testimonials = () => {
                 </div>
               </div>
             </div>
-            <div className="shrink-0  w-[100%] flex mr-[0.625rem]">
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
@@ -208,7 +208,243 @@ const Testimonials = () => {
                 </div>
               </div>
             </div>
-            <div className="shrink-0  w-[100%] flex">
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex">
+              <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
+                <div className="flex items-center mb-[0.625rem]">
+                  <Image
+                    src={ImgOne}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                  />
+                  <Image
+                    src={Rating}
+                    alt=""
+                    width={100}
+                    height={20}
+                    className=""
+                  />
+                </div>
+                <p className="mb-4 text-xs text-[#474747] Poppins400">
+                  My friends are jealous of my new sneakers! Thanks for the
+                  quick delivery!
+                </p>
+                <Image
+                  src={ShoeFour}
+                  alt=""
+                  width={147}
+                  height={180}
+                  className="rounded-[1.25rem] h-[180px] w-full"
+                />
+              </div>
+
+              <div className="w-[50%] lg:h-full">
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
+                  <div className="flex items-center mb-[0.625rem] ">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
+                  <div className="flex items-center mb-[0.625rem]">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Duplicate */}
+
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
+              <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
+                <div className="flex items-center mb-[0.625rem]">
+                  <Image
+                    src={ImgOne}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                  />
+                  <Image
+                    src={Rating}
+                    alt=""
+                    width={100}
+                    height={20}
+                    className=""
+                  />
+                </div>
+                <p className="mb-4 text-xs text-[#474747] Poppins400">
+                  My friends are jealous of my new sneakers! Thanks for the
+                  quick delivery!
+                </p>
+                <Image
+                  src={ShoeSix}
+                  alt=""
+                  width={147}
+                  height={180}
+                  className="rounded-[1.25rem] h-[180px] w-full"
+                />
+              </div>
+
+              <div className="w-[50%] lg:h-full">
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
+                  <div className="flex items-center mb-[0.625rem] ">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
+                  <div className="flex items-center mb-[0.625rem]">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
+              <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
+                <div className="flex items-center mb-[0.625rem]">
+                  <Image
+                    src={ImgOne}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                  />
+                  <Image
+                    src={Rating}
+                    alt=""
+                    width={100}
+                    height={20}
+                    className=""
+                  />
+                </div>
+                <p className="mb-4 text-xs text-[#474747] Poppins400">
+                  My friends are jealous of my new sneakers! Thanks for the
+                  quick delivery!
+                </p>
+                <Image
+                  src={ShoeFive}
+                  alt=""
+                  width={147}
+                  height={180}
+                  className="rounded-[1.25rem] h-[180px] w-full"
+                />
+              </div>
+
+              <div className="w-[50%] lg:h-full">
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
+                  <div className="flex items-center mb-[0.625rem] ">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+                <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
+                  <div className="flex items-center mb-[0.625rem]">
+                    <Image
+                      src={ImgOne}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                    />
+                    <Image
+                      src={Rating}
+                      alt=""
+                      width={100}
+                      height={20}
+                      className=""
+                    />
+                  </div>
+                  <p className="text-xs mb-4 text-[#474747] Poppins400">
+                    My friends are jealous of my new sneakers! Thanks for the
+                    quick delivery!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="shrink-0  w-[100%] lg:w-[33.3%] flex">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
@@ -289,9 +525,9 @@ const Testimonials = () => {
           </div>
         </div>
         {/* slider Two */}
-        <div className="mx-3 lg:mx-6 overflow-hidden">
-          <div className="flex lg:px-3 w-full mt-3 animate-[review-scroll-right_14s_linear_infinite]">
-            {SliderTwo.map((item, index) => (
+        <div className="mx-3 lg:mx-3 overflow-hidden">
+          <div className="flex lg:px-3 w-full mt-3 animate-[review-scroll-right_50s_linear_infinite]">
+            {[...SliderTwo, ...SliderTwo].map((item, index) => (
               <div
                 key={index}
                 className="shrink-0  h-full w-[50%] lg:w-[16.66%] m-[0.313rem]"
@@ -322,8 +558,8 @@ const Testimonials = () => {
           </div>
         </div>
         {/* slider Three */}
-        <div className="mx-3 lg:mx-6 overflow-hidden">
-          <div className="flex mt-3 lg:grid lg:grid-cols-3 animate-[review-scroll-left_14s_linear_infinite]">
+        <div className="mx-3 lg:mx-3 overflow-hidden">
+          <div className="flex mt-3 lg:grid lg:grid-cols-3 animate-[review-scroll-left_60s_linear_infinite]">
             <div className="shrink-0  w-[100%] flex mr-[0.625rem]">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">

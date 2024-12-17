@@ -74,7 +74,7 @@ const Sustainability = () => {
   }, [])
   return (
     <>
-      <div className="container px-3">
+      <div className="container ">
         <div className="px-3">
           <h1 className="mt-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
             Sustainability

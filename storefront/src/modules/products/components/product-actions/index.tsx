@@ -115,7 +115,14 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col" ref={actionsRef}>
+        <h1 className="text-[#404040] text-[2rem] Poppins500">
+          {product.title}
+        </h1>
+        <div className="pb-[1.5em]">
+          <ProductPrice product={product} variant={selectedVariant} />
+        </div>
+
         <div>
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-4">
@@ -133,14 +140,29 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <Divider />
             </div>
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
-
-        <Button
+        <button
+          onClick={handleAddToCart}
+          data-testid="add-product-button"
+          disabled={
+            !inStock ||
+            !selectedVariant ||
+            !!disabled ||
+            isAdding ||
+            !isValidVariant
+          }
+          className="bg-[#44b865] rounded-[0.625rem] p-4 text-white Poppins600"
+        >
+          {!selectedVariant && !options
+            ? "Select variant"
+            : !inStock || !isValidVariant
+            ? "Out of stock"
+            : "Add to cart"}
+        </button>
+        {/* <Button
           onClick={handleAddToCart}
           disabled={
             !inStock ||
@@ -159,7 +181,7 @@ export default function ProductActions({
             : !inStock || !isValidVariant
             ? "Out of stock"
             : "Add to cart"}
-        </Button>
+        </Button> */}
         <MobileActions
           product={product}
           variant={selectedVariant}
