@@ -48,7 +48,22 @@
     -webkit-appearance: none;
   }
 }
+::-webkit-scrollbar {
+  width: 12px;
+}
 
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #44b865;
+  border-radius: 8px;
+}
+
+/* ::-webkit-scrollbar-thumb:hover {
+  background: #554815;
+} */
 @layer components {
   .content-container {
     @apply max-w-[1440px] w-full mx-auto px-6;
@@ -108,5 +123,124 @@
 
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
+  }
+}
+@media (min-width: 390px) {
+  .container {
+    max-width: 100%;
+    margin: auto;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+    margin: auto;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+    margin: auto;
+  }
+}
+
+.Poppins700 {
+  font-family: var(--font-Poppins700);
+}
+.Poppins400 {
+  font-family: var(--font-Poppins400);
+}
+.Poppins600 {
+  font-family: var(--font-Poppins600);
+}
+.Poppins300 {
+  font-family: var(--font-Poppins300);
+}
+.Poppins500 {
+  font-family: var(--font-Poppins500);
+}
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* review */
+@keyframes review-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-35%);
+  }
+}
+@keyframes review-scroll-right {
+  0% {
+    transform: translateX(-40%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes review-scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-150%);
+    }
+  }
+
+  @keyframes review-scroll-right {
+    0% {
+      transform: translateX(-150%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}
+
+.rotate-animation {
+  animation: rotate 10s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(-25deg);
+  }
+  100% {
+    transform: rotate(-30deg);
   }
 }

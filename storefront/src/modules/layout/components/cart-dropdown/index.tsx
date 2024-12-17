@@ -85,7 +85,38 @@ const CartDropdown = ({
             className="hover:text-ui-fg-base"
             href="/cart"
             data-testid="nav-cart-link"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+          >
+            <div className="m-[0.313rem]  px-2 py-1.5 rounded-full border-2 border-[#44b865]">
+              <div className="w-[20px] h-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 256 256"
+                  focusable="false"
+                  style={{
+                    userSelect: "none",
+                    width: "100%",
+                    height: "100%",
+                    display: "inline-block",
+                    fill: "var(--token-720cfe3b-5389-4478-9f37-cf225f3a4f1a, rgb(68, 184, 101))",
+                    color:
+                      "var(--token-720cfe3b-5389-4478-9f37-cf225f3a4f1a, rgb(68, 184, 101))",
+                    flexShrink: 0,
+                  }}
+                >
+                  <g
+                    style={{
+                      color:
+                        "var(--token-720cfe3b-5389-4478-9f37-cf225f3a4f1a, rgb(68, 184, 101))",
+                    }}
+                  >
+                    <path d="M241.55,64.74A12,12,0,0,0,232,60H60.23L51.56,28.79A12,12,0,0,0,40,20H20a12,12,0,0,0,0,24H30.88l34.3,123.49a28.09,28.09,0,0,0,27,20.51H191a28.09,28.09,0,0,0,27-20.51l25.63-92.28A12,12,0,0,0,241.55,64.74ZM194.8,161.07A4,4,0,0,1,191,164H92.16a4,4,0,0,1-3.85-2.93L66.9,84H216.21ZM108,220a20,20,0,1,1-20-20A20,20,0,0,1,108,220Zm104,0a20,20,0,1,1-20-20A20,20,0,0,1,212,220Z"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            {/* {`Cart (${totalItems})`} */}
+          </LocalizedClientLink>
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}

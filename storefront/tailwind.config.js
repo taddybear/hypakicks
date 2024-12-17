@@ -59,15 +59,22 @@ module.exports = {
         "3xl": "2rem",
       },
       fontFamily: {
+        Poppins400: ["var(--font-Poppins400)"],
+        Poppins300: ["var(--font-Poppins300)"],
+        Poppins700: ["var(--font-Poppins700)"],
+        Poppins600: ["var(--font-Poppins600)"],
+        Poppins500: ["var(--font-Poppins500)"],
+
         sans: [
           "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
           "sans-serif",
+          // "-apple-system",
+          // "BlinkMacSystemFont",
+          // "Segoe UI",
+          // "Roboto",
+          // "Helvetica Neue",
+          // "Ubuntu",
+          "Poppins",
         ],
       },
       keyframes: {

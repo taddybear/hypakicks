@@ -20,7 +20,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   const toggleState = useToggleState()
 
   return (
-    <div className="h-full">
+    <div className="lg:hidden h-full mr-[0.625rem]">
       <div className="flex items-center h-full">
         <Popover className="h-full flex">
           {({ open, close }) => (
@@ -30,7 +30,26 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                   data-testid="nav-menu-button"
                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
                 >
-                  Menu
+                  <div className="px-2 py-1.5 rounded-full border-2 border-[#44b865]">
+                    <div className="w-[20px] h-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                        color="var(--token-720cfe3b-5389-4478-9f37-cf225f3a4f1a, rgb(68, 184, 101))"
+                        style={{
+                          userSelect: "none",
+                          width: "100%",
+                          height: "100%",
+                          display: "inline-block",
+                          fill: "var(--token-720cfe3b-5389-4478-9f37-cf225f3a4f1a, rgb(68, 184, 101))",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </Popover.Button>
               </div>
 
