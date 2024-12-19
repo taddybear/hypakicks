@@ -1,7 +1,7 @@
 export default function ContactForm() {
   return (
     <section className="container px-3">
-      <h1 className=" my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+      <h1 className="leading-[2.5rem] lg:leading-[5rem] my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
         Write us a message
       </h1>
 

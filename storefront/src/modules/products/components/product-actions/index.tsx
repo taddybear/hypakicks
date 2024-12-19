@@ -116,7 +116,7 @@ export default function ProductActions({
   return (
     <>
       <div className="flex flex-col" ref={actionsRef}>
-        <h1 className="text-[#404040] text-[2rem] Poppins500">
+        <h1 className="text-[#404040] text-2xl mt-6 lg:mt-0 lg:text-[2rem] Poppins500">
           {product.title}
         </h1>
         <div className="pb-[1.5em]">

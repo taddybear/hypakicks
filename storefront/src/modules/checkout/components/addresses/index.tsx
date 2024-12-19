@@ -41,14 +41,14 @@ const Addresses = ({
 
   return (
     <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
-        >
-          Shipping Address
+      <button
+        onClick={handleEdit}
+        className="w-full flex flex-row items-center justify-between mb-6"
+      >
+        <h1 className="w-full text-[1.313rem] Poppins600 flex flex-row text-3xl-regular gap-x-2 items-baseline">
+          Delivery
           {!isOpen && <CheckCircleSolid />}
-        </Heading>
+        </h1>
         {!isOpen && cart?.shipping_address && (
           <Text>
             <button
@@ -60,7 +60,7 @@ const Addresses = ({
             </button>
           </Text>
         )}
-      </div>
+      </button>
       {isOpen ? (
         <form action={formAction}>
           <div className="pb-8">
@@ -83,7 +83,10 @@ const Addresses = ({
                 <BillingAddress cart={cart} />
               </div>
             )}
-            <SubmitButton className="mt-6" data-testid="submit-address-button">
+            <SubmitButton
+              className="mt-6 bg-[#161d25] !rounded-sm Poppins600"
+              data-testid="submit-address-button"
+            >
               Continue to delivery
             </SubmitButton>
             <ErrorMessage error={message} data-testid="address-error-message" />

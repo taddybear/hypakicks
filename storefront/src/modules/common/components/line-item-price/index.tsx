@@ -52,7 +52,7 @@ const LineItemPrice = ({
           </>
         )}
         <span
-          className={clx("text-base-regular", {
+          className={clx("text-black Poppins700", {
             "text-ui-fg-interactive": hasReducedPrice,
           })}
           data-testid="product-price"

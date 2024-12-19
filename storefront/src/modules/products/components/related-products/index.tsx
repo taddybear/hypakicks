@@ -64,10 +64,10 @@ export default async function RelatedProducts({
       <Sustainability />
       <Faq />
       <StayUpdated />
-      <h1 className="pb-2 text-[2rem] Poppins-500 container">
+      <h1 className="px-3 pb-2 text-[2rem] Poppins-500 container">
         Related products
       </h1>
-      <ul className="container grid grid-cols-2 lg:grid-cols-4">
+      <ul className="px-3 container grid grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
           <li key={product.id} className="m-[0.313rem]">
             <Product region={region} product={product} />

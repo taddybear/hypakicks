@@ -6,11 +6,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 export function Pagination({
   page,
   totalPages,
-  'data-testid': dataTestid
+  "data-testid": dataTestid,
 }: {
   page: number
   totalPages: number
-  'data-testid'?: string
+  "data-testid"?: string
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -35,9 +35,19 @@ export function Pagination({
   ) => (
     <button
       key={p}
-      className={clx("txt-xlarge-plus text-ui-fg-muted", {
-        "text-ui-fg-base hover:text-ui-fg-subtle": isCurrent,
-      })}
+      className={clx(
+        "rounded-[0.3rem] border-2 Poppins600 m-[0.313rem] px-[0.938rem] py-[0.625rem] hover:cursor-pointer", // Common styles
+        isCurrent
+          ? "bg-white border-[#44b865] text-black"
+          : "bg-[#44b865] border-[#44b865] text-white"
+      )}
+      // className={clx(
+      //   "rounded-[0.3rem] text-white border-2 border-[#44b865] bg-[#44b865] Poppins600 m-[0.313rem] px-[0.938rem] py-[0.625rem]",
+      //   {
+      //     "bg-white border-2 border-[#44b865] text-black hover:text-ui-fg-subtle":
+      //       isCurrent,
+      //   }
+      // )}
       disabled={isCurrent}
       onClick={() => handlePageChange(p)}
     >
@@ -108,7 +118,14 @@ export function Pagination({
   // Render the component
   return (
     <div className="flex justify-center w-full mt-12">
-      <div className="flex gap-3 items-end" data-testid={dataTestid}>{renderPageButtons()}</div>
+      <div
+        className="flex gap-3 items-end "
+        style={{ color: "white !important" }}
+        data-testid={dataTestid}
+      >
+        {renderPageButtons()}
+        {/* {renderPageButtons()} */}
+      </div>
     </div>
   )
 }

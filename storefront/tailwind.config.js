@@ -78,6 +78,18 @@ module.exports = {
         ],
       },
       keyframes: {
+        "infinite-scroll-slow": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
+        "infinite-scroll-reverse": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(0)" },
+        },
         ring: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -149,6 +161,10 @@ module.exports = {
         },
       },
       animation: {
+        "infinite-scroll-slow": "infinite-scroll-slow 80s linear infinite",
+        "infinite-scroll-reverse":
+          "infinite-scroll-reverse 25s linear infinite",
+        "infinite-scroll": "infinite-scroll 25s linear infinite",
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
         "fade-in-right":
           "fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards",

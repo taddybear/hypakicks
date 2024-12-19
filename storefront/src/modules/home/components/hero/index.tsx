@@ -6,6 +6,7 @@ import ImgTwo from "../../../../../public/homepage/imgTwo.webp"
 import ImgThree from "../../../../../public/homepage/imgThree.webp"
 import ImgFour from "../../../../../public/homepage/imgFour.webp"
 import Shoe from "../../../../../public/homepage/shoe.webp"
+import Video from "../video"
 
 const Hero = () => {
   return (
@@ -29,7 +30,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          <p className="mb-4 lg:text-[1.375rem] text-[#4D4D4D] PoppinsR ">
+          <p className="mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
             Find your style with exclusive sneakers - only at Hypa Kicks.
           </p>
           <div className=" flex items-center space-x-2">
@@ -119,15 +120,7 @@ const Hero = () => {
             </div>
           </p>
 
-          <div className="w-[200px] h-[200px]"></div>
-          {/* <iframe
-            className="w-full aspect-video self-stretch md:min-h-96"
-            src="https://www.youtube.com/embed/668nUCeBHyY"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Product Overview Video"
-          /> */}
+          <Video />
         </div>
       </section>
     </>

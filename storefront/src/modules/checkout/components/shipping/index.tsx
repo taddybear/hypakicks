@@ -71,18 +71,21 @@ const Shipping: React.FC<ShippingProps> = ({
 
   return (
     <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+      <button
+        onClick={handleEdit}
+        className="w-full mt-4 flex flex-row items-center justify-between mb-6"
+      >
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row w-full text-[1.313rem] Poppins600  gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none":
                 !isOpen && cart.shipping_methods?.length === 0,
             }
           )}
         >
-          Delivery
+          Shipping method
           {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
@@ -101,7 +104,7 @@ const Shipping: React.FC<ShippingProps> = ({
               </button>
             </Text>
           )}
-      </div>
+      </button>
       {isOpen ? (
         <div data-testid="delivery-options-container">
           <div className="pb-8">
@@ -146,11 +149,11 @@ const Shipping: React.FC<ShippingProps> = ({
 
           <Button
             size="large"
-            className="mt-6"
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={!cart.shipping_methods?.[0]}
             data-testid="submit-delivery-option-button"
+            className="mt-6 bg-[#161d25] !rounded-sm Poppins600"
           >
             Continue to payment
           </Button>

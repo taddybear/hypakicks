@@ -53,7 +53,7 @@ export default async function BestSeller({
             </span>
           </h1>
           <div>
-            <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
+            <li className="Poppins700 text-xs lg:text-base text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
               <a href="/shop" className=" whitespace-nowrap	">
                 VIEW BEST SELLERS
               </a>

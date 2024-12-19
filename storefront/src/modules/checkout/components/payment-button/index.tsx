@@ -179,6 +179,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         onClick={handlePayment}
         size="large"
         data-testid="submit-order-button"
+        className="bg-[#161d25] !rounded-sm Poppins600 w-full text-lg"
       >
         Place order
       </Button>

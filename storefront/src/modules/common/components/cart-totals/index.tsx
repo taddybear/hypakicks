@@ -5,6 +5,7 @@ import React from "react"
 
 type CartTotalsProps = {
   totals: {
+    items: any
     total?: number | null
     subtotal?: number | null
     tax_total?: number | null
@@ -31,10 +32,14 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     <div>
       <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
         <div className="flex items-center justify-between">
-          <span className="flex gap-x-1 items-center">
-            Subtotal (excl. shipping and taxes)
+          <span className="flex gap-x-1 items-center text-black Poppins400">
+            Subtotal * {totals?.items?.length} items
           </span>
-          <span data-testid="cart-subtotal" data-value={subtotal || 0}>
+          <span
+            data-testid="cart-subtotal"
+            data-value={subtotal || 0}
+            className="text-black Poppins400"
+          >
             {convertToLocale({ amount: subtotal ?? 0, currency_code })}
           </span>
         </div>
@@ -51,14 +56,14 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
             </span>
           </div>
         )}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between text-black Poppins400">
           <span>Shipping</span>
           <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
             {convertToLocale({ amount: shipping_subtotal ?? 0, currency_code })}
           </span>
         </div>
-        <div className="flex justify-between">
-          <span className="flex gap-x-1 items-center ">Taxes</span>
+        <div className="flex justify-between text-black Poppins400">
+          <span className="flex gap-x-1 items-center ">Estimated taxes</span>
           <span data-testid="cart-taxes" data-value={tax_total || 0}>
             {convertToLocale({ amount: tax_total ?? 0, currency_code })}
           </span>
@@ -78,15 +83,20 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
         )}
       </div>
       <div className="h-px w-full border-b border-gray-200 my-4" />
-      <div className="flex items-center justify-between text-ui-fg-base mb-2 txt-medium ">
+      <div className="flex items-center justify-between mb-2 text-[1.188rem] Poppins700">
         <span>Total</span>
-        <span
-          className="txt-xlarge-plus"
-          data-testid="cart-total"
-          data-value={total || 0}
-        >
-          {convertToLocale({ amount: total ?? 0, currency_code })}
-        </span>
+        <div>
+          <span className="Poppins400 text-xs uppercase mr-1">
+            {currency_code}
+          </span>
+          <span
+            className="txt-xlarge-plus"
+            data-testid="cart-total"
+            data-value={total || 0}
+          >
+            {convertToLocale({ amount: total ?? 0, currency_code })}
+          </span>
+        </div>
       </div>
       <div className="h-px w-full border-b border-gray-200 mt-4" />
     </div>

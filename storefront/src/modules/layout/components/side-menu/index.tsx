@@ -64,8 +64,10 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveTo="opacity-0"
               >
                 <PopoverPanel
-                  className="bg-white w-[78%]  p-6 border-r flex flex-col z-[99999] absolute top-0 w-full h-[100vh] sm:min-w-min z-30 inset-x-0 text-sm backdrop-blur-2xl"
-                  style={{ boxShadow: "2px 0 5px rgba(0, 0, 0, 0.5)" }}
+                  className="bg-white w-[78%] p-6 border-r flex flex-col z-[99999] absolute top-0 h-[100vh] sm:min-w-min z-30 inset-x-0 text-sm backdrop-blur-2xl"
+                  style={{
+                    boxShadow: "2px 0 5px rgba(0, 0, 0, 0.5)",
+                  }}
                 >
                   <div>
                     <div className="flex justify-between">

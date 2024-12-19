@@ -35,9 +35,9 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    border: 1px solid #212121;
-    -webkit-text-fill-color: #212121;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    /* border: 1px solid #212121; */
+    /* -webkit-text-fill-color: #212121; */
+    /* -webkit-box-shadow: 0 0 0px 1000px #fff inset; */
     transition: background-color 5000s ease-in-out 0s;
   }
 
@@ -180,52 +180,6 @@
 .Poppins500 {
   font-family: var(--font-Poppins500);
 }
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* review */
-@keyframes review-scroll-left {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-@keyframes review-scroll-right {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100);
-  }
-}
-
-@media (max-width: 768px) {
-  @keyframes review-scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-150%);
-    }
-  }
-
-  @keyframes review-scroll-right {
-    0% {
-      transform: translateX(-150%);
-    }
-    100% {
-      transform: translateX(0%);
-    }
-  }
-}
 
 .rotate-animation {
   animation: rotate 10s ease-in-out infinite;
@@ -242,5 +196,3 @@
     transform: rotate(-30deg);
   }
 }
-
-/*  */

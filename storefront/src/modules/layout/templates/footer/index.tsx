@@ -4,6 +4,8 @@ import { Text, clx } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
 import Image from "next/image"
+import Link from "next/link"
+
 import Hypakicks from "../../../../../public/homepage/hypakicks.webp"
 
 export default async function Footer() {
@@ -15,9 +17,9 @@ export default async function Footer() {
   return (
     <>
       <footer className="container px-3 py-6">
-        <a href="/" className="w-[150px] lg:w-[200px] block">
+        <Link href="/" className="w-[150px] lg:w-[200px] block">
           <Image src={Hypakicks} width={200} height={41} alt="" className="" />
-        </a>
+        </Link>
         <p className="py-[0.625rem] text-[#474747] text-sm Poppins400">
           Find your new favorite sneakers with fast delivery and 24/7 support at
           Hypa Kicks.
@@ -29,10 +31,10 @@ export default async function Footer() {
             </h1>
             <ul>
               <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                New Collection
+                <Link href="/shop">New Collection</Link>
               </li>
               <li className="text-sm Poppins400 text-[#474747]">
-                Summer Sales
+                <Link href="/shop">Summer Sales</Link>
               </li>
             </ul>
           </div>
@@ -42,19 +44,19 @@ export default async function Footer() {
                 Information
               </li>
               <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <a href="/about-us">About Us</a>
+                <Link href="/about-us">About Us</Link>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <a href="/contact-us">Contact Us</a>
+                <Link href="/contact-us">Contact Us</Link>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <a href="/orders-tracking">Order Tracking</a>
+                <Link href="/orders-tracking">Order Tracking</Link>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <a href="">Privacy Policy</a>
+                <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <a href="">Term and Conditions</a>
+                <Link href="/term-and-conditions">Term and Conditions</Link>
               </li>
             </ul>
           </div>
@@ -164,34 +166,34 @@ export default async function Footer() {
     //           <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
     //           <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
     //             <li>
-    //               <a
+    //               <Link
     //                 href="https://github.com/medusajs"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 GitHub
-    //               </a>
+    //               </Link>
     //             </li>
     //             <li>
-    //               <a
+    //               <Link
     //                 href="https://docs.medusajs.com"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 Documentation
-    //               </a>
+    //               </Link>
     //             </li>
     //             <li>
-    //               <a
+    //               <Link
     //                 href="https://github.com/medusajs/nextjs-starter-medusa"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 Source code
-    //               </a>
+    //               </Link>
     //             </li>
     //           </ul>
     //         </div>

@@ -13,6 +13,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Spinner from "@modules/common/icons/spinner"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { useState } from "react"
+import Image from "next/image"
 
 type ItemProps = {
   item: HttpTypes.StoreCartLineItem
@@ -45,31 +46,37 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <Table.Row className="w-full bg-[#eee] hover:!bg-[#eeee] ">
+      <Table.Cell className="!pl-0 w-[62px]">
+        {/* <Image
+          src={item.thumbnail || ""}
+          width={62}
+          height={62}
+          className="mt-4"
+          alt=""
+        /> */}
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
-          className={clx("flex", {
-            "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
-          })}
+          className="relative"
         >
           <Thumbnail
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
+            className="h-[62px] w-[62px] mt-3"
           />
+          <p className="absolute top-0 -right-2 bg-gray-500 text-white px-[0.5rem] py-[0.125rem] rounded-full">
+            {item.quantity}
+          </p>
         </LocalizedClientLink>
       </Table.Cell>
 
       <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-ui-fg-base"
-          data-testid="product-title"
-        >
-          {item.product_title}
-        </Text>
-        <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        <p className="text-sm mt-3 Poppins400 text-black">
+          {item.product_title} | {item.variant?.title}
+        </p>
+
+        {/* <LineItemOptions variant={item.variant} data-testid="product-variant" /> */}
       </Table.Cell>
 
       {type === "full" && (
@@ -105,7 +112,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       )}
 
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <Table.Cell className="hidden small:table-cell ">
           <LineItemUnitPrice
             item={item}
             style="tight"
@@ -116,13 +123,13 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
       <Table.Cell className="!pr-0">
         <span
-          className={clx("!pr-0", {
+          className={clx("!pr-0 mt-3", {
             "flex flex-col items-end h-full justify-center": type === "preview",
           })}
         >
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity}x </Text>
+            <span className="flex gap-x-1 !text-black">
+              <Text className="text-black">{item.quantity}x </Text>
               <LineItemUnitPrice
                 item={item}
                 style="tight"
