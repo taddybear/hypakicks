@@ -1,5 +1,6 @@
-import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { getBaseURL } from "@lib/util/env"
 import "styles/globals.css"
 import localFont from "next/font/local"
 
@@ -38,6 +39,7 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light">
+      <SpeedInsights />
       <body>
         <main
           className={`relative ${Poppins400.variable} ${Poppins500.variable} ${Poppins300.variable} ${Poppins700.variable} ${Poppins600.variable}`}

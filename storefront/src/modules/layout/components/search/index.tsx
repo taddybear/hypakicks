@@ -30,6 +30,8 @@ const Search = () => {
     <>
       <Popover className="relative h-full">
         <PopoverButton
+          aria-label="Open search"
+          data-testid="search-button"
           className="h-full flex items-center"
           onClick={openAndCancel}
         >
@@ -64,6 +66,7 @@ const Search = () => {
             data-testid="nav-cart-dropdown"
           >
             <button
+              data-testid="close-search-button"
               onClick={close}
               className="text-transparent cursor-auto w-full h-full"
             >
@@ -75,6 +78,7 @@ const Search = () => {
                   Search Products
                 </h1>
                 <button
+                  data-testid="close-search-button"
                   onClick={close}
                   className="h-12 w-12 flex items-center justify-center border-[#44B865] border-2 rounded-full"
                 >
@@ -88,7 +92,10 @@ const Search = () => {
                   id=""
                   className="ring-0 focus:outline-none text-lg pl-2 Poppins400 text-[#666] placeholder:text-[#666] border-2 border-[#44b865] w-full rounded-[0.625rem] h-12 2xl:h-16"
                 />
-                <button className="absolute Poppins500 right-0 bg-[#44b865] h-12 2xl:h-16 rounded-r-[0.625rem] px-2 text-white text-lg	">
+                <button
+                  data-testid="search-button"
+                  className="absolute Poppins500 right-0 bg-[#44b865] h-12 2xl:h-16 rounded-r-[0.625rem] px-2 text-white text-lg	"
+                >
                   search
                 </button>
               </form>

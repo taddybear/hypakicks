@@ -1,14 +1,18 @@
 import { Metadata } from "next"
-
-import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
-import Faq from "@modules/home/components/faq"
-import StayUpdated from "@modules/home/stay-updated"
-import Sustainability from "@modules/home/components/sustainability"
-import Testimonials from "@modules/home/components/testimonials"
-import BestSeller from "@modules/home/components/best-seller"
+import dynamic from "next/dynamic"
+
+const Faq = dynamic(() => import("@modules/home/components/faq"), {})
+const StayUpdated = dynamic(() => import("@modules/home/stay-updated"), {})
+const Sustainability = dynamic(
+  () => import("@modules/home/components/sustainability")
+)
+const Testimonials = dynamic(
+  () => import("@modules/home/components/testimonials")
+)
+const BestSeller = dynamic(() => import("@modules/home/components/best-seller"))
 
 export const metadata: Metadata = {
   title: "Hypa Kicks",
@@ -47,10 +51,9 @@ export default async function Home(props: {
       <Sustainability />
       <Faq />
       <StayUpdated />
-      {/* <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-        </ul>
-        </div> */}
+      <div className="py-12">
+        <ul className="flex flex-col gap-x-6"></ul>
+      </div>
       {/* <FeaturedProducts collections={collections} region={region} /> */}
     </>
   )

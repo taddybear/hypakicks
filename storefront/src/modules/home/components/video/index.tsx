@@ -31,12 +31,15 @@ const Video = () => {
     <>
       <Popover className="relative h-full">
         <PopoverButton
+          aria-label="Open video"
+          data-testid="video-button"
           className="h-full flex items-center pb-[3.125rem]"
           onClick={openAndCancel}
         >
           <Image
             src={Thumbnail}
             alt=""
+            priority={true}
             width={300}
             height={219}
             className="mt-[10rem] lg:mt-4 rounded-md w-[250px] h-[183px] lg:w-[300] lg:h-[219]"
@@ -58,6 +61,8 @@ const Video = () => {
             data-testid="nav-cart-dropdown"
           >
             <button
+              aria-label="Close video"
+              data-testid="video-close-button"
               onClick={close}
               className="text-transparent cursor-auto w-full h-full"
             >
@@ -74,6 +79,8 @@ const Video = () => {
               />
               <button
                 onClick={close}
+                aria-label="Close video"
+                data-testid="video-close-button"
                 className="absolute top-0 lg:pt-6 right-2 lg:right-4 text-lg Poppins700"
               >
                 X

@@ -1,5 +1,3 @@
-import { Github } from "@medusajs/icons"
-import { Button, Heading } from "@medusajs/ui"
 import Image from "next/image"
 import ImgOne from "../../../../../public/homepage/imgOne.webp"
 import ImgTwo from "../../../../../public/homepage/imgTwo.webp"
@@ -7,6 +5,7 @@ import ImgThree from "../../../../../public/homepage/imgThree.webp"
 import ImgFour from "../../../../../public/homepage/imgFour.webp"
 import Shoe from "../../../../../public/homepage/shoe.webp"
 import Video from "../video"
+import Link from "next/link"
 
 const Hero = () => {
   return (
@@ -21,6 +20,7 @@ const Hero = () => {
               <div className="hidden lg:block absolute top-20 lg:top-20 2xl:top-12 right-0 max-w-[55%]">
                 <Image
                   src={Shoe}
+                  priority={true}
                   alt=""
                   width={500}
                   height={287}
@@ -33,11 +33,15 @@ const Hero = () => {
           <p className="mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
             Find your style with exclusive sneakers - only at Hypa Kicks.
           </p>
-          <div className=" flex items-center space-x-2">
+          <ul className=" flex items-center space-x-2">
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <a href="/shop" className=" whitespace-nowrap	">
+              <Link
+                href="/shop"
+                aria-label="Go to shoppage"
+                className=" whitespace-nowrap	"
+              >
                 SHOP SNEAKERS
-              </a>
+              </Link>
               <svg
                 width="100%"
                 height="1.5em"
@@ -56,9 +60,13 @@ const Hero = () => {
               </svg>
             </li>
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <a href="/about-us" className="whitespace-nowrap	">
+              <Link
+                href="/about-us"
+                aria-label="Go to aboutpage"
+                className="whitespace-nowrap	"
+              >
                 About Us
-              </a>
+              </Link>
               <svg
                 width="100%"
                 height="1.5em"
@@ -76,11 +84,12 @@ const Hero = () => {
                 ></path>
               </svg>
             </li>
-          </div>
+          </ul>
           <div className="flex mt-4">
             <Image
               src={ImgOne}
               alt=""
+              priority={true}
               width={40}
               height={40}
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
@@ -88,6 +97,7 @@ const Hero = () => {
             <Image
               src={ImgTwo}
               alt=""
+              priority={true}
               width={40}
               height={40}
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
@@ -95,6 +105,7 @@ const Hero = () => {
             <Image
               src={ImgThree}
               alt=""
+              priority={true}
               width={40}
               height={40}
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
@@ -102,6 +113,7 @@ const Hero = () => {
             <Image
               src={ImgFour}
               alt=""
+              priority={true}
               width={40}
               height={40}
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
@@ -113,6 +125,7 @@ const Hero = () => {
               <Image
                 src={Shoe}
                 alt=""
+                priority={true}
                 width={232}
                 height={113}
                 className="rotate-animation w-full w-[232px] h-[113px]"

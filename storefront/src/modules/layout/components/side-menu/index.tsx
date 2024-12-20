@@ -1,20 +1,10 @@
 "use client"
-
 import { Popover, PopoverPanel, Transition } from "@headlessui/react"
-import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { Text, clx, useToggleState } from "@medusajs/ui"
 import { Fragment } from "react"
-
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import CountrySelect from "../country-select"
+// import LocalizedClientLink from "@modules/common/components/localized-client-link"
+// import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
-
-const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Account: "/account",
-  Cart: "/cart",
-}
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   const toggleState = useToggleState()
@@ -27,6 +17,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
             <>
               <div className="relative flex h-full">
                 <Popover.Button
+                  aria-label="Open navigation menu"
                   data-testid="nav-menu-button"
                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
                 >
@@ -76,6 +67,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                       </h1>
                       <div className=" rounded-full border-2 border-[#44b865] ">
                         <button
+                          aria-label="close menu"
                           data-testid="close-menu-button"
                           onClick={close}
                           className="px-4 py-1.5 text-[#44b865] h-full w-full text-lg Poppins600"

@@ -60,14 +60,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -79,7 +79,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
               <div className="w-[50%] lg:h-full">
@@ -90,14 +90,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -112,14 +112,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -137,14 +137,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -156,7 +156,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
 
@@ -168,14 +168,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -190,14 +190,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -215,14 +215,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -234,7 +234,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
 
@@ -246,14 +246,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -268,14 +268,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -298,14 +298,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -317,7 +317,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
               <div className="w-[50%] lg:h-full">
@@ -328,14 +328,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -350,14 +350,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -375,14 +375,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -394,7 +394,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
 
@@ -406,14 +406,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -428,14 +428,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -453,14 +453,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover	"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -472,26 +472,26 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover	"
                 />
               </div>
 
               <div className="w-[50%] lg:h-full">
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
-                  <div className="flex items-center mb-[0.625rem] ">
+                  <div className="flex items-center mb-[0.625rem] object-cover	">
                     <Image
                       src={ImgOne}
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -506,14 +506,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -538,14 +538,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={item.ratingSrc}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -568,14 +568,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover	"
                     />
                     <Image
                       src={item.ratingSrc}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover	"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -597,14 +597,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -616,7 +616,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
               <div className="w-[50%] lg:h-full">
@@ -627,14 +627,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -649,14 +649,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -674,14 +674,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -693,7 +693,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
 
@@ -705,14 +705,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -727,14 +727,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -752,14 +752,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -771,7 +771,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
 
@@ -783,14 +783,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -805,14 +805,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -835,14 +835,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -854,7 +854,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
               <div className="w-[50%] lg:h-full">
@@ -865,14 +865,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -887,14 +887,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -912,14 +912,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -931,7 +931,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
 
@@ -943,14 +943,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -965,14 +965,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -990,14 +990,14 @@ const Testimonials = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="rounded-full mr-1 h-[40px] w-[40px]"
+                    className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                   />
                   <Image
                     src={Rating}
                     alt=""
                     width={100}
                     height={20}
-                    className=""
+                    className="object-cover"
                   />
                 </div>
                 <p className="mb-4 text-xs text-[#474747] Poppins400">
@@ -1009,7 +1009,7 @@ const Testimonials = () => {
                   alt=""
                   width={147}
                   height={180}
-                  className="rounded-[1.25rem] h-[180px] w-full"
+                  className="rounded-[1.25rem] h-[180px] w-full object-cover"
                 />
               </div>
 
@@ -1021,14 +1021,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
@@ -1043,14 +1043,14 @@ const Testimonials = () => {
                       alt=""
                       width={40}
                       height={40}
-                      className="rounded-full mr-1 h-[40px] w-[40px]"
+                      className="rounded-full mr-1 h-[40px] w-[40px] object-cover"
                     />
                     <Image
                       src={Rating}
                       alt=""
                       width={100}
                       height={20}
-                      className=""
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">

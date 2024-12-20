@@ -5,7 +5,7 @@ import showTwo from "../../../../../public/homepage/shoeTwo.jpeg"
 import showThree from "../../../../../public/homepage/shoeThree.jpg"
 import { useEffect, useState } from "react"
 
-const Sustainability = () => {
+export default function Sustainability() {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const data = [
@@ -123,5 +123,3 @@ const Sustainability = () => {
     </>
   )
 }
-
-export default Sustainability

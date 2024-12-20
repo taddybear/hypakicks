@@ -1,12 +1,15 @@
-import Faq from "@modules/home/components/faq"
-import StayUpdated from "@modules/home/stay-updated"
+// import Faq from "@modules/home/components/faq"
+// import StayUpdated from "@modules/home/stay-updated"
 import Image from "next/image"
 import Member from "../../../public/about/memberOne.webp"
 import MemberTwo from "../../../public/about/memberTwo.webp"
 import MemberThree from "../../../public/about/memberThree.webp"
 import MemberFour from "../../../public/about/memberFour.webp"
-
 import Shoe from "../../../public/about/shoe.webp"
+import dynamic from "next/dynamic"
+
+const Faq = dynamic(() => import("@modules/home/components/faq"), {})
+const StayUpdated = dynamic(() => import("@modules/home/stay-updated"), {})
 
 const Aboutus = () => {
   const teamMembers = [

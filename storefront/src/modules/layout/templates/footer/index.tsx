@@ -18,7 +18,14 @@ export default async function Footer() {
     <>
       <footer className="container px-3 py-6">
         <Link href="/" className="w-[150px] lg:w-[200px] block">
-          <Image src={Hypakicks} width={200} height={41} alt="" className="" />
+          <Image
+            aria-label="Go to homepage"
+            src={Hypakicks}
+            width={200}
+            height={41}
+            alt=""
+            className=""
+          />
         </Link>
         <p className="py-[0.625rem] text-[#474747] text-sm Poppins400">
           Find your new favorite sneakers with fast delivery and 24/7 support at

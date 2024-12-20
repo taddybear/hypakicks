@@ -8,7 +8,6 @@ import {
 } from "@headlessui/react"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
-import { Button } from "@medusajs/ui"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -78,6 +77,8 @@ const CartDropdown = ({
     <>
       <Popover className="relative h-full">
         <PopoverButton
+          aria-label="Open cart"
+          data-testid="cart-button"
           className="h-full flex items-center"
           onClick={openAndCancel}
         >
@@ -123,6 +124,7 @@ const CartDropdown = ({
             data-testid="nav-cart-dropdown"
           >
             <button
+              data-testid="close-cart-button"
               onClick={close}
               className="text-transparent cursor-auto	 w-full h-full"
             >
@@ -266,7 +268,10 @@ const CartDropdown = ({
                   </div>
                   <div className="bg-white px-[1.875rem] pt-8 pb-4">
                     <LocalizedClientLink href="/checkout?step=address" passHref>
-                      <button className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]">
+                      <button
+                        data-testid="checkout-button"
+                        className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
+                      >
                         Checkout
                       </button>
                     </LocalizedClientLink>
@@ -307,6 +312,7 @@ const CartDropdown = ({
                       <>
                         <span className="sr-only">Go to all products page</span>
                         <button
+                          data-testid="return-shop-button"
                           onClick={close}
                           className="py-[0.625rem] px-6 mt-6  uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                         >

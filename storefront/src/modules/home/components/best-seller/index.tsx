@@ -3,6 +3,7 @@ import BestSellerPreview from "./best-seller-preview"
 import { getRegion } from "@lib/data/regions"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import ProductPreview from "@modules/products/components/product-preview"
+import Link from "next/link"
 
 type PaginatedProductsParams = {
   limit: number
@@ -52,11 +53,15 @@ export default async function BestSeller({
               sellers
             </span>
           </h1>
-          <div>
+          <ul>
             <li className="Poppins700 text-xs lg:text-base text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
-              <a href="/shop" className=" whitespace-nowrap	">
+              <Link
+                href="/shop"
+                aria-label="Go to shoppage"
+                className=" whitespace-nowrap	"
+              >
                 VIEW BEST SELLERS
-              </a>
+              </Link>
               <svg
                 width="100%"
                 height="1.5em"
@@ -74,9 +79,9 @@ export default async function BestSeller({
                 ></path>
               </svg>
             </li>
-          </div>
+          </ul>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 lg:grid-cols-4">
           {products.map((p) => {
             return (
               <li key={p.id} className="list-none m-[0.313rem]">
@@ -84,7 +89,7 @@ export default async function BestSeller({
               </li>
             )
           })}
-        </div>
+        </ul>
       </section>
     </>
   )

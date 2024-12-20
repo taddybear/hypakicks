@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -9,6 +8,7 @@ import Search from "@modules/layout/components/search"
 import Image from "next/image"
 import Hypakicks from "../../../../../public/homepage/hypakicks.webp"
 import Slider from "@modules/layout/components/slider"
+import Link from "next/link"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
@@ -50,15 +50,20 @@ export default async function Nav() {
       <div className="container flex items-center justify-between w-full py-2 lg:py-[1.25rem] px-3 lg:px-0">
         <div className="flex items-center w-full lg:lg:w-[16.66666667%]">
           <SideMenu regions={regions} />
-          <a href="/" className="w-[150px] lg:w-full">
+          <Link
+            href="/"
+            aria-label="Go to homepage"
+            className="w-[150px] lg:w-full"
+          >
             <Image
               src={Hypakicks}
+              priority={true}
               width={466}
               height={96}
               alt=""
               className=""
             />
-          </a>
+          </Link>
         </div>
         <ul className="hidden lg:flex mx-4 lg:w-[66.66666667%]">
           {menuItems.map((item, index) => (
@@ -77,6 +82,7 @@ export default async function Nav() {
             className="hover:text-ui-fg-base"
             href="/account"
             data-testid="nav-account-link"
+            aria-label="Go to accountpage"
           >
             <svg
               className="m-[0.313rem]"
