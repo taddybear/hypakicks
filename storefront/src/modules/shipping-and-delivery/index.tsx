@@ -1,7 +1,7 @@
 export default function ShippingAndDelivery() {
   return (
     <>
-      <section className="container text-[#404040] Poppins400 px-3">
+      <section className="container text-[#404040] Poppins400 px-3 lg:px-0">
         <h1 className="leading-[3rem] lg:leading-[5rem] text-center my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           Shipping & Delivery
         </h1>

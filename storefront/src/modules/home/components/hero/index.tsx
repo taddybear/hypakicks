@@ -4,29 +4,47 @@ import ImgTwo from "../../../../../public/homepage/imgTwo.webp"
 import ImgThree from "../../../../../public/homepage/imgThree.webp"
 import ImgFour from "../../../../../public/homepage/imgFour.webp"
 import Shoe from "../../../../../public/homepage/shoe.webp"
+import HomeGrid from "../../../../../public/homepage/homegrid.webp"
 import Video from "../video"
 import Link from "next/link"
 
 const Hero = () => {
   return (
     <>
-      <section className="container px-3">
-        <div className="py-5">
+      <section className="container px-3 lg:px-0">
+        <div className="pt-5">
           <h1 className=" text-[#4D4D4D] text-[2.5rem] leading-[2.5rem] lg:leading-[5.75rem] lg:text-[5.75rem] Poppins700 ">
             Discover Our <br />
             <span className="text-[#44b865] relative flex">
               Exclusive <br className="lg:hidden " /> Sneakers
               {/* Shoe rotate image */}
-              <div className="hidden lg:block absolute top-20 lg:top-20 2xl:top-12 right-0 max-w-[55%]">
+              <div
+                className="hidden lg:block z-20 absolute top-20 lg:top-20 2xl:top-12 right-0 max-w-[55%]"
+                style={{
+                  backgroundImage: `url(${HomeGrid.src})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              >
                 <Image
                   src={Shoe}
                   priority={true}
                   alt=""
-                  width={500}
+                  width={590}
                   height={287}
-                  className="rotate-animation w-full"
+                  className="rotate-animation lg:w-[590px] lg:h-[287px]"
                 />
               </div>
+              {/* <div className="hidden lg:block z-10 absolute top-20 lg:top-20 2xl:top-12 right-0 max-w-[55%]">
+                <Image
+                  src={HomeGrid}
+                  priority={true}
+                  alt=""
+                  width={590}
+                  height={287}
+                  className="lg:w-[590px] lg:h-[287px] "
+                />
+              </div> */}
             </span>
           </h1>
 
@@ -44,7 +62,7 @@ const Hero = () => {
               </Link>
               <svg
                 width="100%"
-                height="1.5em"
+                height="2em"
                 stroke-width="1.5"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -69,7 +87,7 @@ const Hero = () => {
               </Link>
               <svg
                 width="100%"
-                height="1.5em"
+                height="2em"
                 stroke-width="1.5"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -119,7 +137,7 @@ const Hero = () => {
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
           </div>
-          <p className="Poppins400 relative ml-[0.625rem] mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
+          <p className="Poppins400 relative mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
             Already trusted by 1.2k+ people
             <div className="lg:hidden absolute top-10 right-3">
               <Image

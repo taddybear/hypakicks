@@ -30,7 +30,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     <>
       <div
         // className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
-        className="container lg:flex"
+        className="container lg:flex "
         data-testid="product-container"
       >
         {/* <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
@@ -38,7 +38,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <ProductTabs product={product} />
         </div> */}
 
-        <div className="lg:w-1/2">
+        <div className="mt-3 lg:mt-0 lg:w-1/2">
           <Image
             src={product?.thumbnail || ""}
             alt=""

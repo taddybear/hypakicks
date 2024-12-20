@@ -1,13 +1,13 @@
 export default function ContactForm() {
   return (
-    <section className="container px-3">
-      <h1 className="leading-[2.5rem] lg:leading-[5rem] my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+    <section className="container px-3 lg:px-0">
+      <h1 className="mb-5 leading-[2.5rem] lg:leading-[5rem] text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
         Write us a message
       </h1>
 
       <form action="">
-        <div className="flex w-full space-x-6">
-          <div className="w-1/2 flex flex-col">
+        <div className="lg:flex w-full space-y-4 lg:space-y-0 lg:space-x-6">
+          <div className="lg:w-1/2 flex flex-col">
             <label htmlFor="" className="py-[0.313rem] text-[#888888] text-sm">
               Name
             </label>
@@ -18,9 +18,9 @@ export default function ContactForm() {
               className="bg-[#F5F5F5] rounded-[0.625rem] p-[0.625rem]"
             />
           </div>
-          <div className="w-1/2 flex flex-col">
+          <div className="lg:w-1/2 flex flex-col">
             <label htmlFor="" className="py-[0.313rem] text-[#888888] text-sm">
-              Name
+              Email
             </label>
             <input
               type="text"
@@ -30,7 +30,7 @@ export default function ContactForm() {
             />
           </div>
         </div>
-        <div className=" flex flex-col ">
+        <div className="flex flex-col mt-4 ">
           <label htmlFor="" className="py-[0.313rem] text-[#888888] text-sm">
             Message
           </label>

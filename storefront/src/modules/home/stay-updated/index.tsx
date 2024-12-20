@@ -1,9 +1,9 @@
 const StayUpdated = () => {
   return (
     <>
-      <section className="container pt-[0.625rem] px-3 lg:px-3">
+      <section className="container px-3 lg:px-0">
         <div
-          className="my-[1.25rem] py-10 px-5 rounded-[2rem] text-white flex flex-col items-center "
+          className="py-10 px-5 rounded-[2rem] text-white flex flex-col items-center "
           style={{
             backgroundImage: "linear-gradient(180deg, #44b865, #434343)",
           }}

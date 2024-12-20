@@ -1,7 +1,7 @@
 export default function OrdersTracking() {
   return (
     <>
-      <section className="container px-3 pb-[1.5em]">
+      <section className="container px-3 lg:px-0 pb-[1.5em]">
         <h1 className="text-center my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           Order Tracking
         </h1>

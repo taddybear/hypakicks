@@ -16,7 +16,7 @@ export default async function Footer() {
 
   return (
     <>
-      <footer className="container px-3 py-6">
+      <footer className="container px-3 lg:px-0 py-6">
         <Link href="/" className="w-[150px] lg:w-[200px] block">
           <Image
             aria-label="Go to homepage"

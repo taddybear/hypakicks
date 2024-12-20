@@ -44,8 +44,8 @@ export default async function BestSeller({
   })
   return (
     <>
-      <section className="container px-3">
-        <div className="flex justify-between items-center">
+      <section className="container px-3 lg:px-0">
+        <div className="mb-5 flex justify-between items-center">
           <h1 className="leading-[2.5rem] my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
             Best
             <span className="text-[#44B865]">
@@ -53,7 +53,7 @@ export default async function BestSeller({
               sellers
             </span>
           </h1>
-          <ul>
+          <ul className="">
             <li className="Poppins700 text-xs lg:text-base text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
               <Link
                 href="/shop"

@@ -11,7 +11,7 @@ import dynamic from "next/dynamic"
 const Faq = dynamic(() => import("@modules/home/components/faq"), {})
 const StayUpdated = dynamic(() => import("@modules/home/stay-updated"), {})
 
-const Aboutus = () => {
+const AboutUs = () => {
   const teamMembers = [
     {
       id: 1,
@@ -41,7 +41,7 @@ const Aboutus = () => {
 
   return (
     <section className="container ">
-      <div className="px-3">
+      <div className="px-3 lg:px-0 mb-10">
         <h1 className="text-center uppercase my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           ABout us
         </h1>
@@ -89,8 +89,9 @@ const Aboutus = () => {
           </div>
         </div>
 
-        <div>
-          <h1 className=" my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+        {/* Meet Our Team */}
+        <div className="mt-12">
+          <h1 className="mb-5 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
             Meet Our Team
           </h1>
           <div className="lg:grid grid-cols-4">
@@ -118,9 +119,11 @@ const Aboutus = () => {
         </div>
       </div>
       <Faq />
-      <StayUpdated />
+      <div className="my-12">
+        <StayUpdated />
+      </div>
     </section>
   )
 }
 
-export default Aboutus
+export default AboutUs

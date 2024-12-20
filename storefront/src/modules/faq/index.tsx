@@ -127,7 +127,7 @@ export default function Faq() {
     }
   }
   return (
-    <section className="container px-3">
+    <section className="container px-3 lg:px-0">
       <h1 className="text-center uppercase my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
         FAQ
       </h1>

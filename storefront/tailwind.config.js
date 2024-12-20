@@ -161,7 +161,7 @@ module.exports = {
         },
       },
       animation: {
-        "infinite-scroll-slow": "infinite-scroll-slow 80s linear infinite",
+        "infinite-scroll-slow": "infinite-scroll-slow 90s linear infinite",
         "infinite-scroll-reverse":
           "infinite-scroll-reverse 25s linear infinite",
         "infinite-scroll": "infinite-scroll 25s linear infinite",

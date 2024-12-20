@@ -75,11 +75,11 @@ export default function Sustainability() {
   return (
     <>
       <div className="container ">
-        <div className="px-3">
-          <h1 className="mt-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+        <div className="px-3 lg:px-0">
+          <h1 className="mb-5 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
             Sustainability
           </h1>
-          <div className="lg:flex lg:space-x-10 items-center bg-[#ededed] p-5 rounded-[1.25rem] my-4">
+          <div className="lg:flex lg:space-x-10 items-center bg-[#ededed] p-5 rounded-[1.25rem]">
             <div className="lg:w-1/2 mb-[1.25rem] lg:mb-0">
               <Image
                 src={

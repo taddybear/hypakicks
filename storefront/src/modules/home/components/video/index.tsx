@@ -33,16 +33,16 @@ const Video = () => {
         <PopoverButton
           aria-label="Open video"
           data-testid="video-button"
-          className="h-full flex items-center pb-[3.125rem]"
+          className="h-full flex items-center"
           onClick={openAndCancel}
         >
           <Image
             src={Thumbnail}
             alt=""
             priority={true}
-            width={300}
-            height={219}
-            className="mt-[10rem] lg:mt-4 rounded-md w-[250px] h-[183px] lg:w-[300] lg:h-[219]"
+            width={250}
+            height={183}
+            className="mt-[10rem] lg:mt-4 rounded-[1rem] w-[250px] h-[183px] lg:w-[300] lg:h-[219]"
           />
         </PopoverButton>
         <Transition
@@ -57,7 +57,7 @@ const Video = () => {
         >
           <PopoverPanel
             static
-            className="fixed w-full h-full top-0 inset-0 z-20 bg-black bg-opacity-80 text-black hover:text-black-black"
+            className="fixed w-full h-full top-0 inset-0 z-30 bg-black bg-opacity-80 text-black hover:text-black-black"
             data-testid="nav-cart-dropdown"
           >
             <button
@@ -68,9 +68,9 @@ const Video = () => {
             >
               close
             </button>
-            <div className="bg-white w-[90%] lg:w-auto flex items-center justify-center fixed top-[25%] bottom-[25%] left-[5%] right-[5%] lg:right-[25%] lg:left-[25%] rounded-md ">
+            <div className="bg-white lg:w-auto flex items-center justify-center fixed top-[20%] bottom-[20%] lg:top-[15%] lg:bottom-[15%] 2xl:top-[20%] 2xl:bottom-[20%] left-[5%] right-[5%] lg:right-[15%] lg:left-[15%] rounded-md ">
               <iframe
-                className="w-full aspect-video self-stretch md:min-h-88 py-6 px-6 lg:px-12"
+                className="w-full aspect-video self-stretch md:min-h-88 pt-16 pb-10 px-6 lg:px-12"
                 src="https://www.youtube.com/embed/668nUCeBHyY"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -78,13 +78,20 @@ const Video = () => {
                 title="Product Overview Video"
               />
               <button
+                data-testid="close-search-button"
+                onClick={close}
+                className="absolute right-2 top-3 h-10 w-10 flex items-center justify-center border-[#44B865] border-2 rounded-full"
+              >
+                <p className="text-lg Poppins700 text-[#44B865] ">X</p>
+              </button>
+              {/* <button
                 onClick={close}
                 aria-label="Close video"
                 data-testid="video-close-button"
                 className="absolute top-0 lg:pt-6 right-2 lg:right-4 text-lg Poppins700"
               >
                 X
-              </button>
+              </button> */}
             </div>
           </PopoverPanel>
         </Transition>

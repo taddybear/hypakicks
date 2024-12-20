@@ -1,4 +1,4 @@
-import Aboutus from "@modules/about-us"
+import AboutUs from "@modules/about-us"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -7,6 +7,6 @@ export const metadata: Metadata = {
     "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
 }
 
-export default function AboutUs() {
-  return <Aboutus />
+export default function AboutUsPage() {
+  return <AboutUs />
 }

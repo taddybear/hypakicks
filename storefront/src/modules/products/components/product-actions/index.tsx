@@ -33,6 +33,7 @@ export default function ProductActions({
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [buttonText, setButtonText] = useState("Select Variant")
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -113,37 +114,51 @@ export default function ProductActions({
     setIsAdding(false)
   }
 
+  useEffect(() => {
+    if (!selectedVariant && !options) {
+      setButtonText("Select Variant")
+    } else if (
+      (selectedVariant && !inStock) ||
+      (selectedVariant && !isValidVariant)
+    ) {
+      setButtonText("Out of Stock")
+    } else if (selectedVariant && inStock && isValidVariant) {
+      setButtonText("Add to cart")
+    }
+  }, [selectedVariant, inStock, isValidVariant])
+
   return (
     <>
-      <div className="flex flex-col" ref={actionsRef}>
-        <h1 className="text-[#404040] text-2xl mt-6 lg:mt-0 lg:text-[2rem] Poppins500">
-          {product.title}
-        </h1>
-        <div className="pb-[1.5em]">
-          <ProductPrice product={product} variant={selectedVariant} />
-        </div>
-
+      <div className="flex flex-col " ref={actionsRef}>
         <div>
-          {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
-              {(product.options || []).map((option) => {
-                return (
-                  <div key={option.id}>
-                    <OptionSelect
-                      option={option}
-                      current={options[option.id]}
-                      updateOption={setOptionValue}
-                      title={option.title ?? ""}
-                      data-testid="product-options"
-                      disabled={!!disabled || isAdding}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
+          <h1 className="text-[#404040] text-2xl mt-6 lg:mt-0 lg:text-[2rem] Poppins500">
+            {product.title}
+          </h1>
+          <div className="pb-[1.5em]">
+            <ProductPrice product={product} variant={selectedVariant} />
+          </div>
 
+          <div>
+            {(product.variants?.length ?? 0) > 1 && (
+              <div className="flex flex-col gap-y-4">
+                {(product.options || []).map((option) => {
+                  return (
+                    <div key={option.id}>
+                      <OptionSelect
+                        option={option}
+                        current={options[option.id]}
+                        updateOption={setOptionValue}
+                        title={option.title ?? ""}
+                        data-testid="product-options"
+                        disabled={!!disabled || isAdding}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </div>
         <button
           onClick={handleAddToCart}
           data-testid="add-product-button"
@@ -154,34 +169,16 @@ export default function ProductActions({
             isAdding ||
             !isValidVariant
           }
-          className="bg-[#44b865] rounded-[0.625rem] p-4 text-white Poppins600"
+          className="mt-6 lg:mt-6 bg-[#44b865] rounded-[0.625rem] p-4 text-white Poppins600"
         >
-          {!selectedVariant && !options
+          {/* {!selectedVariant && !options
             ? "Select variant"
             : !inStock || !isValidVariant
             ? "Out of stock"
-            : "Add to cart"}
+            : "Add to cart"} */}
+          {buttonText}
         </button>
-        {/* <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-10"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!selectedVariant && !options
-            ? "Select variant"
-            : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
-        </Button> */}
+
         <MobileActions
           product={product}
           variant={selectedVariant}

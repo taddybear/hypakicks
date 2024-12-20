@@ -5,6 +5,7 @@ import { Fragment } from "react"
 // import LocalizedClientLink from "@modules/common/components/localized-client-link"
 // import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   const toggleState = useToggleState()
@@ -77,48 +78,62 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                       </div>
                     </div>
                     <ul className="flex flex-col">
-                      <a
+                      <LocalizedClientLink
+                        data-testid="nav-home-link"
+                        aria-label="Go to homepage"
                         href="/"
                         className="py-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         Home
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        data-testid="nav-shop-link"
+                        aria-label="Go to shoppage"
                         href="/shop"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         Shop
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        data-testid="nav-about-link"
+                        aria-label="Go to aboutpage"
                         href="/about-us"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         About Us
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
                         href="/contact-us"
+                        data-testid="nav-contact-link"
+                        aria-label="Go to contactuspage"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         Contact Us
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
                         href="/shipping-and-delivery"
+                        data-testid="nav-shipping-link"
+                        aria-label="Go to shippingpage"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         Shipping & Delivery
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
                         href="/faq"
+                        data-testid="nav-faw-link"
+                        aria-label="Go to faqpage"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         FAQ
-                      </a>
-                      <a
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
                         href="/orders-tracking"
+                        data-testid="nav-order-link"
+                        aria-label="Go to Order Tracking page"
                         className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
                       >
                         Order Tracking
-                      </a>
+                      </LocalizedClientLink>
                     </ul>
                   </div>
                   {/* <div

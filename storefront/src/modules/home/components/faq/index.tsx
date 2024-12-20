@@ -36,53 +36,51 @@ const Faq = () => {
 
   return (
     <>
-      <div className="container px-3">
-        <div className="">
-          <h1 className="text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700 my-4">
-            FAQ
-          </h1>
-          <div className="bg-[#ececec] rounded-[0.25rem]">
-            {accordionData.map((item, index) => (
-              <div key={index} className="border-b-[1px] border-[#ddd] ">
-                <button
-                  className={`accordion w-full  flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700  ${
-                    activeIndex === index ? "" : ""
+      <div className="container px-3 lg:px-0">
+        <h1 className="mb-5 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+          FAQ
+        </h1>
+        <div className="bg-[#ececec] rounded-[0.25rem]">
+          {accordionData.map((item, index) => (
+            <div key={index} className="border-b-[1px] border-[#ddd] ">
+              <button
+                className={`accordion w-full  flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700  ${
+                  activeIndex === index ? "" : ""
+                }`}
+                onClick={() => toggleAccordion(index)}
+              >
+                <span className="Poppins500 text-lg">{item.title}</span>
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#44b865"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`transition-transform duration-300 ${
+                    activeIndex === index ? "rotate-90" : "rotate-0"
                   }`}
-                  onClick={() => toggleAccordion(index)}
                 >
-                  <span className="Poppins500 text-lg">{item.title}</span>
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#44b865"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={`transition-transform duration-300 ${
-                      activeIndex === index ? "rotate-90" : "rotate-0"
-                    }`}
-                  >
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
 
-                {/* Accordion Content */}
-                <div
-                  className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                    activeIndex === index ? "max-h-screen" : "max-h-0"
-                  } `}
-                >
-                  <div className=" p-[0.938rem]">
-                    <p className=" text-gray-600 pb-[1.5em] Poppins400 ">
-                      {item.content}
-                    </p>
-                  </div>
+              {/* Accordion Content */}
+              <div
+                className={`panel overflow-hidden transition-[max-height] duration-300 ${
+                  activeIndex === index ? "max-h-screen" : "max-h-0"
+                } `}
+              >
+                <div className=" p-[0.938rem]">
+                  <p className=" text-gray-600 pb-[1.5em] Poppins400 ">
+                    {item.content}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </>

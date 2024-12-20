@@ -13,15 +13,17 @@ import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
-import { usePathname } from "next/navigation"
 import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Mastercard from "../../../../../public/homepage/mastercard.jpg"
+import { useRouter, usePathname } from "next/navigation"
+
 const CartDropdown = ({
   cart: cartState,
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
+  const router = useRouter()
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
     undefined
   )
@@ -31,6 +33,10 @@ const CartDropdown = ({
   const close = useCallback(() => {
     setCartDropdownOpen(false)
   }, [])
+
+  const handleredirectUrl = () => {
+    router.push("http://hypa-kicks.com/checkout?step=address")
+  }
 
   const totalItems =
     cartState?.items?.reduce((acc, item) => {
@@ -110,17 +116,17 @@ const CartDropdown = ({
         <Transition
           show={cartDropdownOpen}
           as={Fragment}
-          // enter="transition ease-out duration-200"
-          // enterFrom="opacity-0 translate-y-1"
-          // enterTo="opacity-100 translate-y-0"
-          // leave="transition ease-in duration-150"
-          // leaveFrom="opacity-100 translate-y-0"
-          // leaveTo="opacity-0 translate-y-1"
+          enter="transition ease-out duration-300"
+          enterFrom="opacity-0 translate-y-1"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition ease-in duration-250"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-1"
         >
           <PopoverPanel
             static
             // className="bg-[#f8f9fa] lg:h-[100vh] fixed top-0 right-0 bg-white w-[420px]"
-            className="fixed w-full h-full top-0 inset-0 z-20 bg-black bg-opacity-80 text-black hover:text-black-black"
+            className="fixed w-full h-full top-0 inset-0 z-30 bg-black bg-opacity-80 text-black hover:text-black-black"
             data-testid="nav-cart-dropdown"
           >
             <button
@@ -269,6 +275,7 @@ const CartDropdown = ({
                   <div className="bg-white px-[1.875rem] pt-8 pb-4">
                     <LocalizedClientLink href="/checkout?step=address" passHref>
                       <button
+                        // onClick={handleredirectUrl}
                         data-testid="checkout-button"
                         className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                       >

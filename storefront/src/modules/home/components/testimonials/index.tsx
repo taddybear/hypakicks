@@ -44,13 +44,13 @@ const Testimonials = () => {
 
   return (
     <>
-      <div className=" container overflow-hidden">
-        <h1 className="px-3 my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
+      <div className="px-3 lg:px-0 container overflow-hidden">
+        <h1 className="mb-5 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           Testimonials
         </h1>
 
         {/* slider One */}
-        <div className="mx-3 lg:mx-3 overflow-hidden w-full inline-flex flex-nowrap">
+        <div className=" overflow-hidden w-full inline-flex flex-nowrap">
           <ul className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-infinite-scroll">
             <li className="w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
@@ -527,7 +527,7 @@ const Testimonials = () => {
         </div>
 
         {/* slider Two */}
-        <div className="mx-3 lg:mx-3 overflow-hidden	w-full inline-flex flex-nowrap">
+        <div className=" overflow-hidden	w-full inline-flex flex-nowrap">
           <ul className="flex items-center justify-center md:justify-start [&_li]:mx-1 [&_img]:max-w-none animate-infinite-scroll-reverse">
             {SliderTwo.map((item, index) => (
               <li key={index} className="w-[50%] lg:w-[16.66%] m-[0.313rem]">
@@ -587,7 +587,7 @@ const Testimonials = () => {
           </ul>
         </div>
         {/* slider Three */}
-        <div className="mx-3 lg:mx-3 overflow-hidden w-full inline-flex flex-nowrap">
+        <div className=" overflow-hidden w-full inline-flex flex-nowrap">
           <ul className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-infinite-scroll">
             <li className="w-[100%] lg:w-[33.3%] flex mr-[0.625rem]">
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">

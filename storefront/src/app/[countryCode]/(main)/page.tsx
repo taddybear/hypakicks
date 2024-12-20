@@ -44,17 +44,17 @@ export default async function Home(props: {
   const sort = sortBy || "created_at"
 
   return (
-    <>
+    <div className="space-y-12 mb-12">
       <Hero />
       <BestSeller sortBy={sort} page={pageNumber} countryCode={countryCode} />
       <Testimonials />
       <Sustainability />
       <Faq />
       <StayUpdated />
-      <div className="py-12">
+      {/* <div className="py-12">
         <ul className="flex flex-col gap-x-6"></ul>
-      </div>
+      </div> */}
       {/* <FeaturedProducts collections={collections} region={region} /> */}
-    </>
+    </div>
   )
 }

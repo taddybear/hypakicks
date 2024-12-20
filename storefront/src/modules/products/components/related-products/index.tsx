@@ -51,29 +51,23 @@ export default async function RelatedProducts({
   }
 
   return (
-    <>
-      {/* <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
-          Related products
-        </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-        You might also want to check out these products.
-        </p>
-        </div> */}
+    <div className="space-y-12 my-12">
       <Testimonials />
       <Sustainability />
       <Faq />
       <StayUpdated />
-      <h1 className="px-3 pb-2 text-[2rem] Poppins-500 container">
-        Related products
-      </h1>
-      <ul className="px-3 container grid grid-cols-2 lg:grid-cols-4">
-        {products.map((product) => (
-          <li key={product.id} className="m-[0.313rem]">
-            <Product region={region} product={product} />
-          </li>
-        ))}
-      </ul>
-    </>
+      <div>
+        <h1 className="px-3 pb-2 text-[2rem] Poppins-500 container">
+          Related products
+        </h1>
+        <ul className="px-3 container grid grid-cols-2 lg:grid-cols-4">
+          {products.map((product) => (
+            <li key={product.id} className="m-[0.313rem]">
+              <Product region={region} product={product} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }

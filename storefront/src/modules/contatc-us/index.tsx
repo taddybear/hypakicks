@@ -78,8 +78,8 @@ export default function Contactus() {
     },
   ]
   return (
-    <>
-      <section className="container px-3">
+    <div className="overflow-hidden space-y-12 mb-12">
+      <section className="container px-3 lg:px-0">
         <h1 className="text-center uppercase my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
           Contact us
         </h1>
@@ -109,6 +109,6 @@ export default function Contactus() {
       <ContactForm />
       <Faq />
       <StayUpdated />
-    </>
+    </div>
   )
 }

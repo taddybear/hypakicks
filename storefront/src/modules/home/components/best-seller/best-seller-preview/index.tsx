@@ -2,6 +2,7 @@ import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 import { getProductPrice } from "@lib/util/get-product-price"
 import PreviewPrice from "@modules/products/components/product-preview/price"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export default async function BestSellerPreview({
   product,
@@ -18,7 +19,10 @@ export default async function BestSellerPreview({
 
   return (
     <>
-      <div>
+      <LocalizedClientLink
+        href={`/products/${product.handle}`}
+        className="group"
+      >
         <Image
           src={product.thumbnail || ""}
           alt=""
@@ -32,7 +36,7 @@ export default async function BestSellerPreview({
         <p className="text-[1.063rem] text-[#474747] Poppins700">
           {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
         </p>
-      </div>
+      </LocalizedClientLink>
     </>
   )
 }
