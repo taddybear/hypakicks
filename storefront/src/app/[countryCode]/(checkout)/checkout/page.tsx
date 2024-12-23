@@ -5,9 +5,8 @@ import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-
 export const metadata: Metadata = {
-  title: "Checkout",
+  title: "Checkout - Hypa Kicks",
 }
 
 export default async function Checkout() {
@@ -20,11 +19,17 @@ export default async function Checkout() {
   const customer = await retrieveCustomer()
 
   return (
-    <div className="grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12">
-      <PaymentWrapper cart={cart}>
-        <CheckoutForm cart={cart} customer={customer} />
-      </PaymentWrapper>
-      <CheckoutSummary cart={cart} />
-    </div>
+    <>
+      <div className="flex flex-col-reverse lg:flex lg:flex-row">
+        <div className="px-3 lg:w-[55%]">
+          <PaymentWrapper cart={cart}>
+            <CheckoutForm cart={cart} customer={customer} />
+          </PaymentWrapper>
+        </div>
+        <div className="lg:w-[45%]">
+          <CheckoutSummary cart={cart} />
+        </div>
+      </div>
+    </>
   )
 }

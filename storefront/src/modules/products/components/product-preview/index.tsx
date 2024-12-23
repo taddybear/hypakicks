@@ -5,6 +5,7 @@ import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
+import Image from "next/image"
 
 export default async function ProductPreview({
   product,
@@ -31,20 +32,25 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
       <div data-testid="product-wrapper">
-        <Thumbnail
+        <Image
+          src={product.thumbnail || ""}
+          alt=""
+          width={268}
+          height={268}
+          className="h-[179px] w-[179px] lg:h-[268px] lg:w-full object-cover"
+        />
+        {/* <Thumbnail
           thumbnail={product.thumbnail}
           images={product.images}
           size="full"
           isFeatured={isFeatured}
-        />
-        <div className="flex txt-compact-medium mt-4 justify-between">
-          <Text className="text-ui-fg-subtle" data-testid="product-title">
-            {product.title}
-          </Text>
-          <div className="flex items-center gap-x-2">
-            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-          </div>
-        </div>
+        /> */}
+        <p className="my-[0.625rem] text-[#474747] Poppins400">
+          {product.title}
+        </p>
+        <p className="text-[1.063rem] text-[#474747] Poppins700">
+          {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
+        </p>
       </div>
     </LocalizedClientLink>
   )

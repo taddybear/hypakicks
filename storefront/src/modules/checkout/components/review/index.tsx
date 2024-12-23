@@ -24,7 +24,7 @@ const Review = ({ cart }: { cart: any }) => {
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row mt-4 text-[1.313rem] Poppins600  gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none": !isOpen,
             }
@@ -46,6 +46,23 @@ const Review = ({ cart }: { cart: any }) => {
             </div>
           </div>
           <PaymentButton cart={cart} data-testid="submit-order-button" />
+          <p className="mt-4 text-[#707070] text-sm Poppins400">
+            Your info will be saved to a Shop account. By continuing, you agree
+            to Shop’s
+            <a
+              href="/term-and-conditions"
+              className="text-[#161d25] Poppins400 px-1 underline"
+            >
+              Terms & Conditions
+            </a>
+            and acknowledge the
+            <a
+              href="/privacy-policy"
+              className="text-[#161d25] Poppins400 px-1 underline"
+            >
+              Privacy Policy.
+            </a>
+          </p>
         </>
       )}
     </div>

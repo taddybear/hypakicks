@@ -114,11 +114,14 @@ const Payment = ({
 
   return (
     <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+      <button
+        onClick={handleEdit}
+        className="flex w-full mt-4 flex-row items-center justify-between mb-6"
+      >
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row text-[1.313rem] Poppins600  gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none":
                 !isOpen && !paymentReady,
@@ -139,7 +142,7 @@ const Payment = ({
             </button>
           </Text>
         )}
-      </div>
+      </button>
       <div>
         <div className={isOpen ? "block" : "hidden"}>
           {!paidByGiftcard && availablePaymentMethods?.length && (
@@ -202,7 +205,7 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className="mt-6 bg-[#161d25] !rounded-sm Poppins600"
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={

@@ -13,17 +13,33 @@ const Login = ({ setCurrentView }: Props) => {
   const [message, formAction] = useActionState(login, null)
 
   return (
-    <div
-      className="max-w-sm w-full flex flex-col items-center"
-      data-testid="login-page"
-    >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
-      </p>
-      <form className="w-full" action={formAction}>
-        <div className="flex flex-col w-full gap-y-2">
-          <Input
+    <>
+      <section className="px-3 container flex flex-col justify-center items-center">
+        <h1 className="text-center uppercase mt-2 mb-3 text-[1.5rem] lg:text-[3.2rem] text-[#4D4D4D] Poppins700">
+          MY ACCOUNT
+        </h1>
+        <h1 className="Poppins600 text-[#4D4D4D] text-xl lg:text-3xl	text-center mb-3">
+          Login
+        </h1>
+      </section>
+      <form
+        className="px-3 mt-4 lg:mt-0 w-full lg:w-1/2 m-auto"
+        action={formAction}
+      >
+        <div className="flex flex-col w-full ">
+          <label htmlFor="" className="!text-base  text-[#404040] Poppins500">
+            Username or email address
+          </label>
+          <input
+            name="email"
+            type="email"
+            title="Enter a valid email address."
+            autoComplete="email"
+            required
+            data-testid="email-input"
+            className="bg-[#F5F5F5] rounded-md p-3"
+          />
+          {/* <Input
             label="Email"
             name="email"
             type="email"
@@ -31,22 +47,39 @@ const Login = ({ setCurrentView }: Props) => {
             autoComplete="email"
             required
             data-testid="email-input"
+          /> */}
+          <label
+            htmlFor=""
+            className="mt-6 -mb-1 !text-base text-[#404040] Poppins500"
+          >
+            Password
+          </label>
+          <input
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            data-testid="password-input"
+            className="!bg-[#F5F5F5] rounded-md p-3 !focus:outline-none border-[#F5F5F5]"
           />
-          <Input
+          {/* <Input
             label="Password"
             name="password"
             type="password"
             autoComplete="current-password"
             required
             data-testid="password-input"
-          />
+          /> */}
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
-        <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Sign in
+        <SubmitButton
+          data-testid="sign-in-button"
+          className="text-[1.063rem] py-4 Poppins700 w-full mt-6"
+        >
+          Log in
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="mb-4 lg:mb-0 lg:w-1/2 m-auto text-center text-ui-fg-base text-small-regular mt-6">
         Not a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
@@ -57,7 +90,7 @@ const Login = ({ setCurrentView }: Props) => {
         </button>
         .
       </span>
-    </div>
+    </>
   )
 }
 

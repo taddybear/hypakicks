@@ -2,6 +2,7 @@ import { listCartShippingMethods } from "@lib/data/fulfillment"
 import { listCartPaymentMethods } from "@lib/data/payment"
 import { HttpTypes } from "@medusajs/types"
 import Addresses from "@modules/checkout/components/addresses"
+import ExpressCheckout from "@modules/checkout/components/express-checkout"
 import Payment from "@modules/checkout/components/payment"
 import Review from "@modules/checkout/components/review"
 import Shipping from "@modules/checkout/components/shipping"
@@ -25,7 +26,8 @@ export default async function CheckoutForm({
   }
 
   return (
-    <div className="w-full grid grid-cols-1 gap-y-8">
+    <div className="lg:w-10/12 lg:ml-20 py-10">
+      <ExpressCheckout />
       <Addresses cart={cart} customer={customer} />
 
       <Shipping cart={cart} availableShippingMethods={shippingMethods} />
@@ -33,6 +35,21 @@ export default async function CheckoutForm({
       <Payment cart={cart} availablePaymentMethods={paymentMethods} />
 
       <Review cart={cart} />
+      <p className="mt-16 pt-4 border-t-[#eee] border-t-2 text-sm">
+        <a
+          href="/term-and-conditions"
+          className="text-[#161d25] Poppins400 px-1 underline"
+        >
+          Terms & Conditions
+        </a>
+
+        <a
+          href="/privacy-policy"
+          className="text-[#161d25] Poppins400 px-1 underline"
+        >
+          Privacy Policy.
+        </a>
+      </p>
     </div>
   )
 }

@@ -10,7 +10,7 @@ import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-relat
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
-
+import Image from "next/image"
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
@@ -29,17 +29,26 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        // className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        className="container lg:flex "
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
+        {/* <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
           <ProductInfo product={product} />
           <ProductTabs product={product} />
+        </div> */}
+
+        <div className="mt-3 lg:mt-0 lg:w-1/2">
+          <Image
+            src={product?.thumbnail || ""}
+            alt=""
+            width={500}
+            height={500}
+            className="w-full"
+          />
+          {/* <ImageGallery images={product?.images || []} /> */}
         </div>
-        <div className="block w-full relative">
-          <ImageGallery images={product?.images || []} />
-        </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
+        <div className="flex flex-col small:sticky small:top-48 lg:w-1/2 px-3">
           <ProductOnboardingCta />
           <Suspense
             fallback={
@@ -54,14 +63,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </Suspense>
         </div>
       </div>
-      <div
-        className="content-container my-16 small:my-32"
-        data-testid="related-products-container"
-      >
-        <Suspense fallback={<SkeletonRelatedProducts />}>
-          <RelatedProducts product={product} countryCode={countryCode} />
-        </Suspense>
-      </div>
+
+      <Suspense fallback={<SkeletonRelatedProducts />}>
+        <RelatedProducts product={product} countryCode={countryCode} />
+      </Suspense>
     </>
   )
 }

@@ -119,6 +119,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-first-name-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="Last name"
@@ -128,6 +129,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="Address"
@@ -137,6 +139,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-address-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="Company"
@@ -145,6 +148,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           autoComplete="organization"
           data-testid="shipping-company-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="Postal code"
@@ -154,6 +158,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-postal-code-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="City"
@@ -163,6 +168,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-city-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <CountrySelect
           name="shipping_address.country_code"
@@ -172,6 +178,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-country-select"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="State / Province"
@@ -180,6 +187,7 @@ const ShippingAddress = ({
           value={formData["shipping_address.province"]}
           onChange={handleChange}
           data-testid="shipping-province-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
       </div>
       <div className="my-8">
@@ -202,6 +210,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-email-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
         <Input
           label="Phone"
@@ -210,6 +219,7 @@ const ShippingAddress = ({
           value={formData["shipping_address.phone"]}
           onChange={handleChange}
           data-testid="shipping-phone-input"
+          className="px-2 bg-transparent border-[1px] border-[#eee] w-full h-11 rounded-md"
         />
       </div>
     </>

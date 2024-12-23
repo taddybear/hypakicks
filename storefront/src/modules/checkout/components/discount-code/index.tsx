@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
-import React, { useActionState } from "react";
+import React, { useActionState } from "react"
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
@@ -18,7 +18,7 @@ type DiscountCodeProps = {
 }
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(true)
 
   const { items = [], promotions = [] } = cart
   const removePromotionCode = async (code: string) => {
@@ -52,10 +52,10 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [message, formAction] = useActionState(submitPromotionForm, null)
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full bg-[#eee] flex flex-col">
       <div className="txt-medium">
-        <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
-          <Label className="flex gap-x-1 my-2 items-center">
+        <form action={(a) => addPromotionCode(a)} className="w-full my-5">
+          {/* <Label className="flex gap-x-1 my-2 items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
@@ -65,22 +65,23 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               Add Promotion Code(s)
             </button>
 
-            {/* <Tooltip content="You can add multiple promotion codes">
+            <Tooltip content="You can add multiple promotion codes">
               <InformationCircleSolid color="var(--fg-muted)" />
-            </Tooltip> */}
-          </Label>
+            </Tooltip>
+          </Label> */}
 
           {isOpen && (
             <>
               <div className="flex w-full gap-x-2">
-                <Input
-                  className="size-full"
+                <input
+                  className="w-full rounded-md p-3"
+                  type="text"
+                  placeholder="Discount code or gift card"
                   id="promotion-input"
                   name="code"
-                  type="text"
-                  autoFocus={false}
                   data-testid="discount-input"
                 />
+
                 <SubmitButton
                   variant="secondary"
                   data-testid="discount-apply-button"
