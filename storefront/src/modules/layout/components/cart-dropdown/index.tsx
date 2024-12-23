@@ -126,7 +126,7 @@ const CartDropdown = ({
           <PopoverPanel
             static
             // className="bg-[#f8f9fa] lg:h-[100vh] fixed top-0 right-0 bg-white w-[420px]"
-            className="fixed w-full h-full top-0 inset-0 z-30 bg-black bg-opacity-80 text-black hover:text-black-black"
+            className="fixed w-full h-full top-0 inset-0 z-40 bg-black bg-opacity-80 text-black hover:text-black-black"
             data-testid="nav-cart-dropdown"
           >
             <button

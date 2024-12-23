@@ -125,6 +125,10 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+.container {
+  max-width: 100%;
+  margin: auto;
+}
 @media (min-width: 390px) {
   .container {
     max-width: 100%;
