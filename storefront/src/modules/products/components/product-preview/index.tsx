@@ -48,9 +48,9 @@ export default async function ProductPreview({
         <p className="my-[0.625rem] text-[#474747] Poppins400">
           {product.title}
         </p>
-        <p className="text-[1.063rem] text-[#474747] Poppins700">
+        <div className="text-[1.063rem] text-[#474747] Poppins700">
           {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-        </p>
+        </div>
       </div>
     </LocalizedClientLink>
   )
