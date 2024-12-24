@@ -25,11 +25,12 @@ export const listProducts = async ({
   if (!countryCode && !regionId) {
     throw new Error("Country code or region ID is required")
   }
+  console.log("List products")
 
   const limit = queryParams?.limit || 12
   const _pageParam = Math.max(pageParam, 1)
   const offset = (_pageParam - 1) * limit
-
+  console.log("List products 33")
   let region: HttpTypes.StoreRegion | undefined | null
 
   if (countryCode) {
@@ -37,6 +38,8 @@ export const listProducts = async ({
   } else {
     region = await retrieveRegion(regionId!)
   }
+
+  console.log("List products 42")
 
   if (!region) {
     return {
@@ -48,10 +51,13 @@ export const listProducts = async ({
   const headers = {
     ...(await getAuthHeaders()),
   }
+  console.log("List products 54")
 
   const next = {
     ...(await getCacheOptions("products")),
   }
+
+  console.log("List products 60")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
@@ -73,7 +79,7 @@ export const listProducts = async ({
     )
     .then(({ products, count }) => {
       const nextPage = count > offset + limit ? pageParam + 1 : null
-
+      console.log("List products 82")
       return {
         response: {
           products,
