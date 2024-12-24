@@ -58,7 +58,13 @@ export const listProducts = async ({
   }
 
   console.log("List products 60")
-  console.log("List products 61",limit,offset,region?.id,"*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags")
+  console.log(
+    "List products 61",
+    limit,
+    offset,
+    region?.id,
+    "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags"
+  )
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
