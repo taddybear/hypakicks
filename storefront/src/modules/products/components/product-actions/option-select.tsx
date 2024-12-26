@@ -24,7 +24,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
   return (
     <div className="flex flex-col gap-y-3">
       <span className="text-[#404040] Poppins700">
-        size: {current && `${current}`}
+        Size: {current && `${current}`}
       </span>
       <div
         className="grid grid-cols-2 justify-between"
@@ -35,9 +35,9 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
             <button
               onClick={() => updateOption(option.id, v)}
               key={v}
-              className={`py-3 Poppins-400 border-2 w-[90%] rounded-[0.625rem]  mb-2 border-[#CCCCCC]  ${
+              className={`py-3 Poppins-400 border-2 w-[90%] rounded-[0.625rem] mb-2 border-[#CCCCCC] ${
                 v === current
-                  ? "border-ui-border-interactive border-black"
+                  ? " border-black border-[2.5px]"
                   : "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150"
               }`}
               disabled={disabled}

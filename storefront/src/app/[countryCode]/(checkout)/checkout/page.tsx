@@ -6,7 +6,7 @@ import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import CheckoutWrapper from "./CheckoutWrapper"
+// import CheckoutWrapper from "./CheckoutWrapper"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -26,17 +26,20 @@ export default async function Checkout({ searchParams }: CheckoutProps) {
   const currentUrl = `${proto}://${host}`
 
   // if (currentUrl === "https://hypakicks") {
-  //   redirect(`https://hypa-kicks/checkout`)
+  //   redirect(`https://hypa-kicks/checkout?step=address`)
   // }
   const cartId = searchParams["cart-id"] || null
   console.log("currentUrl", currentUrl)
-  // if (currentUrl === "https://hypakicks-sheikhumar93s-projects.vercel.app") {
-  //   redirect(`https://hypakicks.vercel.app/us/checkout`)
-  // }
+  if (currentUrl === "http://localhost:8000") {
+    redirect(
+      `https://insightful-forgiveness-production.up.railway.app/us/checkout?${cartId}`
+    )
+  }
 
-  // if (cartId) {
-  //   setCartId(cartId)
-  // }
+  if (cartId) {
+    console.log("cartid", cartId)
+    setCartId(cartId)
+  }
 
   const cart = await retrieveCart()
   if (!cart) {

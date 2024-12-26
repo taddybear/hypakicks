@@ -13,7 +13,7 @@ const Hero = () => {
     <>
       <section className="container px-3 lg:px-0">
         <div className="pt-5">
-          <h1 className=" text-[#4D4D4D] text-[2.5rem] leading-[2.5rem] lg:leading-[5.75rem] lg:text-[5.75rem] Poppins700 ">
+          <h1 className=" text-[2.5rem] leading-[2.5rem] text-[#4D4D4D] lg:leading-[5.75rem] lg:text-[5.75rem] Poppins700 ">
             Discover Our <br />
             <span className="text-[#44b865] relative flex">
               {/* Text with z-index 20 */}

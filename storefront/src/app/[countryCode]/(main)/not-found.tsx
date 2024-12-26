@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <div className="container px-3 py-8 ">
         <div className=" border-2 border-[#44b865]  rounded-[1.25rem] px-6 pb-6">
@@ -34,7 +34,7 @@ export default function NotFound() {
           </form>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
     // <div className="flex flex-col gap-4 items-center justify-center min-h-[calc(100vh-64px)]">
     //   <h1 className="text-2xl-semi text-ui-fg-base">Page not found</h1>
