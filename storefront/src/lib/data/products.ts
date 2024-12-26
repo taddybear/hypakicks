@@ -86,7 +86,7 @@ export const listProducts = async ({
     )
     .then(({ products, count }) => {
       const nextPage = count > offset + limit ? pageParam + 1 : null
-      console.log("List products 82")
+      console.log("List products 82", products)
       return {
         response: {
           products,
