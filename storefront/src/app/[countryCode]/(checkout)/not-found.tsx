@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function NotFound() {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <div className="container px-3 py-8 ">
         <div className=" border-2 border-[#44b865]  rounded-[1.25rem] px-6 pb-6">
