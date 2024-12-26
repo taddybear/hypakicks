@@ -23,6 +23,35 @@ module.exports = defineConfig({
   },
   modules: [
     {
+      resolve: "@medusajs/medusa/fulfillment",
+      options: {
+        providers: [
+          {
+            resolve: `@medusajs/medusa/fulfillment-manual`,
+            id: "manual",
+            options: {
+              // provider options...
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/file",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/file-local",
+            id: "local",
+            options: {
+              // provider options...
+              backend_url: process.env.BACKEND_URL,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: "@medusajs/medusa/cache-redis",
       options: {
         redisUrl: process.env.REDIS_URL,
@@ -40,21 +69,6 @@ module.exports = defineConfig({
         redis: {
           url: process.env.REDIS_URL,
         },
-      },
-    },
-    {
-      resolve: "@medusajs/medusa/file",
-      options: {
-        providers: [
-          {
-            resolve: "@medusajs/medusa/file-local",
-            id: "local",
-            options: {
-              // provider options...
-              backend_url: process.env.BACKEND_URL,
-            },
-          },
-        ],
       },
     },
   ],
