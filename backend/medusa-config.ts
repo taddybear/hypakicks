@@ -51,6 +51,7 @@ module.exports = defineConfig({
             id: "local",
             options: {
               // provider options...
+              backend_url: process.env.BACKEND_URL,
             },
           },
         ],
