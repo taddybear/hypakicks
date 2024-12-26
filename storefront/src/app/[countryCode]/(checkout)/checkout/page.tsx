@@ -1,17 +1,44 @@
 import { retrieveCart } from "@lib/data/cart"
+import { setCartId } from "@lib/data/cookies"
 import { retrieveCustomer } from "@lib/data/customer"
 import PaymentWrapper from "@modules/checkout/components/payment-wrapper"
 import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import CheckoutWrapper from "./CheckoutWrapper"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
+
 export const metadata: Metadata = {
   title: "Checkout - Hypa Kicks",
 }
 
-export default async function Checkout() {
-  const cart = await retrieveCart()
+interface CheckoutProps {
+  searchParams: { [key: string]: string | undefined }
+}
 
+export default async function Checkout({ searchParams }: CheckoutProps) {
+  const requestHeaders = headers()
+  const host = (await requestHeaders).get("host")
+  const proto = (await requestHeaders).get("x-forwarded-proto") || "http"
+
+  const currentUrl = `${proto}://${host}`
+
+  // if (currentUrl === "https://hypakicks") {
+  //   redirect(`https://hypa-kicks/checkout`)
+  // }
+  const cartId = searchParams["cart-id"] || null
+  console.log("currentUrl", currentUrl)
+  // if (currentUrl === "https://hypakicks-sheikhumar93s-projects.vercel.app") {
+  //   redirect(`https://hypakicks.vercel.app/us/checkout`)
+  // }
+
+  // if (cartId) {
+  //   setCartId(cartId)
+  // }
+
+  const cart = await retrieveCart()
   if (!cart) {
     return notFound()
   }

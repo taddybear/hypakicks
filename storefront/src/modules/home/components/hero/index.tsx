@@ -60,7 +60,7 @@ const Hero = () => {
               <svg
                 width="100%"
                 height="2em"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,8 +69,8 @@ const Hero = () => {
                 <path
                   d="M6 12h12.5m0 0l-6-6m6 6l-6 6"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></path>
               </svg>
             </li>
@@ -85,7 +85,7 @@ const Hero = () => {
               <svg
                 width="100%"
                 height="2em"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +94,8 @@ const Hero = () => {
                 <path
                   d="M6 12h12.5m0 0l-6-6m6 6l-6 6"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></path>
               </svg>
             </li>
@@ -134,7 +134,7 @@ const Hero = () => {
               className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
           </div>
-          <p className="Poppins400 relative mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
+          <div className="Poppins400 relative mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
             <span className="z-20 relative">
               Already trusted by 1.2k+ people
             </span>
@@ -156,7 +156,7 @@ const Hero = () => {
                 className="rotate-animation w-full w-[232px] h-[113px]"
               />
             </div>
-          </p>
+          </div>
 
           <Video />
         </div>

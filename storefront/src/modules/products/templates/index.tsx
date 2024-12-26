@@ -11,6 +11,10 @@ import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
+import StayUpdated from "@modules/home/stay-updated"
+import Sustainability from "@modules/home/components/sustainability"
+import Testimonials from "@modules/home/components/testimonials"
+import Faq from "@modules/home/components/faq"
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
@@ -63,7 +67,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </Suspense>
         </div>
       </div>
-
+      <div className="space-y-12 my-12">
+        <Testimonials />
+        <Sustainability />
+        <Faq />
+        <StayUpdated />
+      </div>
       <Suspense fallback={<SkeletonRelatedProducts />}>
         <RelatedProducts product={product} countryCode={countryCode} />
       </Suspense>
