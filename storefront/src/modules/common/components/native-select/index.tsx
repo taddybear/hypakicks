@@ -72,7 +72,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
               <path
                 d="M12 12L178.667 178.667L345.333 12"
                 stroke="#9C9C9C"
-                stroke-width="33.3333"
+                strokeWidth="33.3333"
               />
             </svg>
 

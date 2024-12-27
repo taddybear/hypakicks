@@ -4,7 +4,14 @@ import { useState } from "react"
 import { initiatePaymentSession, setAddresses } from "@lib/data/cart"
 import compareAddresses from "@lib/util/compare-addresses"
 import { HttpTypes } from "@medusajs/types"
-import { Heading, Text, useToggleState, clx, Button } from "@medusajs/ui"
+import {
+  Heading,
+  Text,
+  useToggleState,
+  clx,
+  Button,
+  Tooltip,
+} from "@medusajs/ui"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
 import { RadioGroup, Radio } from "@headlessui/react"
@@ -15,6 +22,7 @@ import PaymentContainer from "@modules/checkout/components/payment-container"
 import { isStripe as isStripeFunc, paymentInfoMap } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import MobileCartTotal from "../mobile-cart-total"
+import PaymentForm from "../payment-form"
 
 const Addresses = ({
   cart,
@@ -196,7 +204,6 @@ const Addresses = ({
 
           {/* payment method */}
           <h1 className="text-[1.313rem] Poppins600 mb-4">Payment</h1>
-
           <RadioGroup
             value={selectedPaymentMethod}
             onChange={(value: string) => setSelectedPaymentMethod(value)}
@@ -213,7 +220,8 @@ const Addresses = ({
             })}
           </RadioGroup>
 
-          {/* PlaceOder */}
+          {/* Payment form */}
+          <PaymentForm />
 
           <MobileCartTotal cart={cart} />
           <div className="flex items-start gap-x-1 w-full lg:mt-8 my-6">
