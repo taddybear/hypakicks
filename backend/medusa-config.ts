@@ -23,6 +23,23 @@ module.exports = defineConfig({
   },
   modules: [
     {
+      resolve: "@medusajs/medusa/payment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/mpgs",
+            id: "mpgs",
+            options: {
+              // provider options...
+              msoUrl: process.env.MPGS_MSO_URL,
+              merchantId: process.env.MPGS_MERCHANT_ID,
+              apiPassword: process.env.MPGS_API_PASSWORD,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: "@medusajs/medusa/fulfillment",
       options: {
         providers: [
