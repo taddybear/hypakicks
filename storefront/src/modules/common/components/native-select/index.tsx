@@ -61,7 +61,22 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             {children}
           </select>
           <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none ">
-            <ChevronUpDown />
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 358 203"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 12L178.667 178.667L345.333 12" fill="#9C9C9C" />
+              <path
+                d="M12 12L178.667 178.667L345.333 12"
+                stroke="#9C9C9C"
+                stroke-width="33.3333"
+              />
+            </svg>
+
+            {/* <ChevronUpDown /> */}
           </span>
         </div>
       </div>

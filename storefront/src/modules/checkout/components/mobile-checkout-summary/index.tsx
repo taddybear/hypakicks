@@ -58,7 +58,7 @@ const MobileCheckoutSummary = ({ cart }: { cart: any }) => {
         >
           {isDropdownOpen && (
             <>
-              <ItemsPreviewTemplate cart={cart} />
+              <ItemsPreviewTemplate cart={cart} className="bg-[#eee]" />
               <DiscountCode cart={cart} />
               <CartTotals totals={cart} />
             </>

@@ -19,9 +19,10 @@ type ItemProps = {
   item: HttpTypes.StoreCartLineItem
   type?: "full" | "preview"
   currencyCode: string
+  className: string
 }
 
-const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
+const Item = ({ item, type = "full", currencyCode, className }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -46,7 +47,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className="w-full bg-[#eee] hover:!bg-[#eeee] ">
+    <Table.Row className={`w-full ${className} hover:!bg-[#eeee]`}>
       <Table.Cell className="!pl-0 w-[62px]">
         {/* <Image
           src={item.thumbnail || ""}

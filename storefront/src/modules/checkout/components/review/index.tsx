@@ -8,7 +8,8 @@ import { useSearchParams } from "next/navigation"
 const Review = ({ cart }: { cart: any }) => {
   const searchParams = useSearchParams()
 
-  const isOpen = searchParams.get("step") === "review"
+  // const isOpen = searchParams.get("step") === "review"
+  const isOpen = true
 
   const paidByGiftcard =
     cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
@@ -20,7 +21,7 @@ const Review = ({ cart }: { cart: any }) => {
 
   return (
     <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+      {/* <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
           className={clx(
@@ -32,7 +33,7 @@ const Review = ({ cart }: { cart: any }) => {
         >
           Review
         </Heading>
-      </div>
+      </div> */}
       {isOpen && previousStepsCompleted && (
         <>
           <div className="flex items-start gap-x-1 w-full mb-6">

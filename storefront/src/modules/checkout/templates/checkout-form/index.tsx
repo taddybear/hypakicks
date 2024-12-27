@@ -26,15 +26,21 @@ export default async function CheckoutForm({
   }
 
   return (
-    <div className="lg:w-10/12 lg:ml-20 py-10">
-      <ExpressCheckout />
-      <Addresses cart={cart} customer={customer} />
+    <div className="lg:w-[75%] lg:ml-auto py-10">
+      {/* <ExpressCheckout /> */}
 
-      <Shipping cart={cart} availableShippingMethods={shippingMethods} />
+      <Addresses
+        cart={cart}
+        customer={customer}
+        availableShippingMethods={shippingMethods}
+        availablePaymentMethods={paymentMethods}
+      />
 
-      <Payment cart={cart} availablePaymentMethods={paymentMethods} />
+      {/* <Shipping cart={cart} availableShippingMethods={shippingMethods} /> */}
 
-      <Review cart={cart} />
+      {/* <Payment cart={cart} availablePaymentMethods={paymentMethods} /> */}
+
+      {/* <Review cart={cart} /> */}
       <p className="mt-16 pt-4 border-t-[#eee] border-t-2 text-sm">
         <a
           href="/term-and-conditions"

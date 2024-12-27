@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
-import React, { useActionState } from "react"
+import React, { useActionState, useState } from "react"
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
@@ -19,6 +19,7 @@ type DiscountCodeProps = {
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [isOpen, setIsOpen] = React.useState(true)
+  const [code, setCode] = useState("")
 
   const { items = [], promotions = [] } = cart
   const removePromotionCode = async (code: string) => {
@@ -52,7 +53,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [message, formAction] = useActionState(submitPromotionForm, null)
 
   return (
-    <div className="w-full bg-[#eee] flex flex-col">
+    <div className={`w-full flex flex-col`}>
       <div className="txt-medium">
         <form action={(a) => addPromotionCode(a)} className="w-full my-5">
           {/* <Label className="flex gap-x-1 my-2 items-center">
@@ -72,18 +73,24 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
 
           {isOpen && (
             <>
-              <div className="flex w-full gap-x-2">
+              <div className="flex w-full gap-x-4">
                 <input
-                  className="w-full rounded-md p-3"
+                  className="w-full rounded-md p-3 py-4 border-[#DDDDDD] border-2"
                   type="text"
                   placeholder="Discount code or gift card"
                   id="promotion-input"
                   name="code"
                   data-testid="discount-input"
+                  onChange={(e) => setCode(e.target.value)}
                 />
 
                 <SubmitButton
                   variant="secondary"
+                  className={`${
+                    code.length > 0
+                      ? "bg-[#161d25] text-white"
+                      : "bg-[#ededed] text-[#73798b]"
+                  }`}
                   data-testid="discount-apply-button"
                 >
                   Apply

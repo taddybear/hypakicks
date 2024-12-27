@@ -104,7 +104,7 @@ export default function ProductActions({
     if (!selectedVariant?.id) return null
 
     setIsAdding(true)
-
+    setButtonText("Adding...")
     await addToCart({
       variantId: selectedVariant.id,
       quantity: 1,
@@ -112,6 +112,7 @@ export default function ProductActions({
     })
 
     setIsAdding(false)
+    setButtonText("Added")
   }
 
   useEffect(() => {

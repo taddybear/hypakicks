@@ -37,7 +37,8 @@ const Payment = ({
   const router = useRouter()
   const pathname = usePathname()
 
-  const isOpen = searchParams.get("step") === "payment"
+  const isOpen = true
+  // const isOpen = searchParams.get("step") === "payment"
 
   const isStripe = isStripeFunc(selectedPaymentMethod)
   const stripeReady = useContext(StripeContext)
@@ -162,7 +163,7 @@ const Payment = ({
                   )
                 })}
               </RadioGroup>
-              {isStripe && stripeReady && (
+              {/* {isStripe && stripeReady && (
                 <div className="mt-5 transition-all duration-150 ease-in-out">
                   <Text className="txt-medium-plus text-ui-fg-base mb-1">
                     Enter your card details:
@@ -180,7 +181,7 @@ const Payment = ({
                     }}
                   />
                 </div>
-              )}
+              )} */}
             </>
           )}
 

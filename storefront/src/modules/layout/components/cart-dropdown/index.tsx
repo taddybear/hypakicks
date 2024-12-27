@@ -40,9 +40,10 @@ const CartDropdown = ({
     // router.push(
     //   `https://hypakicks.vercel.app/us/checkout?cart-id=${cartState?.id}`
     // )
-    router.push(
-      `https://insightful-forgiveness-production.up.railway.app/us/checkout?cart-id=${cartState?.id}`
-    )
+    // router.push(
+    //   `https://insightful-forgiveness-production.up.railway.app/us/checkout?cart-id=${cartState?.id}`
+    // )
+    router.push(`http://localhost:8000/us/checkout?cart-id=${cartState?.id}`)
   }
 
   const totalItems =

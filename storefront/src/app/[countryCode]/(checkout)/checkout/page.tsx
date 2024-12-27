@@ -30,14 +30,15 @@ export default async function Checkout({ searchParams }: CheckoutProps) {
   // }
   const cartId = searchParams["cart-id"] || null
   console.log("currentUrl", currentUrl)
-  if (currentUrl === "http://localhost:8000") {
-    redirect(
-      `https://insightful-forgiveness-production.up.railway.app/us/checkout?${cartId}`
-    )
+  if (
+    currentUrl === "https://insightful-forgiveness-production.up.railway.app/us"
+  ) {
+    redirect(`http://localhost:8000/us/checkout?cart-id=${cartId}`)
   }
 
+  console.log("cartid outside", cartId)
   if (cartId) {
-    console.log("cartid", cartId)
+    console.log("cartid inside", cartId)
     setCartId(cartId)
   }
 
@@ -47,16 +48,16 @@ export default async function Checkout({ searchParams }: CheckoutProps) {
   }
 
   const customer = await retrieveCustomer()
-
+  // console.log("cartss", cart)
   return (
     <>
       <div className="flex flex-col-reverse lg:flex lg:flex-row">
-        <div className="px-3 lg:w-[55%]">
+        <div className="px-3 lg:pr-10 lg:w-[54%]">
           <PaymentWrapper cart={cart}>
             <CheckoutForm cart={cart} customer={customer} />
           </PaymentWrapper>
         </div>
-        <div className="lg:w-[45%]">
+        <div className="lg:w-[46%] bg-[#eee]">
           <CheckoutSummary cart={cart} />
         </div>
       </div>
