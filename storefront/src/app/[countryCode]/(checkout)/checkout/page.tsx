@@ -10,7 +10,17 @@ export const metadata: Metadata = {
   title: "Checkout - Hypa Kicks",
 }
 
-export default async function Checkout() {
+export default async function Checkout({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const cartId = (await searchParams).cart_id
+
+  if (cartId) {
+    await fetch("/api/cart-id?cart_id=" + cartId)
+  }
+
   const cart = await retrieveCart()
 
   if (!cart) {

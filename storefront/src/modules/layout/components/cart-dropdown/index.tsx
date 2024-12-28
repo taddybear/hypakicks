@@ -36,9 +36,9 @@ const CartDropdown = ({
     setCartDropdownOpen(false)
   }, [])
 
-  // const handleRedirectUrl = () => {
-  //   router.push(`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`)
-  // }
+  const handleRedirectUrl = async () => {
+    router.push(`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`)
+  }
 
   const totalItems =
     cartState?.items?.reduce((acc, item) => {
@@ -275,19 +275,13 @@ const CartDropdown = ({
                       ))}
                   </div>
                   <div className="bg-white px-[1.875rem] pt-8 pb-4">
-                    {/* <LocalizedClientLink href="/checkout?step=address" passHref> */}
-                    {/* <button
+                    <button
                       onClick={handleRedirectUrl}
                       data-testid="checkout-button"
                       className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
-                    > */}
-                    <Link
-                      href={`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`}
                     >
                       Checkout
-                    </Link>
-                    {/* </button> */}
-                    {/* </LocalizedClientLink> */}
+                    </button>
                     <Image
                       src={Mastercard}
                       alt=""

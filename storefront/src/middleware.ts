@@ -1,4 +1,3 @@
-import { setCartId } from "@lib/data/cookies"
 import { HttpTypes } from "@medusajs/types"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -105,22 +104,6 @@ async function getCountryCode(
  * Middleware to handle region selection and onboarding status.
  */
 export async function middleware(request: NextRequest) {
-  let cartId = request.nextUrl.searchParams.get("cart_id")
-
-  if (cartId && request.nextUrl.pathname.includes("checkout")) {
-    await setCartId(cartId)
-    if (
-      request.nextUrl.basePath.includes(
-        "insightful-forgiveness-production.up.railway.app"
-      )
-    ) {
-      NextResponse.redirect(
-        `http://localhost:8000/us/checkout?cart_id=${cartId}`,
-        301
-      )
-    }
-  }
-
   let redirectUrl = request.nextUrl.href
 
   let response = NextResponse.redirect(redirectUrl, 307)
