@@ -18,6 +18,8 @@ import { getRegion } from "./regions"
 export async function retrieveCart() {
   const cartId = await getCartId()
 
+  console.log("Retrieving cart for cart id:", cartId)
+
   if (!cartId) {
     return null
   }
