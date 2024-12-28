@@ -67,14 +67,15 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
   };
 
   async initiatePayment(
-    _: CreatePaymentProviderSession
+    Context: CreatePaymentProviderSession
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
+    const { amount, currency_code, context } = Context;
+    console.log("Context: ", Context);
     try {
       const authToken = this.generateAuthToken();
       const url =
         this.options_.msoUrl +
         `/api/rest/version/100/merchant/${this.options_.merchantId}/session`;
-      console.log("URL: ", url);
 
       const response = await fetch(url, {
         method: "POST",
@@ -86,15 +87,152 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("Session Data: ", data);
         if (data.result === "SUCCESS") {
-          console.log("Data: ", data.session);
+          // attach card details to the session
+
+          const paymentUrl = url + `/${data.session.id}`;
+          const payerData = {
+            sourceOfFunds: {
+              provided: {
+                card: {
+                  // @ts-ignore
+                  nameOnCard: context.name_on_card,
+                  // @ts-ignore
+                  number: context.card_number,
+                  expiry: {
+                    // @ts-ignore
+                    month: context.expiry_date.substring(0, 2),
+                    // @ts-ignore
+                    year: context.expiry_date.substring(2, 4),
+                  },
+                  // @ts-ignore
+                  securityCode: context.security_card,
+                },
+              },
+            },
+          };
+          const paymentResponse = await fetch(paymentUrl, {
+            method: "PUT",
+            body: JSON.stringify(payerData),
+            headers: {
+              Authorization: `Basic ${authToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+          if (paymentResponse.ok) {
+            const paymentData = await paymentResponse.json();
+            console.log("Payment Data: ", paymentData);
+            // const tokenizeCardUrl =
+            //   this.options_.msoUrl +
+            //   `/api/rest/version/100/merchant/${this.options_.merchantId}/token`;
+
+            // const tokenizeData = {
+            //   session: {
+            //     id: paymentData.session.id,
+            //   },
+            //   sourceOfFunds: {
+            //     type: "CARD",
+            //   },
+            // };
+
+            // const tokenizeResponse = await fetch(tokenizeCardUrl, {
+            //   method: "POST",
+            //   body: JSON.stringify(tokenizeData),
+            //   headers: {
+            //     Authorization: `Basic ${authToken}`,
+            //     "Content-Type": "application/json",
+            //   },
+            // });
+            // if (tokenizeResponse.ok) {
+            //   const tokenizeData = await tokenizeResponse.json();
+            //   console.log("Tokenize data: ", tokenizeData);
+            //   return {
+            //     data: { token_id: tokenizeData.token },
+            //   };
+            // }
+            // console.log("Tokenize response: ", tokenizeResponse);
+            return {
+              data: {
+                payment_id: paymentData.session.id,
+                amount: amount,
+                currency_code: currency_code,
+              },
+            };
+          }
+
           return {
-            data: data.session,
+            data: { session_id: data.session.id },
           };
         }
       }
       return {
         error: `Payment initiation failed + ${response.status}`,
+      };
+    } catch (e) {
+      return {
+        error: e,
+        code: "unknown",
+        detail: e,
+      };
+    }
+  }
+
+  async authorizePayment(
+    paymentSessionData: Record<string, unknown>,
+    context: Record<string, unknown>
+  ): Promise<
+    | PaymentProviderError
+    | {
+        status: PaymentSessionStatus;
+        data: PaymentProviderSessionResponse["data"];
+      }
+  > {
+    console.log("Authorize Payment");
+    console.log("PaymentSessionData: ", paymentSessionData);
+    console.log("Context: ", context);
+    try {
+      const authToken = this.generateAuthToken();
+      const url =
+        this.options_.msoUrl +
+        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/${context.cart_id}/transaction/${context.cart_id}`;
+
+      const payload = {
+        apiOperation: "PAY",
+        authentication: {
+          transactionId: context.cart_id,
+        },
+        order: {
+          amount: Number(paymentSessionData.amount),
+          currency: String(paymentSessionData.currency_code).toUpperCase(),
+          reference: context.cart_id,
+        },
+        transaction: {
+          reference: context.cart_id,
+        },
+        session: {
+          id: paymentSessionData.payment_id,
+        },
+        sourceOfFunds: {
+          type: "CARD",
+        },
+      };
+
+      const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          Authorization: `Basic ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Authorize Data: ", data);
+      }
+      console.log("Response", response);
+      return {
+        error: "Error" + response.status,
       };
     } catch (e) {
       return {
@@ -111,18 +249,26 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     const { amount, currency_code, context: customerDetails, data } = context;
     const externalId = data.id;
 
+    const authToken = this.generateAuthToken();
+    // const url =
+    //   this.options_.msoUrl +
+    //   `/api/rest/version/100/merchant/${this.options_.merchantId}/session/${context.data.session_id}`;
+
+    console.log("Data: ", data);
+    console.log("context: ", context);
+
     try {
       // assuming you have a client that updates the payment
-      const response = await this.client.update(externalId, {
-        amount,
-        currency_code,
-        customerDetails,
-      });
+      // const response = await this.client.update(externalId, {
+      //   amount,
+      //   currency_code,
+      //   customerDetails,
+      // });
 
       return {
-        ...response,
+        // ...response,
         data: {
-          id: response.id,
+          id: "some id",
         },
       };
     } catch (e) {
@@ -156,38 +302,6 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     }
   }
 
-  async authorizePayment(
-    paymentSessionData: Record<string, unknown>,
-    context: Record<string, unknown>
-  ): Promise<
-    | PaymentProviderError
-    | {
-        status: PaymentSessionStatus;
-        data: PaymentProviderSessionResponse["data"];
-      }
-  > {
-    const externalId = paymentSessionData.id;
-
-    try {
-      // assuming you have a client that authorizes the payment
-      const paymentData = await this.client.authorizePayment(externalId);
-
-      return {
-        data: {
-          ...paymentData,
-          id: externalId,
-        },
-        status: "authorized",
-      };
-    } catch (e) {
-      return {
-        error: e,
-        code: "unknown",
-        detail: e,
-      };
-    }
-  }
-
   async retrievePayment(
     paymentSessionData: Record<string, unknown>
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
@@ -209,12 +323,13 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
   async cancelPayment(
     paymentData: Record<string, unknown>
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-    const externalId = paymentData.id;
+    console.log("CancelPaymentData: ", paymentData);
 
     try {
       // assuming you have a client that cancels the payment
-      const paymentData = await this.client.cancelPayment(externalId);
-      return paymentData;
+      return {
+        data: {},
+      };
     } catch (e) {
       return {
         error: e,
@@ -227,11 +342,15 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
   async deletePayment(
     paymentSessionData: Record<string, unknown>
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-    const externalId = paymentSessionData.id;
+    console.log("PaymentSessionData: ", paymentSessionData);
+    // const externalId = paymentSessionData.id;
 
     try {
       // assuming you have a client that cancels the payment
-      return await this.client.cancelPayment(externalId);
+      // return await this.client.cancelPayment(externalId);
+      return {
+        data: {},
+      };
     } catch (e) {
       return {
         error: e,

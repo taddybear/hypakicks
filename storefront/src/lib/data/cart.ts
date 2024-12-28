@@ -245,6 +245,10 @@ export async function initiatePaymentSession(
   data: {
     provider_id: string
     context?: Record<string, unknown>
+    // payment_type: string
+    // cardExpiryDate?: string
+    // securityCode?: string
+    // nameOnCard?: string
   }
 ) {
   const headers = {

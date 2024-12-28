@@ -1,7 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { initiatePaymentSession, setAddresses } from "@lib/data/cart"
+import {
+  initiatePaymentSession,
+  setAddresses,
+  updatePaymentSession,
+} from "@lib/data/cart"
 import compareAddresses from "@lib/util/compare-addresses"
 import { HttpTypes } from "@medusajs/types"
 import {
@@ -23,6 +27,7 @@ import { isStripe as isStripeFunc, paymentInfoMap } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import MobileCartTotal from "../mobile-cart-total"
 import PaymentForm from "../payment-form"
+import { update } from "lodash"
 
 const Addresses = ({
   cart,
@@ -38,6 +43,11 @@ const Addresses = ({
   const activeSession = cart?.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending"
   )
+  const [paymentOption, setPaymentOption] = useState("card")
+  const [cardNumber, setCardNumber] = useState("")
+  const [expiryDate, setExpiryDate] = useState("")
+  const [securityCode, setSecurityCode] = useState("")
+  const [nameOnCard, setNameOnCard] = useState("")
   const [buttonText, setButtonText] = useState("Place order")
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -46,9 +56,10 @@ const Addresses = ({
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart?.shipping_methods?.at(-1)?.shipping_option_id || null
   )
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
-    activeSession?.provider_id ?? ""
-  )
+
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState("pp_mpgs_mpgs")
+
   const { state: sameAsBilling, toggle: toggleSameAsBilling } = useToggleState(
     cart?.shipping_address && cart?.billing_address
       ? compareAddresses(cart?.shipping_address, cart?.billing_address)
@@ -80,11 +91,18 @@ const Addresses = ({
   const handleSubmitPaymentMethod = async () => {
     setIsLoading(true)
     try {
-      if (!activeSession && cart) {
-        await initiatePaymentSession(cart, {
-          provider_id: selectedPaymentMethod,
-        })
-      }
+      // if (!activeSession && cart) {
+      await initiatePaymentSession(cart, {
+        provider_id: selectedPaymentMethod,
+        context: {
+          payment_type: "card",
+          card_number: cardNumber,
+          expiry_date: expiryDate,
+          security_code: securityCode,
+          name_on_card: nameOnCard,
+        },
+      })
+      // }
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -128,12 +146,15 @@ const Addresses = ({
         // console.log("shippingMethodId", shippingMethodId)
         await handleSubmitShippingMethod(shippingMethodId)
 
+        console.log("Payment method", availablePaymentMethods)
+
         if (!selectedPaymentMethod) {
           // console.error("No payment method selected")
           throw new Error("Please select a payment method.")
         }
         // After setting the shipping method, submit the payment method
         await handleSubmitPaymentMethod()
+
         handlePayment()
       } else {
         // console.error("No shipping method selected")
@@ -204,7 +225,7 @@ const Addresses = ({
 
           {/* payment method */}
           <h1 className="text-[1.313rem] Poppins600 mb-4">Payment</h1>
-          <RadioGroup
+          {/* <RadioGroup
             value={selectedPaymentMethod}
             onChange={(value: string) => setSelectedPaymentMethod(value)}
           >
@@ -218,10 +239,15 @@ const Addresses = ({
                 />
               )
             })}
-          </RadioGroup>
+          </RadioGroup> */}
 
           {/* Payment form */}
-          <PaymentForm />
+          <PaymentForm
+            setCardNumber={setCardNumber}
+            setExpiryDate={setExpiryDate}
+            setSecurityCode={setSecurityCode}
+            setNameOnCard={setNameOnCard}
+          />
 
           <MobileCartTotal cart={cart} />
           <div className="flex items-start gap-x-1 w-full lg:mt-8 my-6">

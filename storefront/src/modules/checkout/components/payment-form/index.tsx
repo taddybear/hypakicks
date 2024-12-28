@@ -3,7 +3,12 @@ import { clx } from "@medusajs/ui"
 import { useState } from "react"
 import MedusaRadio from "@modules/common/components/radio"
 
-const PaymentForm = () => {
+const PaymentForm = ({
+  setCardNumber,
+  setExpiryDate,
+  setSecurityCode,
+  setNameOnCard,
+}: any) => {
   const [formError, setFormError] = useState(false)
 
   return (
@@ -90,6 +95,7 @@ const PaymentForm = () => {
               aria-label="enter name on card"
               placeholder="Card number"
               tabIndex={1}
+              onChange={(e) => setCardNumber(e.target.value)}
             />
             <div className="absolute top-0 h-full flex items-center right-4">
               <svg
@@ -136,6 +142,7 @@ const PaymentForm = () => {
               placeholder="Expiration date (MM / YY)"
               aria-label="two digit expiry date"
               // tabIndex={2}
+              onChange={(e) => setExpiryDate(e.target.value)}
             />
             {formError && (
               <p className="text-red-600 text-sm mt-1 Poppins400">
@@ -154,6 +161,7 @@ const PaymentForm = () => {
                 placeholder="Security code"
                 aria-label="three-digit CCV security code"
                 tabIndex={3}
+                onChange={(e) => setSecurityCode(e.target.value)}
               />
               <div className="absolute top-0 right-4 h-full flex items-center">
                 <div className="relative group">
@@ -199,6 +207,7 @@ const PaymentForm = () => {
             placeholder="Name on card"
             aria-label="Name on card"
             tabIndex={4}
+            onChange={(e) => setNameOnCard(e.target.value)}
           />
           {formError && (
             <p className="text-red-600 text-sm mt-1 Poppins400">
