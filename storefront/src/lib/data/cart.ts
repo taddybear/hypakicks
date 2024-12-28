@@ -14,11 +14,19 @@ import {
   setCartId,
 } from "./cookies"
 import { getRegion } from "./regions"
+import { cookies as nextCookies } from "next/headers"
 
-export async function retrieveCart() {
-  const cartId = await getCartId()
+export async function setCartOnRedirect(cartId: string) {
+  await removeCartId()
 
-  console.log("Retrieving cart for cart id:", cartId)
+  await setCartId(cartId)
+
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
+}
+
+export async function retrieveCart(paramsCartId?: string) {
+  const cartId = paramsCartId || (await getCartId())
 
   if (!cartId) {
     return null
@@ -41,10 +49,24 @@ export async function retrieveCart() {
       },
       headers,
       next,
-      cache: "force-cache",
+      cache: "no-store",
     })
     .then(({ cart }) => cart)
     .catch(() => null)
+}
+
+export async function setRedirectCartId(cartId: string) {
+  const cookies = await nextCookies()
+  // cookies.delete("_medusa_cart_id")
+  cookies.set("_medusa_cart_id", cartId, {
+    maxAge: 60 * 60 * 24 * 7,
+    // httpOnly: true,
+    // sameSite: "none",
+    // secure: process.env.NODE_ENV === "production",
+  })
+
+  // await removeCartId()
+  // await setCartId(cartId)
 }
 
 export async function getOrSetCart(countryCode: string) {

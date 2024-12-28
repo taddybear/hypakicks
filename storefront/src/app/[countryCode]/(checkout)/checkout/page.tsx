@@ -1,6 +1,7 @@
-import { retrieveCart } from "@lib/data/cart"
+import { retrieveCart, setRedirectCartId } from "@lib/data/cart"
 import { retrieveCustomer } from "@lib/data/customer"
 import PaymentWrapper from "@modules/checkout/components/payment-wrapper"
+import RedirectComponent from "@modules/checkout/components/redirect-component"
 import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Metadata } from "next"
@@ -15,22 +16,23 @@ export default async function Checkout({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const cartId = (await searchParams).cart_id
+  const params = await searchParams
+  const cartId = params.cart_id
 
-  if (cartId) {
-    await fetch("/api/cart-id?cart_id=" + cartId)
-  }
-
-  const cart = await retrieveCart()
+  console.log("Cart ID", cartId)
+  const cart = await retrieveCart(Array.isArray(cartId) ? cartId[0] : cartId)
 
   if (!cart) {
     return notFound()
   }
 
+  console.log("Checkout cart", cart)
+
   const customer = await retrieveCustomer()
 
   return (
     <>
+      <RedirectComponent cartId={cartId} />
       <div className="flex flex-col-reverse lg:flex lg:flex-row">
         <div className="px-3 lg:pr-10 lg:w-[54%]">
           <PaymentWrapper cart={cart}>
