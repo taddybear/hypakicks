@@ -35,15 +35,8 @@ const CartDropdown = ({
     setCartDropdownOpen(false)
   }, [])
 
-  const handleredirectUrl = () => {
-    // router.push("http://hypa-kicks.com/checkout?step=address")
-    // router.push(
-    //   `https://hypakicks.vercel.app/us/checkout?cart-id=${cartState?.id}`
-    // )
-    // router.push(
-    //   `https://insightful-forgiveness-production.up.railway.app/us/checkout?cart-id=${cartState?.id}`
-    // )
-    router.push(`http://localhost:8000/us/checkout?cart-id=${cartState?.id}`)
+  const handleRedirectUrl = () => {
+    router.push(`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`)
   }
 
   const totalItems =
@@ -283,7 +276,7 @@ const CartDropdown = ({
                   <div className="bg-white px-[1.875rem] pt-8 pb-4">
                     {/* <LocalizedClientLink href="/checkout?step=address" passHref> */}
                     <button
-                      onClick={handleredirectUrl}
+                      onClick={handleRedirectUrl}
                       data-testid="checkout-button"
                       className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                     >
