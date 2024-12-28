@@ -18,6 +18,7 @@ import Image from "next/image"
 import Mastercard from "../../../../../public/homepage/mastercard.jpg"
 import { useRouter, usePathname, notFound } from "next/navigation"
 import { retrieveCart } from "@lib/data/cart"
+import Link from "next/link"
 
 const CartDropdown = ({
   cart: cartState,
@@ -280,11 +281,11 @@ const CartDropdown = ({
                       data-testid="checkout-button"
                       className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                     > */}
-                    <LocalizedClientLink
+                    <Link
                       href={`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`}
                     >
                       Checkout
-                    </LocalizedClientLink>
+                    </Link>
                     {/* </button> */}
                     {/* </LocalizedClientLink> */}
                     <Image
