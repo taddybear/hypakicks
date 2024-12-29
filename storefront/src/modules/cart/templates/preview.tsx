@@ -23,7 +23,7 @@ const ItemsPreviewTemplate = ({ cart, className }: ItemsTemplateProps) => {
       })}
     >
       <Table>
-        <Table.Body data-testid="items-table ">
+        <Table.Body data-testid="items-table " className=" !border-b-0">
           {items
             ? items
                 .sort((a, b) => {

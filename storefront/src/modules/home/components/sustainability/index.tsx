@@ -92,7 +92,7 @@ export default function Sustainability() {
                 alt=""
                 width={200}
                 height={200}
-                className="w-full h-[300px] lg:h-[500px] rounded-[0.625rem]"
+                className="w-full h-[300px] lg:h-[500px] rounded-[0.625rem] object-cover"
               />
             </div>
             <div className="lg:w-1/2 space-y-[0.625rem]">

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   initiatePaymentSession,
   setAddresses,
@@ -16,7 +16,7 @@ import {
   Button,
   Tooltip,
 } from "@medusajs/ui"
-import parse from "html-react-parser"
+// import parse from "html-react-parser"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
 import { RadioGroup, Radio } from "@headlessui/react"
@@ -44,7 +44,7 @@ const Addresses = ({
   const activeSession = cart?.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending"
   )
-  const [paymentOption, setPaymentOption] = useState("card")
+  const [paymentOption, setPaymentOption] = useState("credit_card")
   const [cardNumber, setCardNumber] = useState("")
   const [expiryDate, setExpiryDate] = useState("")
   const [securityCode, setSecurityCode] = useState("")
@@ -55,6 +55,8 @@ const Addresses = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [formattedCardNumber, setFormattedCardNumber] = useState("")
+  const [formattedExpiryDate, setFormattedExpiryDate] = useState("")
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart?.shipping_methods?.at(-1)?.shipping_option_id || null
   )
@@ -94,32 +96,34 @@ const Addresses = ({
     setIsLoading(true)
     try {
       // if (!activeSession && cart) {
-      const response = await initiatePaymentSession(cart, {
-        provider_id: selectedPaymentMethod,
-        context: {
-          payment_type: "card",
-          card_number: cardNumber,
-          expiry_date: expiryDate,
-          security_code: securityCode,
-          name_on_card: nameOnCard,
-          cart_id: cart?.id,
-        },
-      })
+      if (cart) {
+        const response = await initiatePaymentSession(cart, {
+          provider_id: selectedPaymentMethod,
+          context: {
+            payment_type: "card",
+            card_number: cardNumber,
+            expiry_date: expiryDate,
+            security_code: securityCode,
+            name_on_card: nameOnCard,
+            cart_id: cart?.id,
+          },
+        })
 
-      console.log("Cart response", response)
-      // 3ds data is in response.payment_collection.payment_sessions[0].data
-      // if three_d_secure is true, then we need to handle 3ds then we need to handle html
-      if (response.payment_collection.payment_sessions[0].data) {
-        const threeDSData = response.payment_collection.payment_sessions[0].data
-        if (threeDSData.threeDS) {
-          // show html
-          setThreeDSHtml(threeDSData.html)
-        } else {
-          // just complete the payment
-          // handlePayment()
+        console.log("Cart response", response)
+        // 3ds data is in response.payment_collection.payment_sessions[0].data
+        // if three_d_secure is true, then we need to handle 3ds then we need to handle html
+        if (response.payment_collection.payment_sessions[0].data) {
+          const threeDSData =
+            response.payment_collection.payment_sessions[0].data
+          if (threeDSData.threeDS) {
+            // show html
+            setThreeDSHtml(threeDSData.html)
+          } else {
+            // just complete the payment
+            // handlePayment()
+          }
         }
       }
-      // }
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -185,6 +189,20 @@ const Addresses = ({
     }
   }
 
+  useEffect(() => {
+    const sanitizedCardNumber = cardNumber.replace(/\s/g, "")
+    setFormattedCardNumber(sanitizedCardNumber)
+    const sanitizedExpiryDate = expiryDate.replace(/[\s/]/g, "")
+    setFormattedExpiryDate(sanitizedExpiryDate)
+  }, [cardNumber, expiryDate])
+
+  // useEffect(() => {
+  //   console.log("Card Number", formattedCardNumber)
+  //   console.log("Expiry Date", formattedExpiryDate)
+  //   console.log("Card Name", nameOnCard)
+  //   console.log("securityCode", securityCode)
+  // }, [formattedCardNumber, formattedExpiryDate, nameOnCard, securityCode])
+
   return (
     <>
       {threeDSHtml && (
@@ -225,16 +243,18 @@ const Addresses = ({
                       value={option.id}
                       data-testid="delivery-option-radio"
                       className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                        "flex items-center justify-between text-small-regular cursor-pointer py-3 border rounded-rounded px-4 mb-2 hover:shadow-borders-interactive-with-active",
                         {
                           "border-ui-border-interactive":
                             option.id === shippingMethodId,
                         }
                       )}
                     >
-                      <div className="flex items-center gap-x-4">
+                      <div className="flex items-center">
                         <MedusaRadio checked={option.id === shippingMethodId} />
-                        <span className="text-base-regular">{option.name}</span>
+                        <span className="text-base-regular pl-4 Poppins400">
+                          {option.name}
+                        </span>
                       </div>
                       <span className="justify-self-end text-ui-fg-base">
                         {convertToLocale({
@@ -274,16 +294,22 @@ const Addresses = ({
 
           {/* Payment form */}
           <PaymentForm
-          // setCardNumber={setCardNumber}
-          // setExpiryDate={setExpiryDate}
-          // setSecurityCode={setSecurityCode}
-          // setNameOnCard={setNameOnCard}
+            setPaymentOption={setPaymentOption}
+            paymentOption={paymentOption}
+            setCardNumber={setCardNumber}
+            cardNumber={cardNumber}
+            setExpiryDate={setExpiryDate}
+            expiryDate={expiryDate}
+            setSecurityCode={setSecurityCode}
+            securityCode={securityCode}
+            setNameOnCard={setNameOnCard}
+            nameOnCard={nameOnCard}
           />
 
           <MobileCartTotal cart={cart} />
           <div className="flex items-start gap-x-1 w-full lg:mt-8 my-6">
             <div className="w-full">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
+              <Text className="text-sm Poppins400 mb-1">
                 By clicking the Place Order button, you confirm that you have
                 read, understand and accept our Terms of Use, Terms of Sale and
                 Returns Policy and acknowledge that you have read Medusa
@@ -296,7 +322,7 @@ const Addresses = ({
             type="submit"
             size="large"
             data-testid="submit-order-button"
-            className="bg-[#161d25] !rounded-sm Poppins600 w-full text-lg"
+            className="bg-[#161d25] hover:bg-black py-3 !rounded-sm Poppins600 w-full text-lg"
           >
             {buttonText}
           </Button>

@@ -6,12 +6,15 @@ import ImgThree from "../../../../../public/homepage/imgThree.webp"
 import ShoeFour from "../../../../../public/homepage/shoeFour.jpeg"
 import ShoeFive from "../../../../../public/homepage/shoeThree.jpg"
 import ShoeSix from "../../../../../public/homepage/shoeFive.jpeg"
-import ShoeSeven from "../../../../../public/homepage/shoeSeven.jpeg"
+import UserOne from "../../../../../public/homepage/userOne.webp"
+import UserTwo from "../../../../../public/homepage/userTwo.webp"
+import UserThree from "../../../../../public/homepage/userThree.webp"
+import UserFour from "../../../../../public/homepage/userFour.webp"
 
 const Testimonials = () => {
   const SliderTwo = [
     {
-      imgSrc: ImgOne,
+      imgSrc: UserFour,
       ratingSrc: Rating,
       text: "I can't recommend enough! They exceeded my expectations in every way. 🌟",
     },
@@ -26,17 +29,17 @@ const Testimonials = () => {
       text: "Shipping is super fast, I received my order within two days!",
     },
     {
-      imgSrc: ImgOne, // Replace with actual image source
+      imgSrc: UserOne, // Replace with actual image source
       ratingSrc: Rating, // Replace with actual rating source
       text: "My friends are jealous of my new sneakers! Thanks for the quick delivery",
     },
     {
-      imgSrc: ImgOne, // Replace with actual image source
+      imgSrc: UserTwo, // Replace with actual image source
       ratingSrc: Rating, // Replace with actual rating source
       text: "Wearing feels like having art on your feet. Stylish, comfortable and always an eye-catcher",
     },
     {
-      imgSrc: ImgOne, // Replace with actual image source
+      imgSrc: UserThree, // Replace with actual image source
       ratingSrc: Rating, // Replace with actual rating source
       text: "I'm addicted to the fresh drops from. Can't wait to see what's next!",
     },
@@ -108,7 +111,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={ImgThree}
                       alt=""
                       width={40}
                       height={40}
@@ -123,8 +126,7 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Shipping is super fast, I received my order within two days!
                   </p>
                 </div>
               </div>
@@ -133,7 +135,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserOne}
                     alt=""
                     width={40}
                     height={40}
@@ -164,7 +166,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserOne}
                       alt=""
                       width={40}
                       height={40}
@@ -179,8 +181,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Offers a wide range of stylish sneakers, I always find
+                    something I like! 🛍️
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
@@ -201,8 +203,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    I can't recommend enough! They exceeded my expectations in
+                    every way. 🌟
                   </p>
                 </div>
               </div>
@@ -211,7 +213,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserThree}
                     alt=""
                     width={40}
                     height={40}
@@ -242,7 +244,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserTwo}
                       alt=""
                       width={40}
                       height={40}
@@ -258,13 +260,13 @@ const Testimonials = () => {
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
                     My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    quick delivery! 🎉
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={ImgTwo}
                       alt=""
                       width={40}
                       height={40}
@@ -279,8 +281,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Fast delivery, excellent quality and fantastic customer
+                    service
                   </p>
                 </div>
               </div>
@@ -294,7 +296,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserFour}
                     alt=""
                     width={40}
                     height={40}
@@ -339,14 +341,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    The attention to detail in products is unsurpassed. Simply
+                    fantastic! 👌
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={ImgThree}
                       alt=""
                       width={40}
                       height={40}
@@ -361,8 +363,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Wearing feels like having art on your feet. Stylish,
+                    comfortable and always an eye-catcher! 🎨👟
                   </p>
                 </div>
               </div>
@@ -371,7 +373,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={ImgTwo}
                     alt=""
                     width={40}
                     height={40}
@@ -402,7 +404,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserThree}
                       alt=""
                       width={40}
                       height={40}
@@ -417,8 +419,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    I'm addicted to the fresh drops from. Can't wait to see
+                    what's next!🎉🆕
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
@@ -439,8 +441,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Returning a pair was no problem with. Your customer service
+                    is top notch! 📞✔️
                   </p>
                 </div>
               </div>
@@ -449,7 +451,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={ImgThree}
                     alt=""
                     width={40}
                     height={40}
@@ -495,8 +497,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    'm addicted to the fresh drops from. Can't wait to see
+                    what's next!🎉🆕
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
@@ -517,8 +519,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Offers a wide range of stylish sneakers, I always find
+                    something I like! 🛍️
                   </p>
                 </div>
               </div>
@@ -623,7 +625,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserFour}
                       alt=""
                       width={40}
                       height={40}
@@ -638,14 +640,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    I'm addicted to the fresh drops from. Can't wait to see
+                    what's next!🎉🆕
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={UserOne}
                       alt=""
                       width={40}
                       height={40}
@@ -660,8 +662,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Wearing feels like having art on your feet. Stylish,
+                    comfortable and always an eye-catcher! 🎨👟
                   </p>
                 </div>
               </div>
@@ -670,7 +672,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserTwo}
                     alt=""
                     width={40}
                     height={40}
@@ -716,14 +718,13 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Shipping is super fast, I received my order within two days!
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={UserThree}
                       alt=""
                       width={40}
                       height={40}
@@ -738,8 +739,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Wearing feels like having art on your feet. Stylish,
+                    comfortable and always an eye-catcher! 🎨👟
                   </p>
                 </div>
               </div>
@@ -748,7 +749,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserFour}
                     alt=""
                     width={40}
                     height={40}
@@ -779,7 +780,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserOne}
                       alt=""
                       width={40}
                       height={40}
@@ -794,8 +795,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    I can't recommend enough! They exceeded my expectations in
+                    every way. 🌟
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
@@ -817,7 +818,7 @@ const Testimonials = () => {
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
                     My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    quick delivery! 🎉
                   </p>
                 </div>
               </div>
@@ -831,7 +832,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserOne}
                     alt=""
                     width={40}
                     height={40}
@@ -861,7 +862,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserTwo}
                       alt=""
                       width={40}
                       height={40}
@@ -876,14 +877,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    The attention to detail in products is unsurpassed. Simply
+                    fantastic! 👌
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={ImgTwo}
                       alt=""
                       width={40}
                       height={40}
@@ -898,8 +899,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Offers a wide range of stylish sneakers, I always find
+                    something I like! 🛍️
                   </p>
                 </div>
               </div>
@@ -908,7 +909,7 @@ const Testimonials = () => {
               <div className="w-[50%] bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] h-full m-[0.313rem]">
                 <div className="flex items-center mb-[0.625rem]">
                   <Image
-                    src={ImgOne}
+                    src={UserTwo}
                     alt=""
                     width={40}
                     height={40}
@@ -939,7 +940,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserThree}
                       alt=""
                       width={40}
                       height={40}
@@ -954,14 +955,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Offers a wide range of stylish sneakers, I always find
+                    something I like! 🛍️
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
                   <div className="flex items-center mb-[0.625rem]">
                     <Image
-                      src={ImgOne}
+                      src={UserOne}
                       alt=""
                       width={40}
                       height={40}
@@ -976,8 +977,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Returning a pair was no problem with. Your customer service
+                    is top notch! 📞✔️
                   </p>
                 </div>
               </div>
@@ -1017,7 +1018,7 @@ const Testimonials = () => {
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] m-[0.313rem]">
                   <div className="flex items-center mb-[0.625rem] ">
                     <Image
-                      src={ImgOne}
+                      src={UserFour}
                       alt=""
                       width={40}
                       height={40}
@@ -1032,8 +1033,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    Fast delivery, excellent quality and fantastic customer
+                    service 💯
                   </p>
                 </div>
                 <div className="bg-[#f2f2f2] p-[0.625rem] rounded-[1.25rem] mt-[1.25rem] m-[0.313rem] ">
@@ -1054,8 +1055,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <p className="text-xs mb-4 text-[#474747] Poppins400">
-                    My friends are jealous of my new sneakers! Thanks for the
-                    quick delivery!
+                    The attention to detail in products is unsurpassed. Simply
+                    fantastic! 👌
                   </p>
                 </div>
               </div>

@@ -140,7 +140,7 @@ const ShippingAddress = ({
         onChange={handleChange}
         required
         data-testid="shipping-country-select"
-        className="px-2 bg-transparent border-[1px] border-[#DEDEDE] w-full h-11 rounded-md"
+        className="Poppins400 py-1 hover:bg-transparent bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
       <div className="grid grid-cols-2 gap-5 my-4">
         <Input
@@ -151,7 +151,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-first-name-input"
-          className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
         />
         <Input
           label="Last name"
@@ -161,7 +161,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
-          className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
         />
       </div>
 
@@ -173,7 +173,7 @@ const ShippingAddress = ({
         onChange={handleChange}
         required
         data-testid="shipping-address-input"
-        className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+        className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
       <div className="mt-4">
         <Input
@@ -183,7 +183,7 @@ const ShippingAddress = ({
           value={formData["shipping_address.address_2"]}
           onChange={handleChange}
           data-testid="shipping-address-input"
-          className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
         />
       </div>
       {/* <Input
@@ -197,16 +197,6 @@ const ShippingAddress = ({
       /> */}
       <div className="grid grid-cols-2 gap-5 my-4">
         <Input
-          label="Postal code"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-postal-code-input"
-          className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
-        <Input
           label="City"
           name="shipping_address.city"
           autoComplete="address-level2"
@@ -214,7 +204,17 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-city-input"
-          className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+        />
+        <Input
+          label="ZIP code"
+          name="shipping_address.postal_code"
+          autoComplete="postal-code"
+          value={formData["shipping_address.postal_code"]}
+          onChange={handleChange}
+          required
+          data-testid="shipping-postal-code-input"
+          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
         />
       </div>
       <Input
@@ -224,7 +224,7 @@ const ShippingAddress = ({
         value={formData["shipping_address.phone"]}
         onChange={handleChange}
         data-testid="shipping-phone-input"
-        className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+        className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
       {/* <Input
         label="State / Province"

@@ -75,7 +75,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
             <>
               <div className="flex w-full gap-x-4">
                 <input
-                  className="w-full rounded-md p-3 py-4 border-[#DDDDDD] border-2"
+                  className="placeholder:text-[#525252] w-full rounded-md p-3 py-4 border-[#DDDDDD] border-2"
                   type="text"
                   placeholder="Discount code or gift card"
                   id="promotion-input"
