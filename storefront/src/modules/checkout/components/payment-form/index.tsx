@@ -197,7 +197,7 @@ any) => {
               onClick={() => expiryDateRef.current?.focus()}
               className="text-[0.6rem] lg:text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
             >
-              Expiration date (MM / YY)
+              Expiry date (MM / YY)
             </label>
 
             {formError && (
