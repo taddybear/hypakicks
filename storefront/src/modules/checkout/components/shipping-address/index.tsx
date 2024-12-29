@@ -114,9 +114,9 @@ const ShippingAddress = ({
       )} */}
       <div className="flex items-center mb-4 justify-between">
         <h1 className="text-[1.313rem] Poppins600 ">Contact</h1>
-        <Link href="/account" className="underline text-sm">
+        {/* <Link href="/account" className="underline text-sm">
           Login
-        </Link>
+        </Link> */}
       </div>
       <Input
         label="Email"
@@ -131,7 +131,7 @@ const ShippingAddress = ({
         className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
 
-      <h1 className="text-[1.313rem] Poppins600 mb-4 mt-12">Delivery</h1>
+      <h1 className="text-[1.313rem] Poppins600 mb-4 mt-8">Delivery</h1>
       <CountrySelect
         name="shipping_address.country_code"
         autoComplete="country"
@@ -235,7 +235,7 @@ const ShippingAddress = ({
         data-testid="shipping-province-input"
         className="px-2 bg-transparent border-[1px] border-[#DEDEDE] w-full h-11 rounded-md"
       /> */}
-      <div className="my-8">
+      {/* <div className="my-8">
         <Checkbox
           label="Billing address same as shipping address"
           name="same_as_billing"
@@ -243,7 +243,7 @@ const ShippingAddress = ({
           onChange={onChange}
           data-testid="billing-address-checkbox"
         />
-      </div>
+      </div> */}
       {/* <div className="grid grid-cols-2 gap-4 mb-4"></div> */}
     </>
   )

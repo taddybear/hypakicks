@@ -7,6 +7,7 @@ import Shoe from "../../../../../public/homepage/shoe.webp"
 import HomeGrid from "../../../../../public/homepage/homegrid.webp"
 import Video from "../video"
 import Link from "next/link"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const Hero = () => {
   return (
@@ -50,13 +51,13 @@ const Hero = () => {
           </p>
           <ul className=" flex items-center space-x-2">
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <Link
+              <LocalizedClientLink
                 href="/shop"
                 aria-label="Go to shoppage"
                 className=" whitespace-nowrap	"
               >
                 SHOP SNEAKERS
-              </Link>
+              </LocalizedClientLink>
               <svg
                 width="100%"
                 height="2em"
@@ -75,13 +76,13 @@ const Hero = () => {
               </svg>
             </li>
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <Link
+              <LocalizedClientLink
                 href="/about-us"
                 aria-label="Go to aboutpage"
-                className="whitespace-nowrap	"
+                className="whitespace-nowrap"
               >
                 About Us
-              </Link>
+              </LocalizedClientLink>
               <svg
                 width="100%"
                 height="2em"
