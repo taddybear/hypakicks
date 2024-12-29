@@ -312,21 +312,32 @@ const CartDropdown = ({
                 </div> */}
                 </div>
               ) : (
-                <div>
-                  <div className=" h-[92%] flex flex-col p-[1.875rem] justify-center items-center">
-                    <p className="text-center">Your cart is empty</p>
-                    <LocalizedClientLink href="/shop">
-                      <>
-                        <span className="sr-only">Go to all products page</span>
-                        <button
-                          data-testid="return-shop-button"
-                          onClick={close}
-                          className="py-[0.625rem] px-6 mt-6  uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
-                        >
-                          RETURN TO SHOP
-                        </button>
-                      </>
-                    </LocalizedClientLink>
+                <div className="h-full">
+                  <div className=" h-[92%] flex flex-col p-[1.875rem] justify-between items-center">
+                    <div>
+                      <p className="text-center">Your cart is empty</p>
+                      <LocalizedClientLink href="/shop">
+                        <>
+                          <span className="sr-only">
+                            Go to all products page
+                          </span>
+                          <button
+                            data-testid="return-shop-button"
+                            onClick={close}
+                            className="py-[0.625rem] px-6 mt-6  uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
+                          >
+                            RETURN TO SHOP
+                          </button>
+                        </>
+                      </LocalizedClientLink>
+                    </div>
+                    <Image
+                      src={Mastercard}
+                      alt=""
+                      width={225}
+                      height={39}
+                      className="w-full mt-3"
+                    />
                   </div>
                 </div>
               )}

@@ -30,7 +30,7 @@ export default async function BestSellerPreview({
           height={268}
           className="h-[179px] w-[179px] lg:h-[268px] lg:w-[268px]"
         />
-        <p className="my-[0.625rem] text-[#474747] Poppins400">
+        <p className="my-[0.625rem] text-[#474747] Poppins400 object-cover">
           {product.title}
         </p>
         <div className="text-[1.063rem] text-[#474747] Poppins700">

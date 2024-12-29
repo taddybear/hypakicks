@@ -4,7 +4,7 @@ import { useState } from "react"
 import {
   initiatePaymentSession,
   setAddresses,
-  updatePaymentSession,
+  // updatePaymentSession,
 } from "@lib/data/cart"
 import compareAddresses from "@lib/util/compare-addresses"
 import { HttpTypes } from "@medusajs/types"
@@ -180,7 +180,7 @@ const Addresses = ({
           />
 
           {/* shipping method */}
-          <h1 className="Poppins600 mb-4">Shipping method</h1>
+          <h1 className="Poppins600 mt-8 my-4">Shipping method</h1>
           <div data-testid="delivery-options-container">
             <div className="pb-8">
               <RadioGroup
@@ -243,10 +243,10 @@ const Addresses = ({
 
           {/* Payment form */}
           <PaymentForm
-            setCardNumber={setCardNumber}
-            setExpiryDate={setExpiryDate}
-            setSecurityCode={setSecurityCode}
-            setNameOnCard={setNameOnCard}
+          // setCardNumber={setCardNumber}
+          // setExpiryDate={setExpiryDate}
+          // setSecurityCode={setSecurityCode}
+          // setNameOnCard={setNameOnCard}
           />
 
           <MobileCartTotal cart={cart} />

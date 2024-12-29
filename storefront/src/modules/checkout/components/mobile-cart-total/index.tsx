@@ -8,8 +8,10 @@ const MobileCartTotal = ({ cart }: { cart: any }) => {
       <h1 className="text-[1.313rem] Poppins600 mt-6 my-4">Order summary</h1>
 
       <ItemsPreviewTemplate cart={cart} className="" />
-      <DiscountCode cart={cart} />
-      <CartTotals totals={cart} />
+      {/* <DiscountCode cart={cart} /> */}
+      <div className="mt-4">
+        <CartTotals totals={cart} />
+      </div>
     </div>
   )
 }

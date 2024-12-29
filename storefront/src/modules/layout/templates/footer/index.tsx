@@ -17,7 +17,7 @@ export default async function Footer() {
   return (
     <>
       <footer className="container px-3 lg:px-0 py-6">
-        <Link href="/" className="w-[150px] lg:w-[200px] block">
+        <LocalizedClientLink href="/" className="w-[150px] lg:w-[200px] block">
           <Image
             aria-label="Go to homepage"
             src={Hypakicks}
@@ -26,7 +26,7 @@ export default async function Footer() {
             alt=""
             className=""
           />
-        </Link>
+        </LocalizedClientLink>
         <p className="py-[0.625rem] text-[#474747] text-sm Poppins400">
           Find your new favorite sneakers with fast delivery and 24/7 support at
           Hypa Kicks.
@@ -38,10 +38,14 @@ export default async function Footer() {
             </h1>
             <ul>
               <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/shop">New Collection</Link>
+                <LocalizedClientLink href="/shop">
+                  New Collection
+                </LocalizedClientLink>
               </li>
               <li className="text-sm Poppins400 text-[#474747]">
-                <Link href="/shop">Summer Sales</Link>
+                <LocalizedClientLink href="/shop">
+                  Summer Sales
+                </LocalizedClientLink>
               </li>
             </ul>
           </div>
@@ -51,19 +55,29 @@ export default async function Footer() {
                 Information
               </li>
               <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/about-us">About Us</Link>
+                <LocalizedClientLink href="/about-us">
+                  About Us
+                </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/contact-us">Contact Us</Link>
+                <LocalizedClientLink href="/contact-us">
+                  Contact Us
+                </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/orders-tracking">Order Tracking</Link>
+                <LocalizedClientLink href="/orders-tracking">
+                  Order Tracking
+                </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/privacy-policy">Privacy Policy</Link>
+                <LocalizedClientLink href="/privacy-policy">
+                  Privacy Policy
+                </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <Link href="/term-and-conditions">Term and Conditions</Link>
+                <LocalizedClientLink href="/term-and-conditions">
+                  Term and Conditions
+                </LocalizedClientLink>
               </li>
             </ul>
           </div>
@@ -82,7 +96,7 @@ export default async function Footer() {
     //           className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
     //         >
     //           Medusa Store
-    //         </LocalizedClientLink>
+    //         </LocalizedClientLocalizedClientLink>
     //       </div>
     //       <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
     //         {productCategories && productCategories?.length > 0 && (
@@ -120,7 +134,7 @@ export default async function Footer() {
     //                       data-testid="category-link"
     //                     >
     //                       {c.name}
-    //                     </LocalizedClientLink>
+    //                     </LocalizedClientLocalizedClientLink>
     //                     {children && (
     //                       <ul className="grid grid-cols-1 ml-3 gap-2">
     //                         {children &&
@@ -132,7 +146,7 @@ export default async function Footer() {
     //                                 data-testid="category-link"
     //                               >
     //                                 {child.name}
-    //                               </LocalizedClientLink>
+    //                               </LocalizedClientLocalizedClientLink>
     //                             </li>
     //                           ))}
     //                       </ul>
@@ -163,7 +177,7 @@ export default async function Footer() {
     //                     href={`/collections/${c.handle}`}
     //                   >
     //                     {c.title}
-    //                   </LocalizedClientLink>
+    //                   </LocalizedClientLocalizedClientLink>
     //                 </li>
     //               ))}
     //             </ul>
@@ -173,34 +187,34 @@ export default async function Footer() {
     //           <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
     //           <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
     //             <li>
-    //               <Link
+    //               <LocalizedClientLink
     //                 href="https://github.com/medusajs"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 GitHub
-    //               </Link>
+    //               </LocalizedClientLink>
     //             </li>
     //             <li>
-    //               <Link
+    //               <LocalizedClientLink
     //                 href="https://docs.medusajs.com"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 Documentation
-    //               </Link>
+    //               </LocalizedClientLink>
     //             </li>
     //             <li>
-    //               <Link
+    //               <LocalizedClientLink
     //                 href="https://github.com/medusajs/nextjs-starter-medusa"
     //                 target="_blank"
     //                 rel="noreferrer"
     //                 className="hover:text-ui-fg-base"
     //               >
     //                 Source code
-    //               </Link>
+    //               </LocalizedClientLink>
     //             </li>
     //           </ul>
     //         </div>
