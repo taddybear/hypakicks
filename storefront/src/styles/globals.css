@@ -211,3 +211,10 @@
     transform: rotate(-30deg);
   }
 }
+
+apple-pay-button {
+  --apple-pay-button-width: 100%;
+  --apple-pay-button-height: 36px;
+  --apple-pay-button-border-radius: 5px;
+  --apple-pay-button-padding: 5px 0px;
+}

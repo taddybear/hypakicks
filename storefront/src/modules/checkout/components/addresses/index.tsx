@@ -16,6 +16,7 @@ import {
   Button,
   Tooltip,
 } from "@medusajs/ui"
+import parse from "html-react-parser"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
 import { RadioGroup, Radio } from "@headlessui/react"
@@ -50,6 +51,7 @@ const Addresses = ({
   const [nameOnCard, setNameOnCard] = useState("")
   const [buttonText, setButtonText] = useState("Place order")
   const [submitting, setSubmitting] = useState(false)
+  const [threeDSHtml, setThreeDSHtml] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -92,7 +94,7 @@ const Addresses = ({
     setIsLoading(true)
     try {
       // if (!activeSession && cart) {
-      await initiatePaymentSession(cart, {
+      const response = await initiatePaymentSession(cart, {
         provider_id: selectedPaymentMethod,
         context: {
           payment_type: "card",
@@ -100,8 +102,23 @@ const Addresses = ({
           expiry_date: expiryDate,
           security_code: securityCode,
           name_on_card: nameOnCard,
+          cart_id: cart?.id,
         },
       })
+
+      console.log("Cart response", response)
+      // 3ds data is in response.payment_collection.payment_sessions[0].data
+      // if three_d_secure is true, then we need to handle 3ds then we need to handle html
+      if (response.payment_collection.payment_sessions[0].data) {
+        const threeDSData = response.payment_collection.payment_sessions[0].data
+        if (threeDSData.threeDS) {
+          // show html
+          setThreeDSHtml(threeDSData.html)
+        } else {
+          // just complete the payment
+          // handlePayment()
+        }
+      }
       // }
     } catch (err: any) {
       setError(err.message)
@@ -155,7 +172,7 @@ const Addresses = ({
         // After setting the shipping method, submit the payment method
         await handleSubmitPaymentMethod()
 
-        handlePayment()
+        // handlePayment()
       } else {
         // console.error("No shipping method selected")
         throw new Error("Please select a shipping method.")
@@ -170,6 +187,20 @@ const Addresses = ({
 
   return (
     <>
+      {threeDSHtml && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-[480px] h-[640px] relative">
+            <button
+              onClick={() => setThreeDSHtml(null)}
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+            >
+              ✕
+            </button>
+            <div className="p-4">{parse(threeDSHtml)}</div>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handlePlaceOrder}>
         <div className="pb-8">
           <ShippingAddress

@@ -1,7 +1,8 @@
 import { RadioGroup, Radio } from "@headlessui/react"
 import { clx } from "@medusajs/ui"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MedusaRadio from "@modules/common/components/radio"
+import Script from "next/script"
 
 const PaymentForm = ({
   setCardNumber,
@@ -10,6 +11,25 @@ const PaymentForm = ({
   setNameOnCard,
 }: any) => {
   const [formError, setFormError] = useState(false)
+  const [showApplePay, setShowApplePay] = useState(false)
+
+  useEffect(() => {
+    const enableApplePayButton = async () => {
+      if (window.ApplePaySession) {
+        const button = document.querySelector("apple-pay-button")
+        console.log("Apple pay button", button)
+        if (button) {
+          console.log("button exists")
+          button.style.display = "block" // Make the button visible
+          button.disabled = false // Enable the button
+        }
+      } else {
+        console.log("Apple Pay is not available on this device or browser.")
+      }
+    }
+
+    enableApplePayButton()
+  }, [])
 
   return (
     <>
@@ -216,6 +236,20 @@ const PaymentForm = ({
           )}
         </div>
       </div>
+
+      <Script
+        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
+        strategy="beforeInteractive"
+      />
+      {/* {showApplePay && ( */}
+      <div className="mt-4">
+        <apple-pay-button
+          buttonstyle="black"
+          type="buy"
+          locale="en-US"
+        ></apple-pay-button>
+      </div>
+      {/* )} */}
     </>
   )
 }

@@ -89,8 +89,6 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         const data = await response.json();
         console.log("Session Data: ", data);
         if (data.result === "SUCCESS") {
-          // attach card details to the session
-
           const paymentUrl = url + `/${data.session.id}`;
           const payerData = {
             sourceOfFunds: {
@@ -123,35 +121,16 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
           if (paymentResponse.ok) {
             const paymentData = await paymentResponse.json();
             console.log("Payment Data: ", paymentData);
-            // const tokenizeCardUrl =
-            //   this.options_.msoUrl +
-            //   `/api/rest/version/100/merchant/${this.options_.merchantId}/token`;
-
-            // const tokenizeData = {
-            //   session: {
-            //     id: paymentData.session.id,
-            //   },
-            //   sourceOfFunds: {
-            //     type: "CARD",
-            //   },
-            // };
-
-            // const tokenizeResponse = await fetch(tokenizeCardUrl, {
-            //   method: "POST",
-            //   body: JSON.stringify(tokenizeData),
-            //   headers: {
-            //     Authorization: `Basic ${authToken}`,
-            //     "Content-Type": "application/json",
-            //   },
-            // });
-            // if (tokenizeResponse.ok) {
-            //   const tokenizeData = await tokenizeResponse.json();
-            //   console.log("Tokenize data: ", tokenizeData);
-            //   return {
-            //     data: { token_id: tokenizeData.token },
-            //   };
-            // }
-            // console.log("Tokenize response: ", tokenizeResponse);
+            const threeDSecure = await this.threeDSecureInitiate(
+              // @ts-ignore
+              context.cart_id,
+              paymentData.session.id,
+              Number(amount),
+              currency_code
+            );
+            if (threeDSecure) {
+              return { data: threeDSecure.data };
+            }
             return {
               data: {
                 payment_id: paymentData.session.id,
@@ -174,6 +153,122 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         error: e,
         code: "unknown",
         detail: e,
+      };
+    }
+  }
+
+  async threeDSecureInitiate(
+    cart_id: string,
+    session_id: string,
+    amount: number,
+    country_code: string
+  ) {
+    console.log("Initiate 3DS", cart_id, session_id, amount, country_code);
+    const authToken = this.generateAuthToken();
+    const url =
+      this.options_.msoUrl +
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}/transaction/TxnID_${cart_id}`;
+
+    const payload = {
+      apiOperation: "INITIATE_AUTHENTICATION",
+      correlationId: cart_id,
+      order: {
+        currency: "USD",
+      },
+      session: {
+        id: session_id,
+      },
+    };
+
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Basic ${authToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Initiate 3ds resonse: ", response);
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Initiate 3DS Data: ", data);
+      const threeDSresponse = data.response;
+      if (
+        threeDSresponse &&
+        threeDSresponse.gatewayRecommendation === "PROCEED"
+      ) {
+        // go directly to payment
+        return { data: { threeDS: false } };
+      } else {
+        // redirect to 3DS page
+        return await this.threeDSecureAuthenticate(
+          cart_id,
+          session_id,
+          amount,
+          country_code
+        );
+      }
+    }
+  }
+
+  async threeDSecureAuthenticate(
+    cart_id: string,
+    session_id: string,
+    amount: number,
+    country_region: string
+  ) {
+    const authToken = this.generateAuthToken();
+    const url =
+      this.options_.msoUrl +
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}/transaction/TxnID_${cart_id}`;
+
+    const payload = {
+      apiOperation: "AUTHENTICATE_PAYER",
+      authentication: {
+        redirectResponseUrl: "https://localhost:8000/us/checkout",
+      },
+      correlationId: cart_id,
+      device: {
+        browserDetails: {
+          "3DSecureChallengeWindowSize": "600_X_400",
+          acceptHeaders: "application/json",
+          colorDepth: 24,
+          javaEnabled: true,
+          language: "en-US",
+          screenHeight: 640,
+          screenWidth: 480,
+          timeZone: 273,
+        },
+      },
+      order: {
+        amount: amount,
+        currency: "USD",
+      },
+      session: {
+        id: session_id,
+      },
+    };
+
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Basic ${authToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Authenticate 3DS Data: ", data);
+      const authenticationHtml = data.authentication.redirectHtml;
+      return {
+        data: {
+          threeDS: true,
+          html: authenticationHtml,
+        },
       };
     }
   }
@@ -218,21 +313,21 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         },
       };
 
-      const response = await fetch(url, {
-        method: "PUT",
-        body: JSON.stringify(payload),
-        headers: {
-          Authorization: `Basic ${authToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Authorize Data: ", data);
-      }
-      console.log("Response", response);
+      // const response = await fetch(url, {
+      //   method: "PUT",
+      //   body: JSON.stringify(payload),
+      //   headers: {
+      //     Authorization: `Basic ${authToken}`,
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      // if (response.ok) {
+      //   const data = await response.json();
+      //   console.log("Authorize Data: ", data);
+      // }
+      // console.log("Response", response);
       return {
-        error: "Error" + response.status,
+        error: "Error",
       };
     } catch (e) {
       return {
@@ -448,3 +543,33 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 }
 
 export default MPGSProviderService;
+
+// const tokenizeCardUrl =
+//   this.options_.msoUrl +
+//   `/api/rest/version/100/merchant/${this.options_.merchantId}/token`;
+
+// const tokenizeData = {
+//   session: {
+//     id: paymentData.session.id,
+//   },
+//   sourceOfFunds: {
+//     type: "CARD",
+//   },
+// };
+
+// const tokenizeResponse = await fetch(tokenizeCardUrl, {
+//   method: "POST",
+//   body: JSON.stringify(tokenizeData),
+//   headers: {
+//     Authorization: `Basic ${authToken}`,
+//     "Content-Type": "application/json",
+//   },
+// });
+// if (tokenizeResponse.ok) {
+//   const tokenizeData = await tokenizeResponse.json();
+//   console.log("Tokenize data: ", tokenizeData);
+//   return {
+//     data: { token_id: tokenizeData.token },
+//   };
+// }
+// console.log("Tokenize response: ", tokenizeResponse);
