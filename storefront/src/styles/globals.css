@@ -198,6 +198,7 @@
 
 .rotate-animation {
   animation: rotate 10s ease-in-out infinite;
+  animation-delay: 2s;
 }
 
 @keyframes rotate {

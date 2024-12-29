@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Suspense, lazy } from "react"
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -9,6 +9,8 @@ import Image from "next/image"
 import Hypakicks from "../../../../../public/homepage/hypakicks.webp"
 import Slider from "@modules/layout/components/slider"
 import Link from "next/link"
+
+// const SideMenu = lazy(() => import("@modules/layout/components/side-menu"))
 
 export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
@@ -49,7 +51,10 @@ export default async function Nav() {
 
       <div className="container flex items-center justify-between w-full py-2 lg:py-[1.25rem] px-3 lg:px-0">
         <div className="flex items-center w-full lg:lg:w-[16.66666667%]">
-          <SideMenu regions={regions} />
+          <Suspense fallback={<div></div>}>
+            <SideMenu regions={regions} />
+          </Suspense>
+
           <Link
             href="/"
             aria-label="Go to homepage"
@@ -112,7 +117,10 @@ export default async function Nav() {
               </LocalizedClientLink>
             }
           > */}
-          <CartButton />
+          <Suspense fallback={<div></div>}>
+            <CartButton />
+          </Suspense>
+
           {/* </Suspense> */}
         </div>
       </div>

@@ -39,9 +39,10 @@ const Video = () => {
           <Image
             src={Thumbnail}
             alt=""
+            placeholder="blur"
             priority={true}
-            width={250}
-            height={183}
+            width={100}
+            height={100}
             className="mt-[10rem] lg:mt-4 rounded-[1rem] w-[250px] h-[183px] lg:w-[300] lg:h-[219]"
           />
         </PopoverButton>

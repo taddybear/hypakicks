@@ -5,9 +5,11 @@ import ImgThree from "../../../../../public/homepage/imgThree.webp"
 import ImgFour from "../../../../../public/homepage/imgFour.webp"
 import Shoe from "../../../../../public/homepage/shoe.webp"
 import HomeGrid from "../../../../../public/homepage/homegrid.webp"
+import ShoeLowQuality from "../../../../../public/homepage/shoeLowQuality.jpg"
 import Video from "../video"
 import Link from "next/link"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { Suspense } from "react"
 
 const Hero = () => {
   return (
@@ -37,10 +39,12 @@ const Hero = () => {
                 <Image
                   src={Shoe}
                   priority={true}
+                  placeholder="blur"
+                  // blurDataURL={ShoeLowQuality.src}
                   alt="Shoe Image"
                   width={590}
                   height={287}
-                  className="rotate-animation lg:w-[590px] lg:h-[287px]"
+                  className="rotate-animation rotate-[-30deg] lg:w-[590px] lg:h-[287px]"
                 />
               </div>
             </span>
@@ -105,34 +109,38 @@ const Hero = () => {
             <Image
               src={ImgOne}
               alt=""
+              placeholder="blur"
               priority={true}
               width={40}
               height={40}
-              className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
+              className="object-cover	 rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
             <Image
               src={ImgTwo}
               alt=""
+              placeholder="blur"
               priority={true}
               width={40}
               height={40}
-              className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
+              className="object-cover	 rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
             <Image
               src={ImgThree}
               alt=""
+              placeholder="blur"
               priority={true}
               width={40}
               height={40}
-              className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
+              className="object-cover	rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
             <Image
               src={ImgFour}
               alt=""
+              placeholder="blur"
               priority={true}
               width={40}
               height={40}
-              className="rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
+              className="object-cover	rounded-full mr-1 border-[2px] border-[#44B865] h-[40px] w-[40px]"
             />
           </div>
           <div className="Poppins400 relative mb-5 leading-[2.313rem] lg:text-[0.9rem] text-[#666666]">
@@ -150,16 +158,20 @@ const Hero = () => {
             <div className="lg:hidden absolute z-30 top-10 right-3">
               <Image
                 src={Shoe}
-                alt=""
+                alt="shoe"
+                placeholder="blur"
+                blurDataURL={ShoeLowQuality.src}
                 priority={true}
-                width={232}
-                height={113}
-                className="rotate-animation w-full w-[232px] h-[113px]"
+                width={100}
+                height={100}
+                // className="rotate-animation rotate-[-30degree] w-full h-[113px]"
+                className="rotate-animation rotate-[-30deg]  w-full h-[113px]"
               />
             </div>
           </div>
-
-          <Video />
+          <Suspense fallback={<div></div>}>
+            <Video />
+          </Suspense>
         </div>
       </section>
     </>
