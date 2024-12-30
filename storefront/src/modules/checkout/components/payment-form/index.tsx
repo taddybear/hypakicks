@@ -8,7 +8,6 @@ import { RadioGroup, Radio } from "@headlessui/react"
 import { clx } from "@medusajs/ui"
 import { Fragment, useEffect, useRef, useState } from "react"
 import MedusaRadio from "@modules/common/components/radio"
-import Script from "next/script"
 import React from "react"
 
 interface PaymentFormProps {
@@ -357,20 +356,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           </div>
         </RadioGroup>
       </RadioGroup>
-
-      <Script
-        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
-        strategy="beforeInteractive"
-      />
-      {/* {showApplePay && ( */}
-      <div className="mt-4">
-        <apple-pay-button
-          buttonstyle="black"
-          type="buy"
-          locale="en-US"
-        ></apple-pay-button>
-      </div>
-      {/* )} */}
     </>
   )
 }
