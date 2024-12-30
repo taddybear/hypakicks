@@ -7,12 +7,14 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react"
+import { redirect } from "next/navigation"
 
 const Search = () => {
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
     undefined
   )
   const [video, setVideo] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   const open = () => setVideo(true)
   const close = useCallback(() => {
@@ -24,6 +26,12 @@ const Search = () => {
       clearTimeout(activeTimer)
     }
     open()
+  }
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    close()
+    redirect(`/shop?q=${searchQuery}`)
   }
 
   return (
@@ -85,16 +93,21 @@ const Search = () => {
                   <p className="text-lg Poppins700 text-[#44B865]">X</p>
                 </button>
               </div>
-              <form action="" className="relative mt-4 lg:mt-6 2xl:mt-8">
+              <form
+                onSubmit={onSubmit}
+                className="relative mt-4 lg:mt-6 2xl:mt-8"
+              >
                 <input
                   type="text"
-                  name=""
-                  id=""
+                  name="search-string"
+                  id="search-string"
                   className="ring-0 focus:outline-none text-lg pl-2 Poppins400 text-[#666] placeholder:text-[#666] border-2 border-[#44b865] w-full rounded-[0.625rem] h-12 2xl:h-16"
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
                   data-testid="search-button"
                   className="absolute Poppins500 right-0 bg-[#44b865] h-12 2xl:h-16 rounded-r-[0.625rem] px-2 text-white text-lg	"
+                  type="submit"
                 >
                   search
                 </button>
