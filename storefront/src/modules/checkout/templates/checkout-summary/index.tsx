@@ -7,7 +7,7 @@ import MobileCheckoutSummary from "@modules/checkout/components/mobile-checkout-
 
 const CheckoutSummary = ({ cart }: { cart: any }) => {
   return (
-    <div className="w-full sticky h-full top-0 p-5 pb-2 lg:px-9 lg:py-0 lg:w-[70%]">
+    <div className="w-full sticky h-full top-0 lg:px-9 lg:py-0 lg:w-[70%]">
       <MobileCheckoutSummary cart={cart} />
       <div className="hidden w-full lg:flex flex-col sticky top-0 py-9">
         <ItemsPreviewTemplate cart={cart} className="bg-[#eee]" />

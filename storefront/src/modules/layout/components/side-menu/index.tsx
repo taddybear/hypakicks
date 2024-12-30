@@ -9,7 +9,36 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   const toggleState = useToggleState()
-
+  const menuItems = [
+    {
+      title: "Home",
+      url: "/",
+    },
+    {
+      title: "Shop",
+      url: "/shop",
+    },
+    {
+      title: "About Us",
+      url: "/about-us",
+    },
+    {
+      title: "Contact Us",
+      url: "/contact-us",
+    },
+    {
+      title: "Shipping & Delivery",
+      url: "/shipping-and-delivery",
+    },
+    {
+      title: "FAQ",
+      url: "/faq",
+    },
+    {
+      title: "Order Tracking",
+      url: "/orders-tracking",
+    },
+  ]
   return (
     <div className="lg:hidden h-full mr-[0.625rem]">
       <div className="flex items-center h-full">
@@ -77,63 +106,24 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         </button>
                       </div>
                     </div>
-                    <ul className="flex flex-col">
-                      <LocalizedClientLink
-                        data-testid="nav-home-link"
-                        aria-label="Go to homepage"
-                        href="/"
-                        className="py-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        Home
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        data-testid="nav-shop-link"
-                        aria-label="Go to shoppage"
-                        href="/shop"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        Shop
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        data-testid="nav-about-link"
-                        aria-label="Go to aboutpage"
-                        href="/about-us"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        About Us
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/contact-us"
-                        data-testid="nav-contact-link"
-                        aria-label="Go to contactuspage"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        Contact Us
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/shipping-and-delivery"
-                        data-testid="nav-shipping-link"
-                        aria-label="Go to shippingpage"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        Shipping & Delivery
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/faq"
-                        data-testid="nav-faw-link"
-                        aria-label="Go to faqpage"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        FAQ
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/orders-tracking"
-                        data-testid="nav-order-link"
-                        aria-label="Go to Order Tracking page"
-                        className="pb-[0.625rem] text-[#44b865] text-sm Poppins600"
-                      >
-                        Order Tracking
-                      </LocalizedClientLink>
+                    <ul className="flex flex-col mt-[0.625rem]">
+                      {menuItems.map((items, index) => (
+                        <li key={index} className="mb-[0.625rem]">
+                          <LocalizedClientLink
+                            data-testid="nav-home-link"
+                            aria-label="Go to homepage"
+                            href={items.url}
+                            className=" text-[#44b865] text-sm Poppins600"
+                          >
+                            <button
+                              onClick={close}
+                              className="w-full text-start"
+                            >
+                              {items.title}
+                            </button>
+                          </LocalizedClientLink>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   {/* <div

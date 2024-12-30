@@ -139,9 +139,38 @@
 
 body {
   font-family: var(--font-Poppins400);
+  overflow-x: hidden;
 }
 html {
   font-family: var(--font-Poppins400);
+}
+@media (min-width: 1250px) {
+  .productDetailFlex {
+    display: flex;
+  }
+  .productDetailWidth {
+    width: 53%;
+  }
+  .productDetailWidthLeft {
+    width: 47%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .topShoe {
+    top: 9rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .topShoe {
+    top: 5rem;
+  }
+}
+@media (min-width: 1536px) {
+  .topShoe {
+    top: 3rem;
+  }
 }
 .container {
   max-width: 100%;
@@ -218,6 +247,21 @@ html {
   100% {
     transform: rotate(-30deg);
   }
+}
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.-right-2 {
+  right: -0.5rem;
 }
 
 apple-pay-button {

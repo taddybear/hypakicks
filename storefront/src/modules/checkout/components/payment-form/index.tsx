@@ -176,7 +176,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             <label
               htmlFor="card-number"
               onClick={() => cardNumberRef.current?.focus()}
-              className="Poppins400 text-[0.6rem] lg:text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
+              className="Poppins400 text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
             >
               Card number
             </label>
@@ -232,9 +232,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               <label
                 htmlFor="expiration-date"
                 onClick={() => expiryDateRef.current?.focus()}
-                className="Poppins400 text-[0.6rem] lg:text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
+                className="Poppins400 text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
               >
-                Expiry date (MM / YY)
+                Expiry date
               </label>
 
               {formError && (
@@ -260,7 +260,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               <label
                 htmlFor="security-code"
                 onClick={() => securityCodeRef.current?.focus()}
-                className="Poppins400 text-[0.6rem] lg:text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
+                className="Poppins400 text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
               >
                 Security code
               </label>
@@ -283,7 +283,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                       fill="#575757"
                     />
                   </svg>
-                  <div className="Popppins400 absolute text-center w-[10rem] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
+                  <div className="Popppins400 absolute text-center w-[10rem] bottom-full left-1/2 transform -translate-x-[80%] lg:-translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
                     3-digit security code usually found on the back of your
                     card. American Express cards have a 4-digit code located on
                     the front.
@@ -314,7 +314,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             <label
               htmlFor="name-on-card"
               onClick={() => cardNameRef.current?.focus()}
-              className="Poppins400 text-[0.6rem] lg:text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
+              className="Poppins400 text-sm flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3.5 -z-1 origin-0 text-ui-fg-subtle"
             >
               Name on Card
             </label>

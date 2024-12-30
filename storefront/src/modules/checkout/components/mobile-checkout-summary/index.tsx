@@ -15,7 +15,7 @@ const MobileCheckoutSummary = ({ cart }: { cart: any }) => {
       <div className="flex flex-col lg:hidden">
         {/* Dropdown Header */}
         <div
-          className="flex justify-between items-center cursor-pointer"
+          className="flex justify-between items-center cursor-pointer px-3 py-4 "
           onClick={toggleDropdown}
         >
           <div className="flex items-center space-x-2">
@@ -39,7 +39,7 @@ const MobileCheckoutSummary = ({ cart }: { cart: any }) => {
             </svg>
           </div>
           <span
-            className="txt-xlarge-plus"
+            className="txt-xlarge-plus Poppins600"
             data-testid="cart-total"
             data-value={cart.total || 0}
           >
@@ -52,7 +52,7 @@ const MobileCheckoutSummary = ({ cart }: { cart: any }) => {
 
         {/* Dropdown Content */}
         <div
-          className={`mt-2 space-y-2 overflow-hidden transition-all duration-1000 ease-in-out ${
+          className={`px-3 space-y-2 overflow-hidden transition-all duration-1000 ease-in-out ${
             isDropdownOpen ? "max-h-screen" : "max-h-0"
           }`}
         >

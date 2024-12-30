@@ -74,15 +74,17 @@ export default async function Nav() {
         </div>
         <ul className="hidden lg:flex mx-4 lg:w-[66.66666667%]">
           {menuItems.map((item, index) => (
-            <LocalizedClientLink
-              href={item.url}
-              data-testid="nav-pages-link"
-              aria-label="Go to pages"
-              key={index}
-              className="mx-[0.625rem] text-sm text-[#44b865] whitespace-nowrap Poppins700"
-            >
-              {item.title}
-            </LocalizedClientLink>
+            <li key={index}>
+              <LocalizedClientLink
+                href={item.url}
+                data-testid="nav-pages-link"
+                aria-label="Go to pages"
+                key={index}
+                className="mx-[0.625rem] text-sm text-[#44b865] whitespace-nowrap Poppins700"
+              >
+                {item.title}
+              </LocalizedClientLink>
+            </li>
           ))}
         </ul>
         <div className="flex justify-end items-center lg:w-[16.66666667%]">

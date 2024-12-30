@@ -7,7 +7,7 @@ const MobileCartTotal = ({ cart }: { cart: any }) => {
     <div className="lg:hidden">
       <h1 className="text-[1.313rem] Poppins600 mt-6 my-4">Order summary</h1>
 
-      <ItemsPreviewTemplate cart={cart} className="" />
+      <ItemsPreviewTemplate cart={cart} className="bg-white hover:bg-white" />
       {/* <DiscountCode cart={cart} /> */}
       <div className="mt-4">
         <CartTotals totals={cart} />

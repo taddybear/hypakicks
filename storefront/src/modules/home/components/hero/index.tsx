@@ -21,12 +21,12 @@ const Hero = () => {
             <span className="text-[#44b865] relative flex">
               {/* Text with z-index 20 */}
               <span className="z-20 relative">
-                Exclusive <br className="lg:hidden" /> Sneakers
+                Exclusive <br className="md:hidden" /> Sneakers
               </span>
 
               {/* Background image with z-index 10 */}
               <div
-                className="hidden w-[590px] h-[287px] lg:block absolute z-10 top-20 lg:top-20 2xl:top-12 right-0 max-w-[55%]"
+                className="hidden md:w-[420px] md:h-[200px] lg:w-[590px] lg:h-[287px] md:block absolute z-10 top-20 topShoe right-0 max-w-[55%]"
                 style={{
                   backgroundImage: `url(${HomeGrid.src})`,
                   backgroundPosition: "center",
@@ -35,22 +35,21 @@ const Hero = () => {
               ></div>
 
               {/* Rotating image with z-index 30 */}
-              <div className="hidden lg:block absolute z-30 top-20 lg:top-20 2xl:top-12 right-0">
+              <div className="hidden md:block absolute z-30 top-20 topShoe right-0">
                 <Image
                   src={Shoe}
                   priority={true}
                   placeholder="blur"
-                  // blurDataURL={ShoeLowQuality.src}
                   alt="Shoe Image"
                   width={590}
                   height={287}
-                  className="rotate-animation rotate-[-30deg] lg:w-[590px] lg:h-[287px]"
+                  className="rotate-animation rotate-[-30deg] md:w-[420px] md:h-[200px] lg:w-[590px] lg:h-[287px]"
                 />
               </div>
             </span>
           </h1>
 
-          <p className="mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
+          <p className="mt-3 lg:mt-0 mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
             Find your style with exclusive sneakers - only at Hypa Kicks.
           </p>
           <ul className=" flex items-center space-x-2">
@@ -148,14 +147,14 @@ const Hero = () => {
               Already trusted by 1.2k+ people
             </span>
             <div
-              className="w-[232px] h-[113px] lg:hidden absolute z-10 top-10 right-3 max-w-[55%]"
+              className="w-[232px] h-[113px] md:hidden absolute z-10 top-10 right-3 max-w-[55%]"
               style={{
                 backgroundImage: `url(${HomeGrid.src})`,
                 backgroundPosition: "center",
                 backgroundSize: "auto",
               }}
             ></div>
-            <div className="lg:hidden absolute z-30 top-10 right-3">
+            <div className="md:hidden absolute z-30 top-10 right-3">
               <Image
                 src={Shoe}
                 alt="shoe"

@@ -32,7 +32,7 @@ export default function ExpressCheckout() {
       <h1 className=" text-center text-sm text-[#707070] Poppins400">
         Express checkout
       </h1>
-      <div className="flex space-x-3 w-full mt-4 mb-6">
+      <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
         {/* {showApplePay && ( */}
         <apple-pay-button
           buttonstyle="black"

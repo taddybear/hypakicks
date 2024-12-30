@@ -37,7 +37,7 @@ export default async function ProductPreview({
           alt=""
           width={268}
           height={268}
-          className="h-[179px] w-[179px] lg:h-[268px] lg:w-full object-cover"
+          className="h-[179px] w-full md:w-full md:h-full lg:h-[268px] lg:w-full object-cover"
         />
         {/* <Thumbnail
           thumbnail={product.thumbnail}

@@ -47,8 +47,8 @@ const Item = ({ item, type = "full", currencyCode, className }: ItemProps) => {
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className={`border-b-0 w-full ${className} hover:!bg-[#eeee]`}>
-      <Table.Cell className="pt-1 border-0 !border-b-0 !pl-0 w-[62px]">
+    <Table.Row className={`border-b-0 w-full ${className}`}>
+      <Table.Cell className="!pr-4 pt-1 border-0 !border-b-0 !pl-0 w-[62px]">
         {/* <Image
           src={item.thumbnail || ""}
           width={62}

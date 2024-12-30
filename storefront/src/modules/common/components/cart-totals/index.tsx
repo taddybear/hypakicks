@@ -84,7 +84,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
       </div>
       <div className="h-px w-full border-b border-gray-200 my-3" />
       <div className="flex items-center justify-between mb-2 text-[1.188rem] Poppins600">
-        <span>Total</span>
+        <span className="Poppins600">Total</span>
         <div>
           <span className="Poppins400 text-xs uppercase mr-1">
             {currency_code}
