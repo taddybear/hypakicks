@@ -246,7 +246,7 @@ const ShippingAddress = ({
                 fill="#575757"
               />
             </svg>
-            <div className="absolute text-center w-[8rem] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
+            <div className="Popppins400 absolute text-center w-[8rem] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
               Send me updates about my order! Message and data rates apply. View
               our Terms of Service and Privacy Policy.
             </div>

@@ -283,7 +283,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                       fill="#575757"
                     />
                   </svg>
-                  <div className="absolute text-center w-[10rem] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
+                  <div className="Popppins400 absolute text-center w-[10rem] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-3 py-2 rounded shadow-lg">
                     3-digit security code usually found on the back of your
                     card. American Express cards have a 4-digit code located on
                     the front.
