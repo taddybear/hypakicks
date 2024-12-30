@@ -23,13 +23,15 @@ export default async function BestSellerPreview({
         href={`/products/${product.handle}`}
         className="group"
       >
-        <Image
-          src={product.thumbnail || ""}
-          alt=""
-          width={268}
-          height={268}
-          className="h-[179px] w-[179px] lg:h-[268px] lg:w-[268px]"
-        />
+        {product.thumbnail ? (
+          <Image
+            src={product.thumbnail}
+            alt="Product Thumbnail"
+            width={268}
+            height={268}
+            className="h-[179px] w-[179px] lg:h-[268px] lg:w-[268px]"
+          />
+        ) : null}
         <p className="my-[0.625rem] text-[#474747] Poppins400 object-cover">
           {product.title}
         </p>

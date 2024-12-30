@@ -333,7 +333,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       </Popover> */}
 
       {/* Apple Pay */}
-      <RadioGroup>
+      {/* <RadioGroup>
         <RadioGroup
           value=""
           className={`flex flex-col gap-y-2 text-small-regular cursor-pointer py-3 border-2 px-4 ${
@@ -352,7 +352,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               </div>
               <p className="text-base-regular Poppins400">Apple Pay</p>
             </div>
-            {/* <div className="flex space-x-1"></div> */}
           </div>
         </RadioGroup>
       </RadioGroup>

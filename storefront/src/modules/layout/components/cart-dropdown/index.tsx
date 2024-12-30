@@ -275,20 +275,24 @@ const CartDropdown = ({
                       ))}
                   </div>
                   <div className="bg-white px-[1.875rem] pt-8 pb-4">
-                    <button
-                      onClick={handleRedirectUrl}
-                      data-testid="checkout-button"
-                      className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
+                    <LocalizedClientLink
+                      href={`/checkout/?cart_id=${cartState?.id}`}
                     >
-                      Checkout
-                    </button>
-                    <Image
-                      src={Mastercard}
-                      alt=""
-                      width={225}
-                      height={39}
-                      className="w-full mt-3"
-                    />
+                      <button
+                        // onClick={handleRedirectUrl}
+                        data-testid="checkout-button"
+                        className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
+                      >
+                        Checkout
+                      </button>
+                      <Image
+                        src={Mastercard}
+                        alt=""
+                        width={225}
+                        height={39}
+                        className="w-full mt-3"
+                      />
+                    </LocalizedClientLink>
                   </div>
 
                   {/* <div className="p-4 flex flex-col  text-small-regular">

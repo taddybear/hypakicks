@@ -19,7 +19,10 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <div className="pb-8 px-3 container" data-testid="category-container ">
+    <div
+      className="pb-8 px-3 lg:px-0 container"
+      data-testid="category-container "
+    >
       <RefinementList sortBy={sort} />
       <div className="w-full ">
         <Suspense fallback={<SkeletonProductGrid />}>

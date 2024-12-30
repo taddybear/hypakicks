@@ -29,8 +29,8 @@ export default function ExpressCheckout() {
         src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
         strategy="beforeInteractive"
       />
-      <h1 className=" text-center text-sm text-[#707070] Poppins-400">
-        Express Checkout
+      <h1 className=" text-center text-sm text-[#707070] Poppins400">
+        Express checkout
       </h1>
       <div className="flex space-x-3 w-full mt-4 mb-6">
         {/* {showApplePay && ( */}

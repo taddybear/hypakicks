@@ -64,12 +64,12 @@
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #44b865;
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 /* ::-webkit-scrollbar-thumb:hover {
