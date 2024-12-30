@@ -48,7 +48,7 @@ export default async function RelatedProducts({
 
   return (
     <div className="mt-12">
-      <h1 className="px-3 pb-2 text-[2rem] Poppins-500 container">
+      <h1 className="px-3 pb-2 text-[2rem] Poppins500 container">
         Related products
       </h1>
       <ul className="px-3 container grid grid-cols-2 lg:grid-cols-4">

@@ -22,7 +22,7 @@ const Slider = () => {
         <ul className=" whitespace-nowrap	flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-infinite-scroll-slow">
           {brands.concat(brands).map((brand, index) => (
             <li key={index} className="flex items-center py-[0.313rem]">
-              <span className="text-[0.938rem]">{brand}</span>
+              <span className="text-[0.938rem] Poppins400">{brand}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 256 256"
@@ -42,7 +42,7 @@ const Slider = () => {
         >
           {brands.concat(brands).map((brand, index) => (
             <li key={index} className="flex items-center py-[0.313rem]">
-              <span className="text-[0.938rem]">{brand}</span>
+              <span className="text-[0.938rem] Poppins400">{brand}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 256 256"

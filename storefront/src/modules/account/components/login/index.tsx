@@ -37,7 +37,7 @@ const Login = ({ setCurrentView }: Props) => {
             autoComplete="email"
             required
             data-testid="email-input"
-            className="bg-[#F5F5F5] rounded-md p-3"
+            className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
           />
           {/* <Input
             label="Email"
@@ -79,7 +79,7 @@ const Login = ({ setCurrentView }: Props) => {
           Log in
         </SubmitButton>
       </form>
-      <span className="mb-4 lg:mb-0 lg:w-1/2 m-auto text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="Poppins400 mb-4 lg:mb-0 lg:w-1/2 m-auto text-center text-ui-fg-base text-small-regular mt-6">
         Not a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}

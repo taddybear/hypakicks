@@ -43,7 +43,7 @@ const Register = ({ setCurrentView }: Props) => {
                 required
                 autoComplete="given-name"
                 data-testid="first-name-input"
-                className="bg-[#F5F5F5] rounded-md p-3"
+                className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
               />
               {/* <Input
             label="First name"
@@ -65,7 +65,7 @@ const Register = ({ setCurrentView }: Props) => {
                 required
                 autoComplete="family-name"
                 data-testid="last-name-input"
-                className="bg-[#F5F5F5] rounded-md p-3"
+                className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
               />
               {/* <Input
             label="Last name"
@@ -91,7 +91,7 @@ const Register = ({ setCurrentView }: Props) => {
                 type="email"
                 autoComplete="email"
                 data-testid="email-input"
-                className="bg-[#F5F5F5] rounded-md p-3"
+                className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
               />
               {/* <Input
             label="Email"
@@ -114,7 +114,7 @@ const Register = ({ setCurrentView }: Props) => {
                 type="tel"
                 autoComplete="tel"
                 data-testid="phone-input"
-                className="bg-[#F5F5F5] rounded-md p-3"
+                className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
               />
               {/* <Input
             label="Phone"
@@ -149,7 +149,7 @@ const Register = ({ setCurrentView }: Props) => {
           /> */}
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
-        <span className="text-center text-ui-fg-base text-small-regular mt-6">
+        <span className="Poppins400 text-center text-ui-fg-base text-small-regular mt-6">
           By creating an account, you agree to Medusa Store&apos;s{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
@@ -173,7 +173,7 @@ const Register = ({ setCurrentView }: Props) => {
           Sign up
         </SubmitButton>
       </form>
-      <span className="mb-4 text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="Poppins400 mb-4 text-center text-ui-fg-base text-small-regular mt-6">
         Already a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}

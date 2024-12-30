@@ -128,7 +128,7 @@ const ShippingAddress = ({
         onChange={handleChange}
         required
         data-testid="shipping-email-input"
-        className="px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+        className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
 
       <h1 className="text-[1.313rem] Poppins600 mb-4 mt-8">Delivery</h1>

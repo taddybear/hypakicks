@@ -32,7 +32,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
             <button
               onClick={() => updateOption(option.id, v)}
               key={v}
-              className={`py-3 Poppins-400 border-2 w-full rounded-[0.625rem] mb-2 border-[#CCCCCC] ${
+              className={`py-3 Poppins400 border-2 w-full rounded-[0.625rem] mb-2 border-[#CCCCCC] ${
                 v === current
                   ? " border-black border-[2.5px]"
                   : "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150"

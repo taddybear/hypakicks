@@ -256,7 +256,7 @@ const Addresses = ({
                           {option.name}
                         </span>
                       </div>
-                      <span className="justify-self-end text-ui-fg-base">
+                      <span className="justify-self-end Poppins400 text-ui-fg-base">
                         {convertToLocale({
                           amount: option.amount!,
                           currency_code: cart?.currency_code || "",
