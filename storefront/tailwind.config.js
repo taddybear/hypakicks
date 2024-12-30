@@ -64,18 +64,6 @@ module.exports = {
         Poppins700: ["var(--font-Poppins700)"],
         Poppins600: ["var(--font-Poppins600)"],
         Poppins500: ["var(--font-Poppins500)"],
-
-        sans: [
-          // "Inter",
-          // "sans-serif",
-          // "-apple-system",
-          // "BlinkMacSystemFont",
-          // "Segoe UI",
-          // "Roboto",
-          // "Helvetica Neue",
-          // "Ubuntu",
-          "Poppins",
-        ],
       },
       keyframes: {
         "infinite-scroll-slow": {
