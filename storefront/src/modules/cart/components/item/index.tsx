@@ -58,7 +58,7 @@ const Item = ({ item, type = "full", currencyCode, className }: ItemProps) => {
         /> */}
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
-          className="relative Onerelative"
+          className="relative "
         >
           <Thumbnail
             thumbnail={item.thumbnail}
@@ -66,7 +66,7 @@ const Item = ({ item, type = "full", currencyCode, className }: ItemProps) => {
             size="square"
             className="h-[62px] w-[62px] mt-3"
           />
-          <p className="Oneabsolute absolute top-0 -right-2 bg-gray-500 text-white px-[0.5rem] py-[0.125rem] rounded-full">
+          <p className="translated absolute top-0 -right-2 bg-gray-500 text-white px-[0.5rem] py-[0.125rem] rounded-full">
             {item.quantity}
           </p>
         </LocalizedClientLink>

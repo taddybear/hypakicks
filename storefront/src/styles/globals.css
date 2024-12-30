@@ -248,24 +248,10 @@ html {
     transform: rotate(-30deg);
   }
 }
-@supports (-webkit-touch-callout: none) {
-  .Onerelative {
-    position: relative !important;
-  }
-  .Oneabsolute {
-    position: absolute !important;
-    top: 0 !important;
-    right: -0.5rem !important;
-  }
-}
-.Onerelative {
-  position: relative !important;
-}
 
-.Oneabsolute {
-  position: absolute !important;
-  top: 0 !important;
-  right: -0.5rem !important;
+.translated {
+  -webkit-transform: translate(4rem, -4.5rem);
+  transform: translate(0.3rem, -0.1rem);
 }
 
 apple-pay-button {
