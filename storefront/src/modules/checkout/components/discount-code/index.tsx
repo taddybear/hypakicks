@@ -88,7 +88,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   variant="secondary"
                   className={`${
                     code.length > 0
-                      ? "bg-[#161d25] text-white"
+                      ? "bg-[#161d25] text-white hover:bg-[#161d25]"
                       : "bg-[#ededed] text-[#73798b]"
                   }`}
                   data-testid="discount-apply-button"
