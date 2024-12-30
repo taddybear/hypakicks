@@ -249,9 +249,11 @@ html {
   }
 }
 
-.translated {
-  -webkit-transform: translate(4rem, -4.5rem);
-  transform: translate(0.3rem, -0.1rem);
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and
+  (-webkit-appearance: none) {
+  .safari-only {
+    transform: translate(4rem, -4.5rem);
+  }
 }
 
 apple-pay-button {
