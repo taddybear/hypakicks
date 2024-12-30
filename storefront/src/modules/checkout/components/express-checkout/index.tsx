@@ -3,8 +3,8 @@ import PayPalSvg from "../../../../../public/svgs/paypal-svg"
 export default function ExpressCheckout() {
   return (
     <>
-      <h1 className=" text-center text-sm text-[#707070] Poppins-400">
-        Express Checkout
+      <h1 className=" text-center text-sm text-[#707070] Poppins400">
+        Express checkout
       </h1>
       <div className="flex space-x-3 w-full mt-4">
         {/* <button className="bg-[#592FF4] w-1/2 py-2 rounded-md space-x-1 flex items-center justify-center">

@@ -52,7 +52,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           />
           {/* <ImageGallery images={product?.images || []} /> */}
         </div>
-        <div className="flex flex-col small:sticky small:top-48 lg:w-1/2 px-3">
+        <div className="flex flex-col small:sticky small:top-48 lg:w-1/2 px-3 lg:px-0 lg:pl-4">
           <ProductOnboardingCta />
           <Suspense
             fallback={

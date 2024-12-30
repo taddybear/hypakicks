@@ -63,7 +63,7 @@ export default async function BestSeller({
                 VIEW BEST SELLERS
               </Link>
               <svg
-                width="100%"
+                width="2em"
                 height="1.5em"
                 strokeWidth="1.5"
                 viewBox="0 0 24 24"

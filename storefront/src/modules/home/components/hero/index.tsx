@@ -63,7 +63,7 @@ const Hero = () => {
                 SHOP SNEAKERS
               </LocalizedClientLink>
               <svg
-                width="100%"
+                width="2em"
                 height="2em"
                 strokeWidth="1.5"
                 viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ const Hero = () => {
                 About Us
               </LocalizedClientLink>
               <svg
-                width="100%"
+                width="2em"
                 height="2em"
                 strokeWidth="1.5"
                 viewBox="0 0 24 24"

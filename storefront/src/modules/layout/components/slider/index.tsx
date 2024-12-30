@@ -1,3 +1,4 @@
+"use client"
 const Slider = () => {
   const brands = [
     "A-COLD-WALL",

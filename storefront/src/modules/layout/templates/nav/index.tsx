@@ -47,7 +47,9 @@ export default async function Nav() {
 
   return (
     <div>
-      <Slider />
+      <Suspense fallback={<div></div>}>
+        <Slider />
+      </Suspense>
 
       <div className="container flex items-center justify-between w-full py-2 lg:py-[1.25rem] px-3 lg:px-0">
         <div className="flex items-center w-full lg:lg:w-[16.66666667%]">

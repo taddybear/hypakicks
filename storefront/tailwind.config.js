@@ -66,8 +66,8 @@ module.exports = {
         Poppins500: ["var(--font-Poppins500)"],
 
         sans: [
-          "Inter",
-          "sans-serif",
+          // "Inter",
+          // "sans-serif",
           // "-apple-system",
           // "BlinkMacSystemFont",
           // "Segoe UI",
