@@ -11,12 +11,12 @@ const NotFoundPage = () => {
   }
   return (
     <>
-      <div className="container px-3 py-8 ">
-        <div className=" border-2 border-[#44b865]  rounded-[1.25rem] px-6 pb-6">
-          <h1 className="text-center Poppins700 text-[2rem] text-[#44b865] py-[0.67em]">
-            OOPS! THAT PAGE CAN’T BE FOUND.
+      <div className="container px-3 lg:px-0 py-8">
+        <div className=" border-2 border-[#44b865] rounded-[1.25rem] px-6 py-8">
+          <h1 className="text-center Poppins700 text-[2rem] text-[#44b865]">
+            OOPS! THAT PAGE CAN’T BE FOUND
           </h1>
-          <p className="text-center pb-[1.5em] Poppins400">
+          <p className="text-center py-5 Poppins400">
             It looks like nothing was found at this location. Maybe try search?
           </p>
           <form onSubmit={onSubmit} className="relative">
