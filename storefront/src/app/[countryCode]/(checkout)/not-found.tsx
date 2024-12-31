@@ -2,6 +2,8 @@ import InteractiveLink from "@modules/common/components/interactive-link"
 import { Metadata } from "next"
 import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
+import NotFoundPage from "@modules/home/components/notfound-page"
+
 export const metadata: Metadata = {
   title: "404",
   description: "Something went wrong",
@@ -12,7 +14,9 @@ export default async function NotFound() {
     <>
       {/* <Nav /> */}
 
-      <div className="container px-3 py-8 ">
+      <NotFoundPage />
+
+      {/* <div className="container px-3 py-8 ">
         <div className=" border-2 border-[#44b865]  rounded-[1.25rem] px-6 pb-6">
           <h1 className="text-center Poppins700 text-[2rem] text-[#44b865] py-[0.67em]">
             OOPS! THAT PAGE CAN’T BE FOUND.
@@ -33,7 +37,7 @@ export default async function NotFound() {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
 
