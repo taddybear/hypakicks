@@ -3,7 +3,9 @@ import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import Input from "@modules/common/components/input"
-import { useActionState } from "react"
+import Eye from "@modules/common/icons/eye"
+import EyeOff from "@modules/common/icons/eye-off"
+import { useActionState, useEffect, useState } from "react"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -11,7 +13,15 @@ type Props = {
 
 const Login = ({ setCurrentView }: Props) => {
   const [message, formAction] = useActionState(login, null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [inputType, setInputType] = useState("password")
 
+  const handleTogglePassword = () => {
+    setShowPassword((prevState) => !prevState)
+    setInputType((prevState) =>
+      prevState === "password" ? "text" : "password"
+    )
+  }
   return (
     <>
       <section className="px-3 container flex flex-col justify-center items-center">
@@ -39,37 +49,33 @@ const Login = ({ setCurrentView }: Props) => {
             data-testid="email-input"
             className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
           />
-          {/* <Input
-            label="Email"
-            name="email"
-            type="email"
-            title="Enter a valid email address."
-            autoComplete="email"
-            required
-            data-testid="email-input"
-          /> */}
+
           <label
             htmlFor=""
             className="mt-6 -mb-1 !text-base text-[#404040] Poppins500"
           >
             Password
           </label>
-          <input
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            data-testid="password-input"
-            className="!bg-[#F5F5F5] rounded-md p-3 !focus:outline-none border-[#F5F5F5]"
-          />
-          {/* <Input
-            label="Password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            data-testid="password-input"
-          /> */}
+          <div className="relative w-full">
+            <input
+              name="password"
+              type={inputType}
+              autoComplete="current-password"
+              required
+              data-testid="password-input"
+              className="!bg-[#F5F5F5] w-full rounded-md p-3 !focus:outline-none border-[#F5F5F5]"
+            />
+
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                handleTogglePassword()
+              }}
+              className="absolute top-0 right-3 h-full items-center flex"
+            >
+              {showPassword ? <Eye /> : <EyeOff />}
+            </button>
+          </div>
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton

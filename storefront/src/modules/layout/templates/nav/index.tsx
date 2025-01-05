@@ -24,13 +24,14 @@ export default async function Nav() {
       url: "/shop",
     },
     {
-      title: "About Us",
-      url: "/about-us",
-    },
-    {
       title: "Contact Us",
       url: "/contact-us",
     },
+    {
+      title: "About Us",
+      url: "/about-us",
+    },
+
     {
       title: "Shipping & Delivery",
       url: "/shipping-and-delivery",

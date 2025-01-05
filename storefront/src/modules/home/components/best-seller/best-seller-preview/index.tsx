@@ -29,7 +29,7 @@ export default async function BestSellerPreview({
             alt="Product Thumbnail"
             width={268}
             height={268}
-            className="h-[179px] w-[179px] lg:h-[268px] lg:w-[268px]"
+            className="h-[179px] w-[179px] lg:h-[268px] lg:w-[268px] object-cover rounded-md"
           />
         ) : null}
         <p className="my-[0.625rem] text-[#474747] Poppins400 object-cover">

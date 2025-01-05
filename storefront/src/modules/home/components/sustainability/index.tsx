@@ -31,14 +31,17 @@ export default function Sustainability() {
       svg: (
         <svg
           width={50}
-          height={50}
+          height={25}
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 256 256"
-          focusable="false"
+          fill="none"
         >
-          <g>
-            <path d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z"></path>
-          </g>
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M1.944 3.278h11.112M5.5 3.278V1.944a.89.89 0 0 1 .889-.888H8.61a.89.89 0 0 1 .889.888v1.334M11.722 5.5v6.667c0 .982-.795 1.777-1.777 1.777h-4.89a1.777 1.777 0 0 1-1.777-1.777V5.5M5.944 7.278v4M9.056 7.278v4"
+          ></path>
         </svg>
       ),
       title: "Reducing Waste in Production",
@@ -99,7 +102,7 @@ export default function Sustainability() {
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className={`text-[#404040] flex items-center space-x-[8px] p-[0.625rem] rounded-[0.625rem] ${
+                  className={`text-[#404040] flex items-center justify-center space-x-[8px] p-[0.625rem] rounded-[0.625rem] ${
                     index === activeImageIndex
                       ? "bg-white opacity-100"
                       : "filter blur-[2px] opacity-60"

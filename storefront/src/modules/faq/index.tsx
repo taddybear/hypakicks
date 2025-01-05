@@ -48,7 +48,7 @@ const Returns: FAQItem[] = [
       "Yes! You will receive this by email as soon as the sneakers have been sent. This can also often end up in your spam.",
   },
   {
-    title: "Is buying on Hypa Kicks safe?",
+    title: "Is buying on HypaKicks safe?",
     content:
       "Yes, we check all sneakers for authenticity and send all our products with insurance & tracking.",
   },
@@ -65,7 +65,7 @@ const Orders: FAQItem[] = [
       "Yes! Within 24 hours: We will not charge any additional costs. After 24 hours, shipping and payment costs will be charged. We work internationally and incur costs within 24 hours to get your package to you as quickly as possible. In addition, if you ordered with Klarna, this will incur costs for us that we will not get back from Klarna. We must also calculate these costs. This depends on the order amount. Packages that are refused upon delivery will be charged a fee of €15 for shipping and payment costs.",
   },
   {
-    title: "Do you have discount codes?hat payment methods do you have?",
+    title: "Do you have discount codes?",
     content:
       "Yes we have that! If you subscribe to our newsletter at the bottom of the page, you will receive a €5 standard discount. This is also valid on sale products.",
   },

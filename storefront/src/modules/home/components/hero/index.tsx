@@ -50,7 +50,7 @@ const Hero = () => {
           </h1>
 
           <p className="mt-3 lg:mt-0 mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
-            Find your style with exclusive sneakers - only at Hypa Kicks.
+            Find your style with exclusive sneakers - only at HypaKicks.
           </p>
           <ul className=" flex items-center space-x-2">
             <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">

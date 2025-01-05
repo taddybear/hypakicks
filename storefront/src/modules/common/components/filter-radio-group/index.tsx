@@ -25,13 +25,13 @@ const FilterRadioGroup = ({
         data-testid={dataTestId}
         value={value}
         onChange={(e) => handleChange(e.target.value)}
-        className="Poppins400 p-[0.625rem] text-base text-[#404040] border-[1px] border-[#ccc] bg-[#EFEFEF] rounded-[0.313rem]  hover:cursor-pointer "
+        className=" focus:outline-none Poppins400 p-[0.625rem] bg-white text-base text-[#404040] border-[1px] border-[#ccc] bg-[#EFEFEF] rounded-[0.313rem]  hover:cursor-pointer "
       >
         {items?.map((i) => (
           <option
             key={i.value}
             value={i.value}
-            className="Poppins400 text-ui-fg-subtle"
+            className="Poppins400 text-ui-fg-subtle bg-white"
           >
             {i.label}
           </option>

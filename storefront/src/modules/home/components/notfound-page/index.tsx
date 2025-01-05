@@ -33,7 +33,7 @@ const NotFoundPage = () => {
               className="absolute right-0 bg-[#44b865] h-[2.875rem] Poppins600 rounded-r-[0.313rem] px-3 text-white text-lg	"
             >
               <div className="flex items-center space-x-1">
-                <p>search</p>
+                <p>Search</p>
 
                 <svg
                   fill="#FFFFFF"

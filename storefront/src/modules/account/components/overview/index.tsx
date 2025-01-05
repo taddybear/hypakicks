@@ -1,9 +1,11 @@
+"use client"
 import { Container } from "@medusajs/ui"
-
 import ChevronDown from "@modules/common/icons/chevron-down"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
+import { signout } from "@lib/data/customer"
+import { useParams } from "next/navigation"
 
 type OverviewProps = {
   customer: HttpTypes.StoreCustomer | null
@@ -11,9 +13,14 @@ type OverviewProps = {
 }
 
 const Overview = ({ customer, orders }: OverviewProps) => {
+  const { countryCode } = useParams() as { countryCode: string }
+
+  const handleLogout = async () => {
+    await signout(countryCode)
+  }
   return (
     <div data-testid="overview-page-wrapper">
-      <div className="hidden small:block">
+      <div className="container hidden small:block">
         <div className="text-xl-semi flex justify-between items-center mb-4">
           <span data-testid="welcome-message" data-value={customer?.first_name}>
             Hello {customer?.first_name}
@@ -128,6 +135,11 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                 )}
               </ul>
             </div>
+          </div>
+          <div className="flex ">
+            <button onClick={handleLogout} className="Poppins700 text-xl mt-4">
+              Log Out
+            </button>
           </div>
         </div>
       </div>

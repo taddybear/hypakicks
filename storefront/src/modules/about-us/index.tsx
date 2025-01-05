@@ -94,7 +94,7 @@ const AboutUs = () => {
           <h1 className="mb-5 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
             Meet Our Team
           </h1>
-          <div className="lg:grid grid-cols-4">
+          <div className="md:grid meetOurTeam">
             {teamMembers.map((member) => (
               <div
                 key={member.id}
@@ -103,9 +103,9 @@ const AboutUs = () => {
                 <Image
                   src={member.imageSrc}
                   alt={member.name}
-                  width={253}
-                  height={407}
-                  className="rounded-[0.5rem] w-full"
+                  width={500}
+                  height={500}
+                  className="rounded-[0.5rem] object-cover w-full h-[407px] small:h-[600px] large:h-[407px]"
                 />
                 <div className="p-4">
                   <p className="pb-2 text-[#212529] Poppins500 text-[1.25rem]">

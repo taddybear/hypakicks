@@ -36,15 +36,26 @@ export default async function Footer() {
             <h1 className="pb-[0.5rem] text-[#474747] Poppins700">
               Categories
             </h1>
-            <ul>
-              <li className="py-[0.625rem] text-[#474747] sm Poppins400 text-sm">
+            <ul className="space-y-[0.625rem]">
+              <li className="mt-[0.625rem] text-[#474747] sm Poppins400 text-sm">
+                <LocalizedClientLink href="/shop">Adidas</LocalizedClientLink>
+              </li>
+              <li className="text-sm Poppins400 text-[#474747]">
                 <LocalizedClientLink href="/shop">
-                  New Collection
+                  Winter collection
+                </LocalizedClientLink>
+              </li>
+              <li className="text-sm Poppins400 text-[#474747]">
+                <LocalizedClientLink href="/shop">New</LocalizedClientLink>
+              </li>
+              <li className="text-sm Poppins400 text-[#474747]">
+                <LocalizedClientLink href="/shop">
+                  New Balance
                 </LocalizedClientLink>
               </li>
               <li className="text-sm Poppins400 text-[#474747]">
                 <LocalizedClientLink href="/shop">
-                  Summer Sales
+                  Adidas Spezial
                 </LocalizedClientLink>
               </li>
             </ul>
@@ -70,20 +81,20 @@ export default async function Footer() {
                 </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <LocalizedClientLink href="/privacy-policy">
-                  Privacy Policy
+                <LocalizedClientLink href="/term-and-conditions">
+                  Term and Conditions
                 </LocalizedClientLink>
               </li>
               <li className="pb-[0.625rem] text-[#474747] sm Poppins400 text-sm">
-                <LocalizedClientLink href="/term-and-conditions">
-                  Term and Conditions
+                <LocalizedClientLink href="/privacy-policy">
+                  Privacy Policy
                 </LocalizedClientLink>
               </li>
             </ul>
           </div>
         </div>
         <p className="py-[0.625rem] Poppins400 text-sm text-[#474747]">
-          © 2024 Hypa Kicks. All rights reserved.
+          © 2025 Hypa Kicks. All rights reserved.
         </p>
       </footer>
     </>

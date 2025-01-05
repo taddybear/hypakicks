@@ -1,6 +1,7 @@
 import Faq from "@modules/home/components/faq"
 import StayUpdated from "@modules/home/stay-updated"
 import ContactForm from "./contact-form"
+import Link from "next/link"
 
 export default function Contactus() {
   const supportDetails = [
@@ -8,9 +9,9 @@ export default function Contactus() {
       id: 1,
       title: "Customer Support Germany",
       schedules: [
-        "Mon - Fri (9:00 AM to 6:00 PM)",
+        "Schedule: Mon - Fri (9:00 AM to 6:00 PM)",
         "Contact: Coming soon", // Second schedule
-        "Email: help@hypa-kicks.de",
+        "Email: help@hypakicks.de",
       ],
     },
     {
@@ -92,14 +93,32 @@ export default function Contactus() {
                   {support.title}
                 </h1>
                 <ul className="pb-[1.5em]">
-                  {support.schedules.map((schedule, index) => (
-                    <li
-                      key={index}
-                      className="py-[0.313rem] text-[#404040] list-disc	ml-5 Poppins400"
-                    >
-                      {schedule}
-                    </li>
-                  ))}
+                  {support.schedules.map((schedule, index) => {
+                    if (schedule.startsWith("Email:")) {
+                      const email = schedule.split(": ")[1]
+                      return (
+                        <li
+                          key={index}
+                          className="py-[0.313rem] text-[#404040] list-disc ml-5 Poppins400"
+                        >
+                          <Link
+                            href={`mailto:${email}`}
+                            className="text-blue-600 hover:underline !text-[#404040]"
+                          >
+                            {schedule}
+                          </Link>
+                        </li>
+                      )
+                    }
+                    return (
+                      <li
+                        key={index}
+                        className="py-[0.313rem] text-[#404040] list-disc ml-5 Poppins400"
+                      >
+                        {schedule}
+                      </li>
+                    )
+                  })}
                 </ul>
               </li>
             ))}

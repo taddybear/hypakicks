@@ -80,7 +80,7 @@ const Search = () => {
             >
               close
             </button>
-            <div className="p-4 lg:px-10 lg:py-6 bg-white h-fit lg:w-auto fixed top-[40%] bottom-[40%] left-[5%] right-[5%] lg:right-[20%] lg:left-[20%] rounded-md ">
+            <div className="p-4 lg:px-6 lg:py-6 bg-white h-fit lg:w-auto fixed top-[40%] bottom-[40%] left-[5%] right-[5%] lg:right-[20%] lg:left-[20%] rounded-md ">
               <div className="flex items-center justify-between w-full">
                 <h1 className="text-2xl lg:text-[2rem] Poppins600 text-[#44B865]">
                   Search Products
@@ -102,6 +102,8 @@ const Search = () => {
                   name="search-string"
                   id="search-string"
                   autoFocus
+                  pattern="^(?!\s*$).+"
+                  required
                   className="ring-0 focus:outline-none text-lg pl-2 Poppins400 text-[#666] placeholder:text-[#666] border-2 border-[#44b865] w-full rounded-[0.625rem] h-12 2xl:h-16"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -111,7 +113,7 @@ const Search = () => {
                   type="submit"
                 >
                   <div className="flex items-center space-x-1">
-                    <p>search</p>
+                    <p>Search</p>
 
                     <svg
                       fill="#FFFFFF"

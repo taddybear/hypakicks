@@ -12,10 +12,13 @@ export default function ContactForm() {
               Name
             </label>
             <input
-              type="text"
+              type="name"
               name=""
               id=""
+              pattern="^[A-Za-z\s]+$"
+              required
               className="bg-[#F5F5F5] rounded-[0.625rem] p-[0.625rem]"
+              aria-describedby="name-error"
             />
           </div>
           <div className="lg:w-1/2 flex flex-col">
@@ -23,9 +26,10 @@ export default function ContactForm() {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               name=""
               id=""
+              required
               className="bg-[#F5F5F5] rounded-[0.625rem] p-[0.625rem]"
             />
           </div>
@@ -36,10 +40,14 @@ export default function ContactForm() {
           </label>
           <textarea
             name="message"
+            required
             className="bg-[#F5F5F5] mb-6 rounded-[0.625rem] p-[0.625rem] h-36"
             style={{ padding: "0.625rem !important" }}
           ></textarea>
-          <button className="w-full Poppins600 bg-[#353535] text-[1.063rem] p-[0.938rem] rounded-[0.625rem] text-white">
+          <button
+            type="submit"
+            className="w-full Poppins600 bg-[#353535] text-[1.063rem] p-[0.938rem] rounded-[0.625rem] text-white"
+          >
             Submit
           </button>
         </div>

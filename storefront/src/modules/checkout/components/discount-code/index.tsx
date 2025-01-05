@@ -80,6 +80,8 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   placeholder="Discount code or gift card"
                   id="promotion-input"
                   name="code"
+                  pattern="^(?!\s*$).+"
+                  required
                   data-testid="discount-input"
                   onChange={(e) => setCode(e.target.value)}
                 />
@@ -98,7 +100,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               </div>
 
               <ErrorMessage
-                error={message}
+                error="Please enter a valid discount code (no spaces allowed)."
                 data-testid="discount-error-message"
               />
             </>

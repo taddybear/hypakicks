@@ -20,8 +20,8 @@ const StayUpdated = () => {
 
           <form action="" className="flex flex-col w-full">
             <input
-              type="text"
-              className="Poppins400 p-3 rounded-[0.625rem] mb-[0.625rem] w-full lg:w-[30%] m-auto"
+              type="email"
+              className="Poppins400 text-black p-3 rounded-[0.625rem] mb-[0.625rem] w-full lg:w-[30%] m-auto"
               placeholder="Enter your email"
               required
             />
