@@ -82,10 +82,18 @@ const CartDropdown = ({
   }, [totalItems, itemRef.current])
 
   useEffect(() => {
+    const bgOverlay = document.getElementById("bg-overlay")
+
     if (cartDropdownOpen) {
       document.body.classList.add("h-[100vh]", "overflow-y-hidden")
+      if (bgOverlay) {
+        bgOverlay.classList.remove("!hidden")
+      }
     } else {
       document.body.classList.remove("h-[100vh]", "overflow-y-hidden")
+      if (bgOverlay) {
+        bgOverlay.classList.add("!hidden")
+      }
     }
   }, [cartDropdownOpen])
 
@@ -98,12 +106,6 @@ const CartDropdown = ({
           className="h-full flex items-center"
           onClick={openAndCancel}
         >
-          {/* <LocalizedClientLink
-            className="hover:text-ui-fg-base"
-            href="/cart"
-            data-testid="nav-cart-link"
-          > */}
-          {/* <button onClick={openAndCancel} className=" flex items-center"> */}
           <div className="relative">
             <svg
               className="m-[0.313rem] "
@@ -127,25 +129,20 @@ const CartDropdown = ({
               </div>
             ) : null}
           </div>
-          {/* </button> */}
-
-          {/* {`Cart (${totalItems})`} */}
-          {/* </LocalizedClientLink> */}
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}
           as={Fragment}
-          enter="transition ease-out duration-300"
-          enterFrom="opacity-0 translate-y-1"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition ease-in duration-250"
-          leaveFrom="opacity-100 translate-y-0"
-          leaveTo="opacity-0 translate-y-1"
+          enter="transition ease-out duration-500"
+          enterFrom="transform translate-x-full"
+          enterTo="transform translate-x-0"
+          leave="transition ease-in duration-500"
+          leaveFrom="transform translate-x-0"
+          leaveTo="transform translate-x-full"
         >
           <PopoverPanel
             static
-            // className="bg-[#f8f9fa] lg:h-[100vh] fixed top-0 right-0 bg-white w-[420px]"
-            className="fixed w-full h-full top-0 inset-0 z-40 bg-black bg-opacity-80 text-black hover:text-black-black"
+            className="fixed w-full h-full top-0 inset-0 z-40 text-black hover:text-black-black"
             data-testid="nav-cart-dropdown"
           >
             <button

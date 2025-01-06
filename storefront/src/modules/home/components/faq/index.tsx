@@ -29,9 +29,17 @@ const Faq = () => {
         "Once your order has shipped, you will receive an email with a tracking number. You can also check the status of your order through your Hypa Kicks account.",
     },
   ]
-  const [activeIndex, setActiveIndex] = useState(null)
-  const toggleAccordion = (index: any) => {
-    setActiveIndex(activeIndex === index ? null : index)
+
+  const [openIndexes, setOpenIndexes] = useState<boolean[]>(
+    new Array(accordionData.length).fill(false)
+  )
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndexes((prevOpenIndexes) => {
+      return prevOpenIndexes.map((isOpen, i) =>
+        i === index ? !isOpen : isOpen
+      )
+    })
   }
 
   return (
@@ -42,11 +50,9 @@ const Faq = () => {
         </h1>
         <div className="bg-[#ececec] rounded-[0.25rem]">
           {accordionData.map((item, index) => (
-            <div key={index} className="border-b-[1px] border-[#ddd] ">
+            <div key={index} className="border-b-[1px] border-[#ddd]">
               <button
-                className={`accordion w-full  flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700  ${
-                  activeIndex === index ? "" : ""
-                }`}
+                className="accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700"
                 onClick={() => toggleAccordion(index)}
               >
                 <span className="Poppins500 text-lg">{item.title}</span>
@@ -60,7 +66,7 @@ const Faq = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   className={`transition-transform duration-300 ${
-                    activeIndex === index ? "rotate-90" : "rotate-0"
+                    openIndexes[index] ? "rotate-90" : "rotate-0"
                   }`}
                 >
                   <polyline points="9 18 15 12 9 6"></polyline>
@@ -70,11 +76,11 @@ const Faq = () => {
               {/* Accordion Content */}
               <div
                 className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                  activeIndex === index ? "max-h-screen" : "max-h-0"
-                } `}
+                  openIndexes[index] ? "max-h-screen" : "max-h-0"
+                }`}
               >
-                <div className=" p-[0.938rem]">
-                  <p className=" text-gray-600 pb-[1.5em] Poppins400 ">
+                <div className="p-[0.938rem]">
+                  <p className="text-gray-600 pb-[1.5em] Poppins400">
                     {item.content}
                   </p>
                 </div>

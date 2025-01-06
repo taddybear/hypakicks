@@ -100,32 +100,50 @@ const WhoAreWe: FAQItem[] = [
 ]
 
 export default function Faq() {
-  const [activeDispatchIndex, setActiveDispatchIndex] = useState<number | null>(
-    null
-  )
-  const [activeReturnsIndex, setActiveReturnsIndex] = useState<number | null>(
-    null
-  )
-  const [activeOrdersIndex, setActiveOrdersIndex] = useState<number | null>(
-    null
-  )
-  const [activeWhoAreWeIndex, setActiveWhoAreWeIndex] = useState<number | null>(
-    null
-  )
+  const [openIndexes, setOpenIndexes] = useState({
+    dispatch: new Array(Dispatch.length).fill(false),
+    returns: new Array(Returns.length).fill(false),
+    orders: new Array(Orders.length).fill(false),
+    whoAreWe: new Array(WhoAreWe.length).fill(false),
+  })
+
   const toggleAccordion = (
     index: number,
-    sectionType: "dispatch" | "returns" | "orders" | "whoarewe"
+    section: "dispatch" | "returns" | "orders" | "whoAreWe"
   ) => {
-    if (sectionType === "dispatch") {
-      setActiveDispatchIndex(activeDispatchIndex === index ? null : index)
-    } else if (sectionType === "returns") {
-      setActiveReturnsIndex(activeReturnsIndex === index ? null : index)
-    } else if (sectionType === "orders") {
-      setActiveOrdersIndex(activeOrdersIndex === index ? null : index)
-    } else if (sectionType === "whoarewe") {
-      setActiveWhoAreWeIndex(activeWhoAreWeIndex === index ? null : index)
-    }
+    setOpenIndexes((prevOpenIndexes) => ({
+      ...prevOpenIndexes,
+      [section]: prevOpenIndexes[section].map((isOpen, i) =>
+        i === index ? !isOpen : isOpen
+      ),
+    }))
   }
+  // const [activeDispatchIndex, setActiveDispatchIndex] = useState<number | null>(
+  //   null
+  // )
+  // const [activeReturnsIndex, setActiveReturnsIndex] = useState<number | null>(
+  //   null
+  // )
+  // const [activeOrdersIndex, setActiveOrdersIndex] = useState<number | null>(
+  //   null
+  // )
+  // const [activeWhoAreWeIndex, setActiveWhoAreWeIndex] = useState<number | null>(
+  //   null
+  // )
+  // const toggleAccordion = (
+  //   index: number,
+  //   sectionType: "dispatch" | "returns" | "orders" | "whoarewe"
+  // ) => {
+  //   if (sectionType === "dispatch") {
+  //     setActiveDispatchIndex(activeDispatchIndex === index ? null : index)
+  //   } else if (sectionType === "returns") {
+  //     setActiveReturnsIndex(activeReturnsIndex === index ? null : index)
+  //   } else if (sectionType === "orders") {
+  //     setActiveOrdersIndex(activeOrdersIndex === index ? null : index)
+  //   } else if (sectionType === "whoarewe") {
+  //     setActiveWhoAreWeIndex(activeWhoAreWeIndex === index ? null : index)
+  //   }
+  // }
   return (
     <section className="container px-3 lg:px-0">
       <h1 className="text-center uppercase my-4 text-[2.5rem] lg:text-[4.375rem] text-[#4D4D4D] Poppins700">
@@ -138,11 +156,9 @@ export default function Faq() {
       </h1>
       <div className="bg-[#ececec] my-6 rounded-[0.25rem]">
         {Dispatch.map((item, index) => (
-          <div key={index} className="border-b-[1px] border-[#ddd] ">
+          <div key={index} className="border-b-[1px] border-[#ddd]">
             <button
-              className={`accordion w-full  flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700  ${
-                activeDispatchIndex === index ? "" : ""
-              }`}
+              className="accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700"
               onClick={() => toggleAccordion(index, "dispatch")}
             >
               <span className="Poppins500 text-lg">{item.title}</span>
@@ -156,7 +172,7 @@ export default function Faq() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className={`transition-transform duration-300 ${
-                  activeDispatchIndex === index ? "rotate-90" : "rotate-0"
+                  openIndexes.dispatch[index] ? "rotate-90" : "rotate-0"
                 }`}
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -166,11 +182,11 @@ export default function Faq() {
             {/* Accordion Content */}
             <div
               className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                activeDispatchIndex === index ? "max-h-screen" : "max-h-0"
-              } `}
+                openIndexes.dispatch[index] ? "max-h-screen" : "max-h-0"
+              }`}
             >
-              <div className=" p-[0.938rem]">
-                <p className=" text-gray-600 pb-[1.5em] Poppins400 ">
+              <div className="p-[0.938rem]">
+                <p className="text-gray-600 pb-[1.5em] Poppins400">
                   {item.content}
                 </p>
               </div>
@@ -185,11 +201,9 @@ export default function Faq() {
       </h1>
       <div className="bg-[#ececec] my-6 rounded-[0.25rem]">
         {Returns.map((item, index) => (
-          <div key={index} className="border-b-[1px] border-[#ddd] ">
+          <div key={index} className="border-b-[1px] border-[#ddd]">
             <button
-              className={`accordion w-full  flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700  ${
-                activeReturnsIndex === index ? "" : ""
-              }`}
+              className="accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700"
               onClick={() => toggleAccordion(index, "returns")}
             >
               <span className="Poppins500 text-lg">{item.title}</span>
@@ -203,7 +217,7 @@ export default function Faq() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className={`transition-transform duration-300 ${
-                  activeReturnsIndex === index ? "rotate-90" : "rotate-0"
+                  openIndexes.returns[index] ? "rotate-90" : "rotate-0"
                 }`}
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -213,11 +227,11 @@ export default function Faq() {
             {/* Accordion Content */}
             <div
               className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                activeReturnsIndex === index ? "max-h-screen" : "max-h-0"
-              } `}
+                openIndexes.returns[index] ? "max-h-screen" : "max-h-0"
+              }`}
             >
-              <div className=" p-[0.938rem]">
-                <p className=" text-gray-600 pb-[1.5em] Poppins400 ">
+              <div className="p-[0.938rem]">
+                <p className="text-gray-600 pb-[1.5em] Poppins400">
                   {item.content}
                 </p>
               </div>
@@ -232,9 +246,9 @@ export default function Faq() {
       </h1>
       <div className="bg-[#ececec] my-6 rounded-[0.25rem]">
         {Orders.map((section, index) => (
-          <div key={index} className="border-b-[1px] border-[#ddd] ">
+          <div key={index} className="border-b-[1px] border-[#ddd]">
             <button
-              className={`accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700`}
+              className="accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700"
               onClick={() => toggleAccordion(index, "orders")}
             >
               <span className="Poppins500 text-lg">{section.title}</span>
@@ -248,7 +262,7 @@ export default function Faq() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className={`transition-transform duration-300 ${
-                  activeOrdersIndex === index ? "rotate-90" : "rotate-0"
+                  openIndexes.orders[index] ? "rotate-90" : "rotate-0"
                 }`}
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -258,11 +272,11 @@ export default function Faq() {
             {/* Accordion Content */}
             <div
               className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                activeOrdersIndex === index ? "max-h-screen" : "max-h-0"
-              } `}
+                openIndexes.orders[index] ? "max-h-screen" : "max-h-0"
+              }`}
             >
               <div className="p-[0.938rem]">
-                <p className="text-gray-600 pb-[1.5em] Poppins400 ">
+                <p className="text-gray-600 pb-[1.5em] Poppins400">
                   {section.content}
                 </p>
               </div>
@@ -277,10 +291,10 @@ export default function Faq() {
       </h1>
       <div className="bg-[#ececec] my-6 rounded-[0.25rem]">
         {WhoAreWe.map((section, index) => (
-          <div key={index} className="border-b-[1px] border-[#ddd] ">
+          <div key={index} className="border-b-[1px] border-[#ddd]">
             <button
-              className={`accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700`}
-              onClick={() => toggleAccordion(index, "whoarewe")}
+              className="accordion w-full flex justify-between items-center text-left p-[0.938rem] font-medium text-gray-700"
+              onClick={() => toggleAccordion(index, "whoAreWe")}
             >
               <span className="Poppins500 text-lg">{section.title}</span>
               <svg
@@ -293,7 +307,7 @@ export default function Faq() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className={`transition-transform duration-300 ${
-                  activeWhoAreWeIndex === index ? "rotate-90" : "rotate-0"
+                  openIndexes.whoAreWe[index] ? "rotate-90" : "rotate-0"
                 }`}
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -303,11 +317,11 @@ export default function Faq() {
             {/* Accordion Content */}
             <div
               className={`panel overflow-hidden transition-[max-height] duration-300 ${
-                activeWhoAreWeIndex === index ? "max-h-screen" : "max-h-0"
-              } `}
+                openIndexes.whoAreWe[index] ? "max-h-screen" : "max-h-0"
+              }`}
             >
               <div className="p-[0.938rem]">
-                <p className="text-gray-600 pb-[1.5em] Poppins400 ">
+                <p className="text-gray-600 pb-[1.5em] Poppins400">
                   {section.content}
                 </p>
               </div>
