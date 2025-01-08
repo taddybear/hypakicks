@@ -49,7 +49,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          <p className="mt-3 lg:mt-0 mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400">
+          <p className="mt-3 lg:mt-0 mb-4 lg:text-[1.375rem] text-[#4D4D4D] Poppins400 relative z-20">
             Find your style with exclusive sneakers - only at HypaKicks.
           </p>
           <ul className=" flex items-center space-x-2">

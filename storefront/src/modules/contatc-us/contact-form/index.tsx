@@ -15,7 +15,7 @@ export default function ContactForm() {
               type="name"
               name=""
               id=""
-              pattern="^[A-Za-z\s]+$"
+              pattern="^(?!\s*$).+"
               required
               className="bg-[#F5F5F5] rounded-[0.625rem] p-[0.625rem]"
               aria-describedby="name-error"
@@ -41,6 +41,7 @@ export default function ContactForm() {
           <textarea
             name="message"
             required
+            // pattern="^(?!\s*$).+"
             className="bg-[#F5F5F5] mb-6 rounded-[0.625rem] p-[0.625rem] h-36"
             style={{ padding: "0.625rem !important" }}
           ></textarea>
