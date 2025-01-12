@@ -109,7 +109,7 @@ const Addresses = ({
           },
         })
 
-        console.log("Cart response", response)
+        // console.log("Cart response", response)
         // 3ds data is in response.payment_collection.payment_sessions[0].data
         // if three_d_secure is true, then we need to handle 3ds then we need to handle html
         if (response.payment_collection.payment_sessions[0].data) {

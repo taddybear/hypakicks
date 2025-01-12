@@ -41,7 +41,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <div
           id="bg-overlay"
-          className="!hidden absolute w-[100vw] h-[100vh] bg-black bg-opacity-80 z-40"
+          className="!hidden fixed w-[100vw] h-[100vh] bg-black bg-opacity-80 z-40"
         ></div>
         <main
           className={`relative ${Poppins400.variable} ${Poppins500.variable} ${Poppins300.variable} ${Poppins700.variable} ${Poppins600.variable}`}

@@ -7,6 +7,8 @@ import React, { useEffect, useMemo, useState } from "react"
 import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
 import Link from "next/link"
+import { signoutReload } from "@lib/data/customer"
+import { useParams } from "next/navigation"
 const ShippingAddress = ({
   customer,
   cart,
@@ -32,11 +34,18 @@ const ShippingAddress = ({
     email: cart?.email || "",
   })
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const { countryCode } = useParams() as { countryCode: string }
+
   const countriesInRegion = useMemo(
     () => cart?.region?.countries?.map((c) => c.iso_2),
     [cart?.region]
   )
 
+  const handleLogout = async () => {
+    console.log("run")
+    await signoutReload(countryCode)
+  }
   // check if customer has saved addresses that are in the current region
   const addressesInRegion = useMemo(
     () =>
@@ -93,43 +102,84 @@ const ShippingAddress = ({
       [e.target.name]: e.target.value,
     })
   }
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev)
+  }
+  // useEffect(() => {
+  //   console.log("cart", cart)
+  // }, [cart])
 
   return (
     <>
-      {/* {customer && (addressesInRegion?.length || 0) > 0 && (
-        <Container className="mb-6 flex flex-col gap-y-4 p-5">
-          <p className="text-small-regular">
-            {`Hi ${customer.first_name}, do you want to use one of your saved addresses?`}
-          </p>
-          <AddressSelect
-            addresses={customer.addresses}
-            addressInput={
-              mapKeys(formData, (_, key) =>
-                key.replace("shipping_address.", "")
-              ) as HttpTypes.StoreCartAddress
-            }
-            onSelect={setFormAddress}
+      {cart?.email === "" || cart?.email === null ? (
+        <>
+          <div className="flex items-center mb-4 justify-between">
+            <h1 className="text-[1.313rem] Poppins600 ">Contact</h1>
+            <Link href="/account" className="underline text-sm">
+              Login
+            </Link>
+          </div>
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            title="Enter a valid email address."
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            data-testid="shipping-email-input"
+            className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
           />
-        </Container>
-      )} */}
-      <div className="flex items-center mb-4 justify-between">
-        <h1 className="text-[1.313rem] Poppins600 ">Contact</h1>
-        {/* <Link href="/account" className="underline text-sm">
-          Login
-        </Link> */}
-      </div>
-      <Input
-        label="Email"
-        name="email"
-        type="email"
-        title="Enter a valid email address."
-        autoComplete="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-        data-testid="shipping-email-input"
-        className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-      />
+        </>
+      ) : (
+        <>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-[#707070] hover:!text-black flex justify-between items-center"
+          >
+            <h1 className=" text-sm">Account</h1>
+            <span className="bg-[#f3f3f4] rounded-md p-[0.25rem]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 14 14"
+                focusable="false"
+                aria-hidden="true"
+                className={`w-3 h-3 transition-transform duration-300 ${
+                  isDropdownOpen ? "rotate-180" : "rotate-0"
+                }`}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m11.9 5.6-4.653 4.653a.35.35 0 0 1-.495 0L2.1 5.6"
+                ></path>
+              </svg>
+            </span>
+          </button>
+          <p className="text-sm pt-3">{cart?.email}</p>
+          {isDropdownOpen && (
+            <div
+              className={`transition-all duration-300 ease-in-out ${
+                isDropdownOpen
+                  ? "opacity-100 translate-y-0 mt-3"
+                  : "opacity-0 -translate-y-2  pointer-events-none"
+              }`}
+            >
+              <button
+                onClick={(event) => {
+                  event.preventDefault()
+                  handleLogout()
+                }}
+                className="underline text-sm"
+              >
+                Log out
+              </button>
+            </div>
+          )}
+          <hr className="bg-black mt-4 w-full" />
+        </>
+      )}
 
       <h1 className="text-[1.313rem] Poppins600 mb-4 mt-8">Delivery</h1>
       <CountrySelect

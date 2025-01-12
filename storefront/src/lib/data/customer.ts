@@ -130,6 +130,14 @@ export async function signout(countryCode: string) {
   redirect(`/${countryCode}/account`)
 }
 
+export async function signoutReload(countryCode: string) {
+  await sdk.auth.logout()
+  removeAuthToken()
+  revalidateTag("auth")
+  revalidateTag("customer")
+  redirect(`/${countryCode}/account`)
+}
+
 export async function transferCart() {
   const cartId = await getCartId()
 

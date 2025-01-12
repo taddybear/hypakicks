@@ -294,6 +294,7 @@ const CartDropdown = ({
                     >
                       <button
                         // onClick={handleRedirectUrl}
+                        onClick={close}
                         data-testid="checkout-button"
                         className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                       >
