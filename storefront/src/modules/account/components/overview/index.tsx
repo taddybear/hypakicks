@@ -137,7 +137,10 @@ const Overview = ({ customer, orders }: OverviewProps) => {
             </div>
           </div>
           <div className="flex ">
-            <button onClick={handleLogout} className="Poppins700 text-xl mt-4">
+            <button
+              onClick={handleLogout}
+              className="border-[1px] border-[#44B865] px-4 py-2 text-[#44B865] Poppins700 text-xl mt-4"
+            >
               Log Out
             </button>
           </div>

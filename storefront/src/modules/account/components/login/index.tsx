@@ -5,6 +5,8 @@ import { SubmitButton } from "@modules/checkout/components/submit-button"
 import Input from "@modules/common/components/input"
 import Eye from "@modules/common/icons/eye"
 import EyeOff from "@modules/common/icons/eye-off"
+import { redirect } from "next/navigation"
+
 import { useActionState, useEffect, useState } from "react"
 
 type Props = {
@@ -21,6 +23,10 @@ const Login = ({ setCurrentView }: Props) => {
     setInputType((prevState) =>
       prevState === "password" ? "text" : "password"
     )
+  }
+
+  const forgotPassword = () => {
+    redirect(`/reset-password`)
   }
   return (
     <>
@@ -67,6 +73,7 @@ const Login = ({ setCurrentView }: Props) => {
             />
 
             <button
+              type="button"
               onClick={(e) => {
                 e.preventDefault()
                 handleTogglePassword()
@@ -76,6 +83,18 @@ const Login = ({ setCurrentView }: Props) => {
               {showPassword ? <Eye /> : <EyeOff />}
             </button>
           </div>
+          {/* <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                forgotPassword()
+              }}
+              className="text-sm mt-1 Poppins600"
+            >
+              Forgot Password
+            </button>
+          </div> */}
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton
