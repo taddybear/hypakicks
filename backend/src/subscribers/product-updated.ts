@@ -20,7 +20,7 @@ export default async function productUpdatedHandler({
   //   throw err;
   // }
 
-  logger.info("Running Shopify Workflow");
+  logger.info("Running Shopify Workflow bump");
 
   // await shopifyOrderPlacedWorkflow(container).run({
   //   input: {
