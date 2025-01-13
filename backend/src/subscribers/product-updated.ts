@@ -8,6 +8,7 @@ export default async function productUpdatedHandler({
 }: SubscriberArgs<{ id: string }>) {
   const productModuleService = container.resolve(Modules.PRODUCT);
 
+  
   const newProduct = await productModuleService.createProducts([
     {
       title: "TEST SUBSCRIBER PRODUCT",
