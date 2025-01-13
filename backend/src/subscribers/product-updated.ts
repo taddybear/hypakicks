@@ -6,8 +6,13 @@ export default async function productUpdatedHandler({
   event: { data },
   container,
 }: SubscriberArgs<{ id: string }>) {
-  console.log("ORDER PLACED HANDLER");
-  const logger = container.resolve("logger");
+  const newProduct = await productModuleService.createProducts([
+    {
+      title: "TEST SUBSCRIBER PRODUCT",
+    },
+  ]);
+  // console.log("ORDER PLACED HANDLER");
+  // const logger = container.resolve("logger");
 
   // try {
   //   const client = createAdminApiClient({
@@ -20,7 +25,7 @@ export default async function productUpdatedHandler({
   //   throw err;
   // }
 
-  logger.info("Running Shopify Workflow bump");
+  // logger.info("Running Shopify Workflow bump");
 
   // await shopifyOrderPlacedWorkflow(container).run({
   //   input: {
