@@ -134,6 +134,7 @@ const Register = ({ setCurrentView }: Props) => {
               className="bg-[#F5F5F5]  w-full rounded-md p-3"
             />
             <button
+              type="button"
               onClick={(e) => {
                 e.preventDefault()
                 handleTogglePassword()
@@ -147,18 +148,15 @@ const Register = ({ setCurrentView }: Props) => {
         <ErrorMessage error={message} data-testid="register-error" />
         <span className="Poppins400 text-center text-ui-fg-base text-small-regular mt-6">
           By creating an account, you agree to Medusa Store&apos;s{" "}
-          <LocalizedClientLink
-            href="/content/privacy-policy"
-            className="underline"
-          >
+          <LocalizedClientLink href="/privacy-policy" className="underline">
             Privacy Policy
           </LocalizedClientLink>{" "}
           and{" "}
           <LocalizedClientLink
-            href="/content/terms-of-use"
+            href="/term-and-conditions"
             className="underline"
           >
-            Terms of Use
+            Term and Conditions
           </LocalizedClientLink>
           .
         </span>
