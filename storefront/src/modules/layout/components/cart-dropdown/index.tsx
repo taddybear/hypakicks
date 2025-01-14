@@ -152,7 +152,7 @@ const CartDropdown = ({
             >
               close
             </button>
-            <div className="bg-[#f8f9fa] h-[100vh] fixed top-0 right-0 bg-white cartDropdownWidth">
+            <div className="bg-[#f8f9fa] h-[100%] lg:h-[100vh] fixed top-0 right-0 bg-white cartDropdownWidth">
               <div className="cartParentHeight border-2 border-b-[#eee] bg-white shadow-sm p-4 relative flex items-center justify-center">
                 <div className="flex items-center">
                   <div className="relative">

@@ -32,7 +32,7 @@ export default async function Footer() {
           Hypa Kicks.
         </p>
         <div className="flex">
-          <div className="w-1/2 pt-6 pb-6">
+          {/* <div className="w-1/2 pt-6 pb-6">
             <h1 className="pb-[0.5rem] text-[#474747] Poppins700">
               Categories
             </h1>
@@ -59,8 +59,9 @@ export default async function Footer() {
                 </LocalizedClientLink>
               </li>
             </ul>
-          </div>
-          <div className="w-1/2 pt-6 pb-6 flex flex-col items-center justify-center">
+          </div> */}
+          {/* <div className="w-1/2 pt-6 pb-6 flex flex-col items-center justify-center"> */}
+          <div className="w-1/2 pt-6 pb-6 flex flex-col items-start justify-center">
             <ul>
               <li className="pb-[0.5rem] text-[#474747] Poppins700">
                 Information

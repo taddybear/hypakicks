@@ -135,7 +135,11 @@ const ShippingAddress = ({
       ) : (
         <>
           <button
-            onClick={toggleDropdown}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault()
+              toggleDropdown()
+            }}
             className="w-full text-[#707070] hover:!text-black flex justify-between items-center"
           >
             <h1 className=" text-sm">Account</h1>

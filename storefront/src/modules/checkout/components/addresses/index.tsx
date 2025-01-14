@@ -196,12 +196,15 @@ const Addresses = ({
     setFormattedExpiryDate(sanitizedExpiryDate)
   }, [cardNumber, expiryDate])
 
-  // useEffect(() => {
-  //   console.log("Card Number", formattedCardNumber)
-  //   console.log("Expiry Date", formattedExpiryDate)
-  //   console.log("Card Name", nameOnCard)
-  //   console.log("securityCode", securityCode)
-  // }, [formattedCardNumber, formattedExpiryDate, nameOnCard, securityCode])
+  useEffect(() => {
+    if (cart?.shipping_methods?.length) {
+      setShippingMethodId(
+        cart.shipping_methods.at(-1)?.shipping_option_id || null
+      )
+    } else if (availableShippingMethods?.length) {
+      setShippingMethodId(availableShippingMethods[0]?.id || null)
+    }
+  }, [cart, availableShippingMethods])
 
   return (
     <>
@@ -245,7 +248,7 @@ const Addresses = ({
                       className={clx(
                         "flex items-center justify-between text-small-regular cursor-pointer py-3 border rounded-rounded px-4 mb-2 hover:shadow-borders-interactive-with-active",
                         {
-                          "border-ui-border-interactive":
+                          "border-[1px] border-black":
                             option.id === shippingMethodId,
                         }
                       )}
@@ -307,7 +310,7 @@ const Addresses = ({
           />
 
           <MobileCartTotal cart={cart} />
-          <div className="flex items-start gap-x-1 w-full lg:mt-8 my-6">
+          {/* <div className="flex items-start gap-x-1 w-full lg:mt-8 my-6">
             <div className="w-full">
               <Text className="text-sm Poppins400 mb-1">
                 By clicking the Place Order button, you confirm that you have
@@ -316,13 +319,13 @@ const Addresses = ({
                 Store&apos;s Privacy Policy.
               </Text>
             </div>
-          </div>
+          </div> */}
           <Button
             isLoading={submitting}
             type="submit"
             size="large"
             data-testid="submit-order-button"
-            className="bg-[#161d25] hover:bg-black py-3 !rounded-sm Poppins600 w-full text-lg"
+            className="bg-[#161d25] lg:mt-8 mt-6 hover:bg-black py-3 !rounded-sm Poppins600 w-full text-lg"
           >
             {buttonText}
           </Button>
