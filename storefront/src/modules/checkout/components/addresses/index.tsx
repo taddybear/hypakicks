@@ -206,6 +206,10 @@ const Addresses = ({
     }
   }, [cart, availableShippingMethods])
 
+  // useEffect(() => {
+  //   console.log("cart", cart)
+  // }, [cart])
+
   return (
     <>
       {threeDSHtml && (

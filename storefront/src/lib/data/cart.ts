@@ -393,6 +393,29 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
   // )
 }
 
+export async function setEmail(currentState: unknown, data: { email: string }) {
+  try {
+    if (!data.email) {
+      throw new Error("No email provided")
+    }
+
+    const cartId = getCartId()
+    if (!cartId) {
+      throw new Error("No existing cart found when setting addresses")
+    }
+
+    const cartData = {
+      email: data.email,
+    }
+
+    await updateCart(cartData)
+  } catch (e: any) {
+    return e.message
+  }
+
+  // redirect(`/checkout?step=payment`)
+}
+
 export async function placeOrder() {
   const cartId = await getCartId()
 

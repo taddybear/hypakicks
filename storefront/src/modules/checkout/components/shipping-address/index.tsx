@@ -9,6 +9,8 @@ import CountrySelect from "../country-select"
 import Link from "next/link"
 import { signoutReload } from "@lib/data/customer"
 import { useParams } from "next/navigation"
+import { setAddresses, setEmail } from "@lib/data/cart"
+import { useFormState } from "react-dom"
 const ShippingAddress = ({
   customer,
   cart,
@@ -35,6 +37,7 @@ const ShippingAddress = ({
   })
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [emailError, setEmailError] = useState<string | null>(null)
   const { countryCode } = useParams() as { countryCode: string }
 
   const countriesInRegion = useMemo(
@@ -43,7 +46,6 @@ const ShippingAddress = ({
   )
 
   const handleLogout = async () => {
-    console.log("run")
     await signoutReload(countryCode)
   }
   // check if customer has saved addresses that are in the current region
@@ -102,12 +104,27 @@ const ShippingAddress = ({
       [e.target.name]: e.target.value,
     })
   }
+
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev)
   }
-  // useEffect(() => {
-  //   console.log("cart", cart)
-  // }, [cart])
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const handleSaveField = async () => {
+    if (!validateEmail(formData.email)) {
+      setEmailError("Please enter a valid email address.")
+      return
+    } else {
+      setEmailError(null)
+    }
+
+    const email = formData.email
+    await setEmail(null, { email })
+  }
 
   return (
     <>
@@ -127,10 +144,14 @@ const ShippingAddress = ({
             autoComplete="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleSaveField}
             required
             data-testid="shipping-email-input"
             className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
           />
+          {emailError && (
+            <p className="text-red-500 text-sm mt-2">{emailError}</p>
+          )}
         </>
       ) : (
         <>
