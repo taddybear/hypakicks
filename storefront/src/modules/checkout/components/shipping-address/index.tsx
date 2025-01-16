@@ -8,7 +8,7 @@ import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
 import Link from "next/link"
 import { signoutReload } from "@lib/data/customer"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { setAddresses, setAdress, setEmail } from "@lib/data/cart"
 import { useFormState } from "react-dom"
 
@@ -60,9 +60,6 @@ const ShippingAddress = ({
     [cart?.region]
   )
 
-  const handleLogout = async () => {
-    await signoutReload(countryCode)
-  }
   // check if customer has saved addresses that are in the current region
   const addressesInRegion = useMemo(
     () =>
@@ -120,6 +117,9 @@ const ShippingAddress = ({
     })
   }
 
+  const handleLogout = async (id: string) => {
+    await signoutReload(countryCode, id)
+  }
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev)
   }
@@ -309,15 +309,17 @@ const ShippingAddress = ({
                   : "opacity-0 -translate-y-2  pointer-events-none"
               }`}
             >
-              <button
-                onClick={(event) => {
-                  event.preventDefault()
-                  handleLogout()
-                }}
-                className="underline text-sm"
-              >
-                Log out
-              </button>
+              {cart && (
+                <button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    handleLogout(cart.id)
+                  }}
+                  className="underline text-sm"
+                >
+                  Log out
+                </button>
+              )}
             </div>
           )}
           <hr className="bg-black mt-4 w-full" />
