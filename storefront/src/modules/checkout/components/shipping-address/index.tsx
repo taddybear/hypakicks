@@ -9,8 +9,18 @@ import CountrySelect from "../country-select"
 import Link from "next/link"
 import { signoutReload } from "@lib/data/customer"
 import { useParams } from "next/navigation"
-import { setAddresses, setEmail } from "@lib/data/cart"
+import { setAddresses, setAdress, setEmail } from "@lib/data/cart"
 import { useFormState } from "react-dom"
+
+interface ErrorMessages {
+  firstName?: string
+  lastName?: string
+  address_1?: string
+  city?: string
+  zipCode?: string
+  phone?: string
+}
+
 const ShippingAddress = ({
   customer,
   cart,
@@ -27,18 +37,23 @@ const ShippingAddress = ({
     "shipping_address.last_name": cart?.shipping_address?.last_name || "",
     "shipping_address.address_1": cart?.shipping_address?.address_1 || "",
     "shipping_address.address_2": cart?.shipping_address?.address_2 || "",
-    // "shipping_address.company": cart?.shipping_address?.company || "",
     "shipping_address.postal_code": cart?.shipping_address?.postal_code || "",
     "shipping_address.city": cart?.shipping_address?.city || "",
     "shipping_address.country_code": cart?.shipping_address?.country_code || "",
-    // "shipping_address.province": cart?.shipping_address?.province || "",
     "shipping_address.phone": cart?.shipping_address?.phone || "",
     email: cart?.email || "",
   })
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [emailError, setEmailError] = useState<string | null>(null)
   const { countryCode } = useParams() as { countryCode: string }
+  const [emailError, setEmailError] = useState<string | null>(null)
+  const [fNameError, setFNameError] = useState<string | null>(null)
+  const [lNameError, setLNameError] = useState<string | null>(null)
+  const [adressError, setAdressError] = useState<string | null>(null)
+  const [cityError, setCityError] = useState<string | null>(null)
+  const [zipCodeError, setZipCodeError] = useState<string | null>(null)
+  const [phoneError, setPhoneError] = useState<string | null>(null)
+  const [disabled, setDisabled] = useState(false)
 
   const countriesInRegion = useMemo(
     () => cart?.region?.countries?.map((c) => c.iso_2),
@@ -114,21 +129,119 @@ const ShippingAddress = ({
     return emailRegex.test(email)
   }
 
-  const handleSaveField = async () => {
+  const validateInput = (FName: string) => {
+    const validInputRegex = /^[A-Za-z]+$/
+    return validInputRegex.test(FName.trim())
+  }
+  const validatePhone = (value: string): boolean => {
+    const validPhoneRegex = /^[+]?[\d\-]+(?:\s[\d\-]+)*$/
+    return validPhoneRegex.test(value.trim())
+  }
+
+  const validateZipCode = (value: string): boolean => {
+    const validZipCodeRegex = /^[A-Za-z0-9\s,.'#/\\-]+$/
+    return validZipCodeRegex.test(value.trim())
+  }
+  const validateAddress = (value: string): boolean => {
+    const validAddressRegex = /^[A-Za-z0-9\s,.'#/\\-]+$/
+    return validAddressRegex.test(value.trim())
+  }
+
+  const handleEmailSave = async () => {
+    setDisabled(true)
     if (!validateEmail(formData.email)) {
-      setEmailError("Please enter a valid email address.")
+      setEmailError("Enter a valid email address.")
+      setDisabled(false)
       return
     } else {
+      setDisabled(true)
       setEmailError(null)
     }
 
     const email = formData.email
     await setEmail(null, { email })
+    setDisabled(false)
+    console.log("update succes")
+  }
+
+  const handleSaveAdress = async () => {
+    const errors: ErrorMessages = {}
+    if (
+      !formData["shipping_address.first_name"] ||
+      !validateInput(formData["shipping_address.first_name"])
+    ) {
+      errors.firstName = "Enter a valid first name (letters only)."
+    }
+
+    if (
+      !formData["shipping_address.last_name"] ||
+      !validateInput(formData["shipping_address.last_name"])
+    ) {
+      errors.lastName = "Enter a valid last name (letters only)."
+    }
+
+    if (
+      !formData["shipping_address.city"] ||
+      !validateInput(formData["shipping_address.city"])
+    ) {
+      errors.city = "Enter a valid city (letters only)."
+    }
+
+    if (
+      !formData["shipping_address.phone"] ||
+      !validatePhone(formData["shipping_address.phone"])
+    ) {
+      errors.phone = "Enter a valid phone number."
+    }
+
+    if (
+      !formData["shipping_address.postal_code"] ||
+      !validateZipCode(formData["shipping_address.postal_code"])
+    ) {
+      errors.zipCode = "Enter a valid ZIP code."
+    }
+
+    if (
+      !formData["shipping_address.address_1"] ||
+      !validateAddress(formData["shipping_address.address_1"])
+    ) {
+      errors.address_1 = "Enter a valid address."
+    }
+
+    setFNameError(errors.firstName || null)
+    setLNameError(errors.lastName || null)
+    setAdressError(errors.address_1 || null)
+    setCityError(errors.city || null)
+    setZipCodeError(errors.zipCode || null)
+    setPhoneError(errors.phone || null)
+
+    if (Object.keys(errors).length > 0) {
+      return
+    }
+    const firstName = formData["shipping_address.first_name"]
+    const lastName = formData["shipping_address.last_name"]
+    const country = formData["shipping_address.country_code"]
+    const address_1 = formData["shipping_address.address_1"]
+    const address_2 = formData["shipping_address.address_2"]
+    const city = formData["shipping_address.city"]
+    const zipCode = formData["shipping_address.postal_code"]
+    const phone = formData["shipping_address.phone"]
+
+    await setAdress(null, {
+      lastName,
+      firstName,
+      country,
+      address_1,
+      address_2,
+      city,
+      zipCode,
+      phone,
+    })
   }
 
   return (
     <>
-      {cart?.email === "" || cart?.email === null ? (
+      {!customer ? (
         <>
           <div className="flex items-center mb-4 justify-between">
             <h1 className="text-[1.313rem] Poppins600 ">Contact</h1>
@@ -144,13 +257,18 @@ const ShippingAddress = ({
             autoComplete="email"
             value={formData.email}
             onChange={handleChange}
-            onBlur={handleSaveField}
+            onBlur={handleEmailSave}
             required
             data-testid="shipping-email-input"
-            className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md 
+              ${
+                emailError
+                  ? "border-red-500 border-[3px] focus:ring-0 focus:outline-none"
+                  : "border-[#DEDEDE]"
+              }`}
           />
           {emailError && (
-            <p className="text-red-500 text-sm mt-2">{emailError}</p>
+            <p className="text-red-500 text-sm mt-1">{emailError}</p>
           )}
         </>
       ) : (
@@ -217,39 +335,71 @@ const ShippingAddress = ({
         data-testid="shipping-country-select"
         className="Poppins400 py-1 hover:bg-transparent bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
       />
+
       <div className="grid grid-cols-2 gap-5 my-4">
-        <Input
-          label="First name"
-          name="shipping_address.first_name"
-          autoComplete="given-name"
-          value={formData["shipping_address.first_name"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-first-name-input"
-          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
-        <Input
-          label="Last name"
-          name="shipping_address.last_name"
-          autoComplete="family-name"
-          value={formData["shipping_address.last_name"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-last-name-input"
-          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
+        <div>
+          <Input
+            label="First name"
+            name="shipping_address.first_name"
+            autoComplete="given-name"
+            value={formData["shipping_address.first_name"]}
+            onChange={handleChange}
+            required
+            disabled={disabled}
+            data-testid="shipping-first-name-input"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+              fNameError
+                ? "border-red-500 border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
+            }`}
+          />
+          {fNameError && (
+            <p className="text-red-500 text-sm mt-1">{fNameError}</p>
+          )}
+        </div>
+        <div>
+          <Input
+            label="Last name"
+            name="shipping_address.last_name"
+            autoComplete="family-name"
+            value={formData["shipping_address.last_name"]}
+            onChange={handleChange}
+            required
+            disabled={disabled}
+            data-testid="shipping-last-name-input"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+              lNameError
+                ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
+            }`}
+          />
+          {lNameError && (
+            <p className="text-red-500  mt-1 text-sm">{lNameError}</p>
+          )}
+        </div>
       </div>
 
-      <Input
-        label="Address"
-        name="shipping_address.address_1"
-        autoComplete="address-line1"
-        value={formData["shipping_address.address_1"]}
-        onChange={handleChange}
-        required
-        data-testid="shipping-address-input"
-        className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-      />
+      <div>
+        <Input
+          label="Address"
+          name="shipping_address.address_1"
+          autoComplete="address-line1"
+          value={formData["shipping_address.address_1"]}
+          onChange={handleChange}
+          required
+          disabled={disabled}
+          data-testid="shipping-address-input"
+          className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+            adressError
+              ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+              : "border-[#DEDEDE]"
+          }`}
+        />
+        {adressError && (
+          <p className="text-red-500 mt-1 text-sm">{adressError}</p>
+        )}
+      </div>
+
       <div className="mt-4">
         <Input
           label="Apartment, suite, etc."
@@ -257,52 +407,72 @@ const ShippingAddress = ({
           autoComplete="address-line1"
           value={formData["shipping_address.address_2"]}
           onChange={handleChange}
+          disabled={disabled}
           data-testid="shipping-address-input"
           className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
         />
       </div>
-      {/* <Input
-        label="Company"
-        name="shipping_address.company"
-        value={formData["shipping_address.company"]}
-        onChange={handleChange}
-        autoComplete="organization"
-        data-testid="shipping-company-input"
-        className="px-2 bg-transparent border-[1px] border-[#DEDEDE] w-full h-11 rounded-md"
-      /> */}
       <div className="grid grid-cols-2 gap-5 my-4">
-        <Input
-          label="City"
-          name="shipping_address.city"
-          autoComplete="address-level2"
-          value={formData["shipping_address.city"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-city-input"
-          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
-        <Input
-          label="ZIP code"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-postal-code-input"
-          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
+        <div>
+          <Input
+            label="City"
+            name="shipping_address.city"
+            autoComplete="address-level2"
+            value={formData["shipping_address.city"]}
+            onChange={handleChange}
+            required
+            disabled={disabled}
+            data-testid="shipping-city-input"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+              cityError
+                ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
+            }`}
+          />
+          {cityError && (
+            <p className="text-red-500 mt-1 text-sm">{cityError}</p>
+          )}
+        </div>
+        <div>
+          <Input
+            label="ZIP code"
+            name="shipping_address.postal_code"
+            autoComplete="postal-code"
+            value={formData["shipping_address.postal_code"]}
+            onChange={handleChange}
+            required
+            disabled={disabled}
+            data-testid="shipping-postal-code-input"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+              zipCodeError
+                ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
+            }`}
+          />
+          {zipCodeError && (
+            <p className="text-red-500 mt-1 text-sm">{zipCodeError}</p>
+          )}
+        </div>
       </div>
       <div className="relative">
-        <Input
-          label="Phone number"
-          name="shipping_address.phone"
-          autoComplete="tel"
-          value={formData["shipping_address.phone"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-phone-input"
-          className="Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md"
-        />
+        <div>
+          <Input
+            label="Phone number"
+            name="shipping_address.phone"
+            autoComplete="tel"
+            value={formData["shipping_address.phone"]}
+            onChange={handleChange}
+            required
+            disabled={disabled}
+            onBlur={handleSaveAdress}
+            data-testid="shipping-phone-input"
+            className={`Poppins400 px-4 pt-7 pb-2 bg-transparent border-[1px] border-[#DEDEDE] w-full rounded-md ${
+              phoneError
+                ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
+            }`}
+          />
+        </div>
         <div className="absolute top-0 right-4 h-full flex items-center">
           <div className="relative group">
             <svg
@@ -329,25 +499,7 @@ const ShippingAddress = ({
           </div>
         </div>
       </div>
-      {/* <Input
-        label="State / Province"
-        name="shipping_address.province"
-        autoComplete="address-level1"
-        value={formData["shipping_address.province"]}
-        onChange={handleChange}
-        data-testid="shipping-province-input"
-        className="px-2 bg-transparent border-[1px] border-[#DEDEDE] w-full h-11 rounded-md"
-      /> */}
-      {/* <div className="my-8">
-        <Checkbox
-          label="Billing address same as shipping address"
-          name="same_as_billing"
-          checked={checked}
-          onChange={onChange}
-          data-testid="billing-address-checkbox"
-        />
-      </div> */}
-      {/* <div className="grid grid-cols-2 gap-4 mb-4"></div> */}
+      {phoneError && <p className="text-red-500 mt-1 text-sm">{phoneError}</p>}
     </>
   )
 }

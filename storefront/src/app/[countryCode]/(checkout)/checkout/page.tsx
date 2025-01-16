@@ -19,14 +19,11 @@ export default async function Checkout({
   const params = await searchParams
   const cartId = params.cart_id
 
-  // console.log("Cart ID", cartId)
   const cart = await retrieveCart(Array.isArray(cartId) ? cartId[0] : cartId)
 
   if (!cart) {
     return notFound()
   }
-
-  // console.log("Checkout cart", cart)
 
   const customer = await retrieveCustomer()
 

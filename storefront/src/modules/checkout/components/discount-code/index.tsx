@@ -99,10 +99,10 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 </SubmitButton>
               </div>
 
-              <ErrorMessage
+              {/* <ErrorMessage
                 error="Please enter a valid discount code (no spaces allowed)."
                 data-testid="discount-error-message"
-              />
+              /> */}
             </>
           )}
         </form>

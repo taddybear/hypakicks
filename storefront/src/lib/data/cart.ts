@@ -357,7 +357,6 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         last_name: formData.get("shipping_address.last_name"),
         address_1: formData.get("shipping_address.address_1"),
         address_2: formData.get("shipping_address.address_2"),
-        // company: formData.get("shipping_address.company"),
         postal_code: formData.get("shipping_address.postal_code"),
         city: formData.get("shipping_address.city"),
         country_code: formData.get("shipping_address.country_code"),
@@ -393,6 +392,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
   // )
 }
 
+// set email
 export async function setEmail(currentState: unknown, data: { email: string }) {
   try {
     if (!data.email) {
@@ -412,8 +412,55 @@ export async function setEmail(currentState: unknown, data: { email: string }) {
   } catch (e: any) {
     return e.message
   }
+}
 
-  // redirect(`/checkout?step=payment`)
+// set Adress
+export async function setAdress(
+  currentState: unknown,
+  dataa: {
+    lastName: string
+    firstName: any
+    country: any
+    address_1: string
+    address_2: any
+    city: any
+    zipCode: any
+    phone: any
+  }
+) {
+  try {
+    const cartId = getCartId()
+    if (!cartId) {
+      throw new Error("No existing cart found when setting addresses")
+    }
+
+    const data = {
+      shipping_address: {
+        first_name: dataa.firstName,
+        last_name: dataa.lastName,
+        country_code: dataa.country,
+        address_1: dataa.address_1,
+        address_2: dataa.address_2,
+        postal_code: dataa.zipCode,
+        city: dataa.city,
+        phone: dataa.phone,
+      },
+    } as any
+
+    data.billing_address = {
+      first_name: dataa.firstName,
+      last_name: dataa.lastName,
+      country_code: dataa.country,
+      address_1: dataa.address_1,
+      address_2: dataa.address_2,
+      postal_code: dataa.zipCode,
+      city: dataa.city,
+      phone: dataa.phone,
+    }
+    await updateCart(data)
+  } catch (e: any) {
+    return e.message
+  }
 }
 
 export async function placeOrder() {
