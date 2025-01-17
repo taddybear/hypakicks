@@ -54,14 +54,12 @@ export default async function BestSeller({
             </span>
           </h1>
           <ul className="">
-            <li className="Poppins700 text-xs lg:text-base text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center">
-              <Link
-                href="/shop"
-                aria-label="Go to shoppage"
-                className=" whitespace-nowrap	"
-              >
-                VIEW BEST SELLERS
-              </Link>
+            <Link
+              href="/shop"
+              aria-label="Go to shoppage"
+              className="Poppins700 text-xs lg:text-base text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center"
+            >
+              <p className=" whitespace-nowrap">VIEW BEST SELLERS</p>
               <svg
                 width="2em"
                 height="1.5em"
@@ -78,7 +76,7 @@ export default async function BestSeller({
                   strokeLinejoin="round"
                 ></path>
               </svg>
-            </li>
+            </Link>
           </ul>
         </div>
         <ul className="grid grid-cols-2 lg:grid-cols-4">

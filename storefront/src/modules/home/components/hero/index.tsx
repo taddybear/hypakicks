@@ -53,14 +53,12 @@ const Hero = () => {
             Find your style with exclusive sneakers - only at HypaKicks.
           </p>
           <ul className=" flex items-center space-x-2">
-            <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <LocalizedClientLink
-                href="/shop"
-                aria-label="Go to shoppage"
-                className=" whitespace-nowrap	"
-              >
-                SHOP SNEAKERS
-              </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/shop"
+              aria-label="Go to shoppage"
+              className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center "
+            >
+              <p className=" whitespace-nowrap">SHOP SNEAKERS</p>
               <svg
                 width="2em"
                 height="2em"
@@ -77,15 +75,13 @@ const Hero = () => {
                   strokeLinejoin="round"
                 ></path>
               </svg>
-            </li>
-            <li className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center ">
-              <LocalizedClientLink
-                href="/about-us"
-                aria-label="Go to aboutpage"
-                className="whitespace-nowrap"
-              >
-                About Us
-              </LocalizedClientLink>
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/about-us"
+              aria-label="Go to aboutpage"
+              className="Poppins700 text-xs text-[#44b865] border-2 border-[#44b865] rounded-[50px] uppercase px-5 py-2 list-none flex items-center "
+            >
+              <p className="whitespace-nowrap">About Us</p>
               <svg
                 width="2em"
                 height="2em"
@@ -102,7 +98,7 @@ const Hero = () => {
                   strokeLinejoin="round"
                 ></path>
               </svg>
-            </li>
+            </LocalizedClientLink>
           </ul>
           <div className="flex mt-4">
             <Image
