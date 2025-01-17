@@ -34,22 +34,26 @@ const AbandonedCartsPage = () => {
         <h3 className="text-lg font-semibold text-white mb-4">Abandoned Carts List</h3>
 
         <Table className="min-w-full shadow-md">
-          <thead className=" text-white">
-            <tr>
-              <th className="px-4 py-2 text-left">Email</th>
-              <th className="px-4 py-2 text-left">Cart Created At</th>
-              <th className="px-4 py-2 text-left">Last Updated At</th>
-            </tr>
-          </thead>
-          <tbody>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Email</Table.HeaderCell>
+              <Table.HeaderCell>Cart Created At</Table.HeaderCell>
+              <Table.HeaderCell>Last Updated At</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {abandonedCarts.map((cart) => (
-              <tr key={cart.id} className="hover:bg-gray-700">
-                <td className="px-4 py-2 text-white">{cart.email}</td>
-                <td className="px-4 py-2 text-white">{new Date(cart.created_at).toLocaleString()}</td>
-                <td className="px-4 py-2 text-white">{new Date(cart.updated_at).toLocaleString()}</td>
-              </tr>
+              <Table.Row key={cart.id} className="hover:bg-gray-700">
+                <Table.Cell className="text-white">{cart.email}</Table.Cell>
+                <Table.Cell className="text-white">
+                  {new Date(cart.created_at).toLocaleString()}
+                </Table.Cell>
+                <Table.Cell className="text-white">
+                  {new Date(cart.updated_at).toLocaleString()}
+                </Table.Cell>
+              </Table.Row>
             ))}
-          </tbody>
+          </Table.Body>
         </Table>
       </div>
     </Container>
