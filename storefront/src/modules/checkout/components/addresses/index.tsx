@@ -60,7 +60,7 @@ const Addresses = ({
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart?.shipping_methods?.at(-1)?.shipping_option_id || null
   )
-
+  const [PlaceOrder, setPlaceOrder] = useState(false)
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState("pp_mpgs_mpgs")
 
@@ -159,10 +159,10 @@ const Addresses = ({
     setSubmitting(true)
 
     try {
-      const formData = new FormData(e.currentTarget)
+      // const formData = new FormData(e.currentTarget)
 
-      await setAddresses(null, formData)
-
+      // await setAddresses(null, formData)
+      setPlaceOrder(true)
       if (shippingMethodId) {
         // console.log("shippingMethodId", shippingMethodId)
         await handleSubmitShippingMethod(shippingMethodId)
@@ -233,6 +233,7 @@ const Addresses = ({
             checked={sameAsBilling}
             onChange={toggleSameAsBilling}
             cart={cart}
+            PlaceOrder={PlaceOrder}
           />
 
           {/* shipping method */}

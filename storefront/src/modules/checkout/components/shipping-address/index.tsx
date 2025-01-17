@@ -19,6 +19,7 @@ interface ErrorMessages {
   city?: string
   zipCode?: string
   phone?: string
+  email?: string
 }
 
 const ShippingAddress = ({
@@ -26,10 +27,12 @@ const ShippingAddress = ({
   cart,
   checked,
   onChange,
+  PlaceOrder,
 }: {
   customer: HttpTypes.StoreCustomer | null
   cart: HttpTypes.StoreCart | null
   checked: boolean
+  PlaceOrder: boolean
   onChange: () => void
 }) => {
   const [formData, setFormData] = useState<Record<string, any>>({
@@ -166,6 +169,9 @@ const ShippingAddress = ({
 
   const handleSaveAdress = async () => {
     const errors: ErrorMessages = {}
+    if (!formData.email || !validateEmail(formData.email)) {
+      errors.email = "Enter a valid email"
+    }
     if (
       !formData["shipping_address.first_name"] ||
       !validateInput(formData["shipping_address.first_name"])
@@ -214,6 +220,7 @@ const ShippingAddress = ({
     setCityError(errors.city || null)
     setZipCodeError(errors.zipCode || null)
     setPhoneError(errors.phone || null)
+    setEmailError(errors.phone || null)
 
     if (Object.keys(errors).length > 0) {
       return
@@ -238,6 +245,15 @@ const ShippingAddress = ({
       phone,
     })
   }
+
+  useEffect(() => {
+    // console.log("PlaceOrder bollean...", PlaceOrder)
+
+    if (PlaceOrder) {
+      // console.log("formdata after bolaen", formData)
+      handleSaveAdress()
+    }
+  }, [PlaceOrder])
 
   return (
     <>
