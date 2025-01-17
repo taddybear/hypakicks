@@ -11,7 +11,7 @@ export default function Contactus() {
       schedules: [
         "Schedule: Mon - Fri (9:00 AM to 6:00 PM)",
         "Contact: Coming soon", // Second schedule
-        "Email: help@hypakicks.de",
+        "Email: help@hypa-kicks.de",
       ],
     },
     {

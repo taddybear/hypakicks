@@ -250,9 +250,9 @@ const Addresses = ({
                       value={option.id}
                       data-testid="delivery-option-radio"
                       className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-3 border rounded-rounded px-4 mb-2 hover:shadow-borders-interactive-with-active",
+                        "flex items-center justify-between text-small-regular cursor-pointer py-3 border rounded-t-md px-4 mb-2 hover:shadow-borders-interactive-with-active",
                         {
-                          "border-[1px] border-black":
+                          "border-t-[1px]  bg-[#F4F7FA] border-black":
                             option.id === shippingMethodId,
                         }
                       )}

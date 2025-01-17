@@ -30,7 +30,7 @@ export default function OrdersTracking() {
           </button>
         </form>
 
-        <form action="" className="pt-8 lg:w-[70%] lg:m-auto">
+        {/* <form action="" className="pt-8 lg:w-[70%] lg:m-auto">
           <div className="lg:flex space-y-5 lg:space-y-0 gap-8">
             <input
               type="email"
@@ -74,7 +74,7 @@ export default function OrdersTracking() {
           <p className="mt-8 text-gray-500 Poppins400">
             Please click button Track to track your order
           </p>
-        </form>
+        </form> */}
       </section>
     </>
   )

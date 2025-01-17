@@ -33,16 +33,26 @@ export default function Sustainability() {
           width={50}
           height={25}
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          viewBox="0 0 256 256"
+          focusable="false"
         >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            d="M1.944 3.278h11.112M5.5 3.278V1.944a.89.89 0 0 1 .889-.888H8.61a.89.89 0 0 1 .889.888v1.334M11.722 5.5v6.667c0 .982-.795 1.777-1.777 1.777h-4.89a1.777 1.777 0 0 1-1.777-1.777V5.5M5.944 7.278v4M9.056 7.278v4"
-          ></path>
+          <g>
+            <path d="M216,48H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM192,208H64V64H192ZM80,24a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,24Z"></path>
+          </g>
         </svg>
+        // <svg
+
+        //   xmlns="http://www.w3.org/2000/svg"
+        //   fill="none"
+        // >
+        //   <path
+        //     stroke="currentColor"
+        //     strokeLinecap="round"
+        //     strokeLinejoin="round"
+        //     strokeWidth="1.5"
+        //     d="M1.944 3.278h11.112M5.5 3.278V1.944a.89.89 0 0 1 .889-.888H8.61a.89.89 0 0 1 .889.888v1.334M11.722 5.5v6.667c0 .982-.795 1.777-1.777 1.777h-4.89a1.777 1.777 0 0 1-1.777-1.777V5.5M5.944 7.278v4M9.056 7.278v4"
+        //   ></path>
+        // </svg>
       ),
       title: "Reducing Waste in Production",
       description:

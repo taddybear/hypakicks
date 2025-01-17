@@ -288,7 +288,7 @@ const CartDropdown = ({
                         </div>
                       ))}
                   </div>
-                  <div className="bg-white px-[1.875rem] pt-8 pb-4">
+                  <div className="bg-white px-[1.875rem] pt-5 pb-4">
                     <LocalizedClientLink
                       href={`/checkout/?cart_id=${cartState?.id}`}
                     >
@@ -300,13 +300,13 @@ const CartDropdown = ({
                       >
                         Checkout
                       </button>
-                      <Image
+                      {/* <Image
                         src={Mastercard}
                         alt=""
                         width={225}
                         height={39}
                         className="w-full mt-3"
-                      />
+                      /> */}
                     </LocalizedClientLink>
                   </div>
 
@@ -332,7 +332,7 @@ const CartDropdown = ({
                 </div>
               ) : (
                 <div className="h-full">
-                  <div className="bg-[#f8f9fa] cartchildHeight flex flex-col  justify-between items-center">
+                  <div className="mb-4 bg-[#f8f9fa] cartchildHeight flex flex-col  justify-between items-center">
                     <div className="p-[1.875rem]">
                       <p className="text-center">Your cart is empty</p>
                       <LocalizedClientLink href="/shop">
@@ -350,7 +350,7 @@ const CartDropdown = ({
                         </>
                       </LocalizedClientLink>
                     </div>
-                    <div className="w-full bg-white pb-4">
+                    {/* <div className="w-full bg-white pb-4">
                       <Image
                         src={Mastercard}
                         alt=""
@@ -358,7 +358,7 @@ const CartDropdown = ({
                         height={400}
                         className=" object-cover w-full mt-3 h-[39px]"
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
