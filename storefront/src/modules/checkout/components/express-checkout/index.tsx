@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 
 export default function ExpressCheckout() {
   const [showApplePay, setShowApplePay] = useState(false)
+  const [shippingAddress, setShippingAddress] = useState(null)
 
   useEffect(() => {
     const enableApplePayButton = async () => {
@@ -76,8 +77,26 @@ export default function ExpressCheckout() {
 
         event.complete(merchantSessionPromise)
       }
+
+      request.onshippingaddresschange = (event: any) => {
+        console.log("Shipping address change", request.shippingAddress)
+        setShippingAddress(request.shippingAddress)
+        event.updateWith({
+          total: {
+            label: "Hypakicks",
+            amount: {
+              value: "50",
+              currency: "AED",
+            },
+          },
+        })
+      }
     }
   }
+
+  useEffect(() => {
+    console.log("Shipping address", shippingAddress)
+  }, [shippingAddress])
 
   return (
     <>
