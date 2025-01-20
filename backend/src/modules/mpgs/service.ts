@@ -75,9 +75,8 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       const authToken = this.generateAuthToken();
       const url =
         this.options_.msoUrl +
-        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/Txn_${context.cart_id}`;
-        console.log("apple pay", context.apple_pay);
-        console.log("payment data", context.apple_pay.paymentData);
+        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/${context.transaction_id}`;
+      console.log("\n\napple pay context data", context.apple_pay, "\n\n");
       const body = {
         apiOperation: "AUTHORIZE",
         order: {
@@ -90,7 +89,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
           provided: {
             card: {
               devicePayment: {
-                paymentToken: JSON.stringify(context.apple_pay.paymentData),
+                paymentToken: JSON.stringify(context.apple_pay),
               },
             },
           },

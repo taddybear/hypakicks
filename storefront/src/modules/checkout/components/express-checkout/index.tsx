@@ -97,7 +97,8 @@ export default function ExpressCheckout({ cart }: any) {
           provider_id: "pp_mpgs_mpgs",
           context: {
             cart_id: cart.id,
-            apple_pay: response.details.token,
+            apple_pay: response.details.token.paymentData,
+            transaction_id: response.details.token.transactionIdentifier,
           },
         })
       }
