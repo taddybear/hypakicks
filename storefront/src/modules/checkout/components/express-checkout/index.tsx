@@ -1,8 +1,9 @@
 "use client"
+import { initiatePaymentSession } from "@lib/data/cart"
 import Script from "next/script"
 import { useState, useEffect } from "react"
 
-export default function ExpressCheckout() {
+export default function ExpressCheckout({ cart }: any) {
   const [showApplePay, setShowApplePay] = useState(false)
   const [shippingAddress, setShippingAddress] = useState(null)
 
@@ -90,6 +91,16 @@ export default function ExpressCheckout() {
         })
       }
       const response = await request.show()
+      if (response) {
+        // complete the payment on mastercard's side
+        const paymentSession = await initiatePaymentSession(cart, {
+          provider_id: "pp_mpgs_mpgs",
+          context: {
+            cart_id: cart.id,
+            apple_pay: response.details.token,
+          },
+        })
+      }
       console.log("Response", response)
     }
   }

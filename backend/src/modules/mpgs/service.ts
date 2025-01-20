@@ -71,6 +71,51 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
     const { amount, currency_code, context } = Context;
 
+    if (context && "apple_pay" in context) {
+      const authToken = this.generateAuthToken();
+      const url =
+        this.options_.msoUrl +
+        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/Txn_${context.cart_id}`;
+
+      const body = {
+        apiOperation: "PAY",
+        order: {
+          currency: "AED",
+          amount: "50.00",
+          walletProvider: "APPLE_PAY",
+        },
+        sourceOfFunds: {
+          type: "CARD",
+          provided: {
+            card: {
+              devicePayment: {
+                paymentToken: JSON.stringify(context.apple_pay.paymentData),
+              },
+            },
+          },
+        },
+        transaction: {
+          source: "INTERNET",
+        },
+      };
+
+      const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          Authorization: `Basic ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log("Apple Pay response: ", data);
+
+      return {
+        data: {},
+      };
+    }
+
     console.log("Initiate payment context: ", Context);
     try {
       const authToken = this.generateAuthToken();

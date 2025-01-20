@@ -27,7 +27,7 @@ export default async function CheckoutForm({
 
   return (
     <div className="lg:w-[75%] lg:ml-auto py-10">
-      <ExpressCheckout />
+      <ExpressCheckout cart={cart} />
 
       <Addresses
         cart={cart}
