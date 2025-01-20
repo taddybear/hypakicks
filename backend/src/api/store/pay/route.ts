@@ -1,4 +1,7 @@
+import https from "https";
+import fs from "fs";
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
+import axios from "axios";
 
 export async function GET(
   req: MedusaRequest,
@@ -12,17 +15,20 @@ export async function GET(
     initiative: "web",
     initiativeContext: "insightful-forgiveness-production.up.railway.app",
   };
-  const headers = {
-    "Content-Type": "application/json",
-  };
 
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers,
+  const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+    cert: fs.readFileSync("./certs/apple_pay.pem", "utf-8"),
+    key: fs.readFileSync("./certs/apple_pay.key", "utf-8"),
+    passphrase: "admin",
   });
 
-  const merchantSession = await response.json();
+  const response = await axios.post(url, body, {
+    headers: { "Content-Type": "application/json" },
+    httpsAgent,
+  });
+
+  const merchantSession = response.data;
   console.log("Merchant session", merchantSession);
 
   res.json(merchantSession);
