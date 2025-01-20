@@ -76,12 +76,13 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       const url =
         this.options_.msoUrl +
         `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/Txn_${context.cart_id}`;
-
+        console.log("apple pay", context.apple_pay);
+        console.log("payment data", context.apple_pay.paymentData);
       const body = {
-        apiOperation: "PAY",
+        apiOperation: "AUTHORIZE",
         order: {
           currency: "AED",
-          amount: "50.00",
+          amount: "5656",
           walletProvider: "APPLE_PAY",
         },
         sourceOfFunds: {

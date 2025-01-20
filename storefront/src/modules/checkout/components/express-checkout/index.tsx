@@ -44,7 +44,7 @@ export default function ExpressCheckout({ cart }: any) {
         total: {
           label: "Hypakicks",
           amount: {
-            value: "50",
+            value: "5656",
             currency: "AED",
           },
         },
@@ -84,7 +84,7 @@ export default function ExpressCheckout({ cart }: any) {
           total: {
             label: "Hypakicks",
             amount: {
-              value: "50",
+              value: "5656",
               currency: "AED",
             },
           },
