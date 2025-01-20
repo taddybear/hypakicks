@@ -23,6 +23,54 @@ export default function ExpressCheckout() {
     enableApplePayButton()
   }, [])
 
+  const initiateApplePay = () => {
+    if (window.PaymentRequest) {
+      const methods = [
+        {
+          supportedMethods: "https://apple.com/apple-pay",
+          data: {
+            version: 14,
+            merchantIdentifier: "merchant.com.railway.hypakicks",
+            merchantCapabilities: ["supports3DS"],
+            supportedNetworks: ["masterCard", "visa"],
+            countryCode: "AE",
+          },
+        },
+      ]
+      const details = {
+        total: {
+          label: "Hypakicks",
+          amount: {
+            value: "50",
+            currency: "AED",
+          },
+        },
+      }
+      const options = {
+        requestPayerName: false,
+        requestPayerEmail: true,
+        requestPayerPhone: false,
+        requestShipping: true,
+        shippingType: "shipping" as PaymentShippingType,
+      }
+      const request = new PaymentRequest(methods, details, options)
+
+      request.show()
+
+      request.onmerchantvalidation = (event: any) => {
+        const merchantSessionPromise = fetch(
+          "https://hypakicks-production.up.railway.app/store/authorizeMerchant"
+        )
+          .then((res) => res.json()) // Parse the response as JSON.
+          .catch((err) => {
+            console.error("Error fetching merchant session", err)
+          })
+
+        event.complete(merchantSessionPromise)
+      }
+    }
+  }
+
   return (
     <>
       <Script
@@ -38,6 +86,7 @@ export default function ExpressCheckout() {
           buttonstyle="black"
           type="buy"
           locale="en-US"
+          onClick={() => initiateApplePay()}
         ></apple-pay-button>
         {/* )} */}
         {/* <button className="bg-[#592FF4] w-1/2 py-2 rounded-md space-x-1 flex items-center justify-center">

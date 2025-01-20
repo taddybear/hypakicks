@@ -70,7 +70,8 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     Context: CreatePaymentProviderSession
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
     const { amount, currency_code, context } = Context;
-    console.log("Context: ", Context);
+
+    console.log("Initiate payment context: ", Context);
     try {
       const authToken = this.generateAuthToken();
       const url =
@@ -85,11 +86,17 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         },
       });
 
+      // console.log("Payment session initiate response: ", response);
+
       if (response.ok) {
         const data = await response.json();
         console.log("Session Data: ", data);
         if (data.result === "SUCCESS") {
           const paymentUrl = url + `/${data.session.id}`;
+          // @ts-ignore
+          const cardNumber = context.card_number.replace(/ /g, "");
+          // @ts-ignore
+          const expiryDate = context.expiry_date.replace(/ /g, "");
           const payerData = {
             sourceOfFunds: {
               provided: {
@@ -97,19 +104,20 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
                   // @ts-ignore
                   nameOnCard: context.name_on_card,
                   // @ts-ignore
-                  number: context.card_number,
+                  number: cardNumber,
                   expiry: {
                     // @ts-ignore
-                    month: context.expiry_date.substring(0, 2),
+                    month: expiryDate.substring(0, 2),
                     // @ts-ignore
-                    year: context.expiry_date.substring(2, 4),
+                    year: expiryDate.substring(3, 5),
                   },
                   // @ts-ignore
-                  securityCode: context.security_card,
+                  securityCode: context.security_code,
                 },
               },
             },
           };
+          console.log("Payer Data: ", payerData.sourceOfFunds.provided.card);
           const paymentResponse = await fetch(paymentUrl, {
             method: "PUT",
             body: JSON.stringify(payerData),
@@ -118,19 +126,37 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
               "Content-Type": "application/json",
             },
           });
+
           if (paymentResponse.ok) {
             const paymentData = await paymentResponse.json();
-            console.log("Payment Data: ", paymentData);
+            console.log(
+              "Payment Data: ",
+              paymentData.sourceOfFunds.provided.card
+            );
             const threeDSecure = await this.threeDSecureInitiate(
               // @ts-ignore
               context.cart_id,
+              // @ts-ignore
+              context.payment_attempt,
               paymentData.session.id,
               Number(amount),
               currency_code
             );
+
             if (threeDSecure) {
+              console.log("Three3d secure data", threeDSecure);
+              // paymentSessionData = {
+              //   payment_attempt,
+              //   sessionId,
+              //   amount,
+              // }
+
+              // context = {
+              //   cart_id
+              // }
               return { data: threeDSecure.data };
             }
+
             return {
               data: {
                 payment_id: paymentData.session.id,
@@ -139,7 +165,6 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
               },
             };
           }
-
           return {
             data: { session_id: data.session.id },
           };
@@ -159,21 +184,22 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 
   async threeDSecureInitiate(
     cart_id: string,
+    payment_attempt: number,
     session_id: string,
     amount: number,
     country_code: string
   ) {
-    console.log("Initiate 3DS", cart_id, session_id, amount, country_code);
+    console.log("Initiate 3DS", cart_id, session_id, amount);
     const authToken = this.generateAuthToken();
     const url =
       this.options_.msoUrl +
-      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}/transaction/TxnID_${cart_id}`;
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}_${payment_attempt}/transaction/TxnID_${cart_id}_${payment_attempt}`;
 
     const payload = {
       apiOperation: "INITIATE_AUTHENTICATION",
       correlationId: cart_id,
       order: {
-        currency: "USD",
+        currency: "AED",
       },
       session: {
         id: session_id,
@@ -189,32 +215,43 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       },
     });
 
-    console.log("Initiate 3ds resonse: ", response);
+    // const data = await response.json();
+    // console.log("Initiate 3ds response:", data);
 
     if (response.ok) {
       const data = await response.json();
       console.log("Initiate 3DS Data: ", data);
       const threeDSresponse = data.response;
-      if (
-        threeDSresponse &&
-        threeDSresponse.gatewayRecommendation === "PROCEED"
-      ) {
-        // go directly to payment
-        return { data: { threeDS: false } };
-      } else {
-        // redirect to 3DS page
-        return await this.threeDSecureAuthenticate(
-          cart_id,
-          session_id,
-          amount,
-          country_code
-        );
-      }
+      // if (
+      //   threeDSresponse &&
+      //   threeDSresponse.gatewayRecommendation === "PROCEED"
+      // ) {
+      //   console.log("Go to payment");
+      // go directly to payment
+      return {
+        data: {
+          threeDS: false,
+          amount: amount,
+          sessionId: session_id,
+          payment_attempt: payment_attempt,
+        },
+      };
+      // } else {
+      //   // redirect to 3DS page
+      //   return await this.threeDSecureAuthenticate(
+      //     cart_id,
+      //     payment_attempt,
+      //     session_id,
+      //     amount,
+      //     country_code
+      //   );
+      // }
     }
   }
 
   async threeDSecureAuthenticate(
     cart_id: string,
+    payment_attempt: number,
     session_id: string,
     amount: number,
     country_region: string
@@ -222,12 +259,12 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     const authToken = this.generateAuthToken();
     const url =
       this.options_.msoUrl +
-      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}/transaction/TxnID_${cart_id}`;
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cart_id}_${payment_attempt}/transaction/TxnID_${cart_id}_${payment_attempt}`;
 
     const payload = {
       apiOperation: "AUTHENTICATE_PAYER",
       authentication: {
-        redirectResponseUrl: "https://localhost:8000/us/checkout",
+        redirectResponseUrl: "http://localhost:8000/us/checkout",
       },
       correlationId: cart_id,
       device: {
@@ -244,7 +281,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       },
       order: {
         amount: amount,
-        currency: "USD",
+        currency: "AED",
       },
       session: {
         id: session_id,
@@ -259,15 +296,18 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         "Content-Type": "application/json",
       },
     });
-
+    const data = await response.json();
+    console.log("Authenticate 3ds response:", data);
     if (response.ok) {
-      const data = await response.json();
       console.log("Authenticate 3DS Data: ", data);
       const authenticationHtml = data.authentication.redirectHtml;
       return {
         data: {
           threeDS: true,
+          payment_attempt: payment_attempt,
           html: authenticationHtml,
+          amount: amount,
+          sessionId: session_id,
         },
       };
     }
@@ -283,110 +323,180 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         data: PaymentProviderSessionResponse["data"];
       }
   > {
-    console.log("Authorize Payment");
-    console.log("PaymentSessionData: ", paymentSessionData);
+    console.log("Authorize payment");
+    console.log("Payment session data: ", paymentSessionData);
     console.log("Context: ", context);
-    try {
-      const authToken = this.generateAuthToken();
-      const url =
-        this.options_.msoUrl +
-        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/${context.cart_id}/transaction/${context.cart_id}`;
-
-      const payload = {
-        apiOperation: "PAY",
-        authentication: {
-          transactionId: context.cart_id,
-        },
-        order: {
-          amount: Number(paymentSessionData.amount),
-          currency: String(paymentSessionData.currency_code).toUpperCase(),
-          reference: context.cart_id,
-        },
-        transaction: {
-          reference: context.cart_id,
-        },
-        session: {
-          id: paymentSessionData.payment_id,
-        },
-        sourceOfFunds: {
-          type: "CARD",
-        },
-      };
-
-      // const response = await fetch(url, {
-      //   method: "PUT",
-      //   body: JSON.stringify(payload),
-      //   headers: {
-      //     Authorization: `Basic ${authToken}`,
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      // if (response.ok) {
-      //   const data = await response.json();
-      //   console.log("Authorize Data: ", data);
-      // }
-      // console.log("Response", response);
-      return {
-        error: "Error",
-      };
-    } catch (e) {
-      return {
-        error: e,
-        code: "unknown",
-        detail: e,
-      };
-    }
-  }
-
-  async updatePayment(
-    context: UpdatePaymentProviderSession
-  ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
-    const { amount, currency_code, context: customerDetails, data } = context;
-    const externalId = data.id;
+    // try {
 
     const authToken = this.generateAuthToken();
-    // const url =
-    //   this.options_.msoUrl +
-    //   `/api/rest/version/100/merchant/${this.options_.merchantId}/session/${context.data.session_id}`;
+    const url =
+      this.options_.msoUrl +
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${context.cart_id}_${paymentSessionData.payment_attempt}/transaction/Pay_${context.cart_id}_${paymentSessionData.payment_attempt}`;
 
-    console.log("Data: ", data);
-    console.log("context: ", context);
+    const payload = {
+      apiOperation: "PAY",
+      authentication: {
+        transactionId:
+          "TxnID_" + context.cart_id + "_" + paymentSessionData.payment_attempt,
+      },
+      order: {
+        amount: paymentSessionData.amount,
+        // currency: String(paymentSessionData.currency_code).toUpperCase(),
+        currency: "AED",
+        reference: "OrdID_" + context.cart_id,
+      },
+      transaction: {
+        reference: context.cart_id,
+      },
+      session: {
+        id: paymentSessionData.sessionId,
+      },
+      sourceOfFunds: {
+        type: "CARD",
+      },
+    };
 
-    try {
-      // assuming you have a client that updates the payment
-      // const response = await this.client.update(externalId, {
-      //   amount,
-      //   currency_code,
-      //   customerDetails,
-      // });
-
-      return {
-        // ...response,
-        data: {
-          id: "some id",
-        },
-      };
-    } catch (e) {
-      return {
-        error: e,
-        code: "unknown",
-        detail: e,
-      };
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Basic ${authToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log("Authorization response: ", data);
+    // console.log(data.risk.response.review);
+    // console.log(data.risk.response.rule);
+    if (response.ok) {
+      if (data.result === "SUCCESS") {
+        if (data.order.status === "CAPTURED") {
+          return {
+            data: { session_id: paymentSessionData.sessionId },
+            status: "captured",
+          };
+        }
+      }
     }
+    console.log("Returning same data");
+    return {
+      data: {
+        threeDS: false,
+        amount: paymentSessionData.amount,
+        sessionId: paymentSessionData.sessionId,
+        payment_attempt: paymentSessionData.payment_attempt,
+      },
+      status: "canceled",
+    };
+    // console.log("Response", response);
+    // return {
+    //   error: "Error",
+    // };
+    // } catch (e) {
+    //   return {
+    //     error: e,
+    //     code: "unknown",
+    //     detail: e,
+    //   };
+    // }
+  }
+
+  async listPaymentMethods(context): Promise<any> {}
+
+  async updatePayment(
+    contextUpdate: UpdatePaymentProviderSession
+  ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
+    const { amount, currency_code, context, data } = contextUpdate;
+    console.log("context", context);
+
+    const url =
+      this.options_.msoUrl +
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/session`;
+
+    const paymentUrl = url + `/${context.session_id}`;
+    // @ts-ignore
+    const cardNumber = context.card_number.replace(/ /g, "");
+    // @ts-ignore
+    const expiryDate = context.expiry_date.replace(/ /g, "");
+    const payerData = {
+      sourceOfFunds: {
+        provided: {
+          card: {
+            // @ts-ignore
+            nameOnCard: context.name_on_card,
+            // @ts-ignore
+            number: cardNumber,
+            expiry: {
+              // @ts-ignore
+              month: expiryDate.substring(0, 2),
+              // @ts-ignore
+              year: expiryDate.substring(3, 5),
+            },
+            // @ts-ignore
+            securityCode: context.security_code,
+          },
+        },
+      },
+    };
+    // console.log("Payer Data: ", payerData.sourceOfFunds.provided.card);
+    // const authToken = this.generateAuthToken();
+    // const paymentResponse = await fetch(paymentUrl, {
+    //   method: "PUT",
+    //   body: JSON.stringify(payerData),
+    //   headers: {
+    //     Authorization: `Basic ${authToken}`,
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+
+    // if (paymentResponse.ok) {
+    //   const paymentData = await paymentResponse.json();
+    //   console.log("Payment Data: ", paymentData.sourceOfFunds.provided.card);
+    //   const threeDSecure = await this.threeDSecureInitiate(
+    //     // @ts-ignore
+    //     context.cart_id,
+    //     // @ts-ignore
+    //     context.payment_attempt,
+    //     context.session_id || "",
+    //     Number(amount),
+    //     currency_code
+    //   );
+
+    //   console.log("THree RESULT", threeDSecure);
+
+    //   if (threeDSecure) {
+    //     return { data: threeDSecure.data };
+    //   }
+
+    //   return {
+    //     data: {
+    //       payment_id: paymentData.session.id,
+    //       amount: amount,
+    //       currency_code: currency_code,
+    //     },
+    //   };
+    // }
+    return {
+      data: { session_id: context.session_id },
+    };
+    return {
+      data: {},
+    };
   }
 
   async capturePayment(
     paymentData: Record<string, unknown>
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-    const externalId = paymentData.id;
+    console.log("CapturePaymentData: ", paymentData);
+    // const externalId = paymentData.id;
 
     try {
       // assuming you have a client that captures the payment
-      const newData = await this.client.capturePayment(externalId);
+      // const newData = await this.client.capturePayment(externalId);
 
       return {
-        ...newData,
-        id: externalId,
+        // ...newData,
+        id: paymentData.session_id,
       };
     } catch (e) {
       return {
@@ -543,33 +653,3 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 }
 
 export default MPGSProviderService;
-
-// const tokenizeCardUrl =
-//   this.options_.msoUrl +
-//   `/api/rest/version/100/merchant/${this.options_.merchantId}/token`;
-
-// const tokenizeData = {
-//   session: {
-//     id: paymentData.session.id,
-//   },
-//   sourceOfFunds: {
-//     type: "CARD",
-//   },
-// };
-
-// const tokenizeResponse = await fetch(tokenizeCardUrl, {
-//   method: "POST",
-//   body: JSON.stringify(tokenizeData),
-//   headers: {
-//     Authorization: `Basic ${authToken}`,
-//     "Content-Type": "application/json",
-//   },
-// });
-// if (tokenizeResponse.ok) {
-//   const tokenizeData = await tokenizeResponse.json();
-//   console.log("Tokenize data: ", tokenizeData);
-//   return {
-//     data: { token_id: tokenizeData.token },
-//   };
-// }
-// console.log("Tokenize response: ", tokenizeResponse);
