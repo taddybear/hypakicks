@@ -7,7 +7,7 @@ export default function ExpressCheckout() {
 
   useEffect(() => {
     const enableApplePayButton = async () => {
-      if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+      if (window.ApplePaySession) {
         const button = document.querySelector("apple-pay-button")
         console.log("Apple pay button", button)
         if (button) {
@@ -23,7 +23,8 @@ export default function ExpressCheckout() {
     enableApplePayButton()
   }, [])
 
-  const initiateApplePay = () => {
+  function initiateApplePay() {
+    console.log("Initiate Apple Pay")
     if (window.PaymentRequest) {
       const methods = [
         {
@@ -54,12 +55,13 @@ export default function ExpressCheckout() {
         shippingType: "shipping" as PaymentShippingType,
       }
       const request = new PaymentRequest(methods, details, options)
+      console.log("Request", request)
 
       request.show()
 
       request.onmerchantvalidation = (event: any) => {
         const merchantSessionPromise = fetch(
-          "https://hypakicks-production.up.railway.app/store/authorizeMerchant"
+          "https://hypakicks-production.up.railway.app/store/pay"
         )
           .then((res) => res.json()) // Parse the response as JSON.
           .catch((err) => {
@@ -81,25 +83,12 @@ export default function ExpressCheckout() {
         Express checkout
       </h1>
       <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
-        {/* {showApplePay && ( */}
         <apple-pay-button
           buttonstyle="black"
           type="buy"
           locale="en-US"
-          onClick={() => initiateApplePay()}
+          onclick={initiateApplePay}
         ></apple-pay-button>
-        {/* )} */}
-        {/* <button className="bg-[#592FF4] w-1/2 py-2 rounded-md space-x-1 flex items-center justify-center">
-          <p className="text-white Poppins600 text-lg">shop</p>
-          <p className="text-[#592FF4] bg-white text-xs p-[0.125rem] px-[0.25rem] rounded-sm">
-            Pay
-          </p>
-        </button>
-        <button className="bg-[#ffc439] w-1/2 py-2 rounded-md space-x-1 flex items-center justify-center">
-          <div className="w-20 h-auto">
-            <PayPalSvg />
-          </div>
-        </button> */}
       </div>
       <div className="flex items-center my-4 mb-8">
         <div className="bg-[#eee] h-[1px] w-1/2"></div>
