@@ -1,7 +1,11 @@
 import https from "https";
 import fs from "fs";
+import path from "path";
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import axios from "axios";
+
+const certPath = path.join(__dirname, "certs", "apple_pay.pem");
+const keyPath = path.join(__dirname, "certs", "apple_pay.key");
 
 export async function GET(
   req: MedusaRequest,
@@ -18,8 +22,8 @@ export async function GET(
 
   const httpsAgent = new https.Agent({
     rejectUnauthorized: false,
-    cert: fs.readFileSync("./certs/apple_pay.pem", "utf-8"),
-    key: fs.readFileSync("./certs/apple_pay.key", "utf-8"),
+    cert: fs.readFileSync(certPath, "utf-8"),
+    key: fs.readFileSync(keyPath, "utf-8"),
     passphrase: "admin",
   });
 
