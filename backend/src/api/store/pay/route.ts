@@ -4,8 +4,8 @@ import path from "path";
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import axios from "axios";
 
-const certPath = path.join(__dirname, "certs", "apple_pay.pem");
-const keyPath = path.join(__dirname, "certs", "apple_pay.key");
+const certPath = path.join(__dirname, "certs", "merchant_id.pem");
+const keyPath = path.join(__dirname, "certs", "merchant.key");
 
 export async function GET(
   req: MedusaRequest,
