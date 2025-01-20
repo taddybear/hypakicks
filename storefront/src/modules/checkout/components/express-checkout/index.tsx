@@ -61,7 +61,13 @@ export default function ExpressCheckout() {
 
       request.onmerchantvalidation = (event: any) => {
         const merchantSessionPromise = fetch(
-          "https://hypakicks-production.up.railway.app/store/pay"
+          "https://hypakicks-production.up.railway.app/store/pay",
+          {
+            headers: {
+              "x-publishable-api-key":
+                "pk_8f884385f2f090a5c8738e6de29f817d81b9e3b83f14c412ccae6fa1604beac0",
+            },
+          }
         )
           .then((res) => res.json()) // Parse the response as JSON.
           .catch((err) => {
