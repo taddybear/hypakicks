@@ -24,7 +24,7 @@ export default function ExpressCheckout() {
     enableApplePayButton()
   }, [])
 
-  function initiateApplePay() {
+  async function initiateApplePay() {
     console.log("Initiate Apple Pay")
     if (window.PaymentRequest) {
       const methods = [
@@ -58,8 +58,6 @@ export default function ExpressCheckout() {
       const request = new PaymentRequest(methods, details, options)
       console.log("Request", request)
 
-      request.show()
-
       request.onmerchantvalidation = (event: any) => {
         const merchantSessionPromise = fetch(
           "https://hypakicks-production.up.railway.app/store/pay",
@@ -91,6 +89,8 @@ export default function ExpressCheckout() {
           },
         })
       }
+      const response = await request.show()
+      console.log("Response", response)
     }
   }
 
