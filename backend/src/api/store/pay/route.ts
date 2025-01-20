@@ -23,6 +23,7 @@ export async function GET(
   });
 
   const merchantSession = await response.json();
+  console.log("Merchant session", merchantSession);
 
   res.json(merchantSession);
 }
