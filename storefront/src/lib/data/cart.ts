@@ -473,6 +473,20 @@ export async function placeOrder() {
   const headers = {
     ...(await getAuthHeaders()),
   }
+  console.log("Completing Cart")
+  // const cartRes: any = await fetch(
+  //   `http://localhost:9000/store/carts/${cartId}/complete`,
+  //   {
+  //     credentials: "include",
+  //     headers: {
+  //       "x-publishable-api-key":
+  //         process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "temp",
+  //     },
+  //     method: "POST",
+  //     cache: "no-store",
+  //   }
+  // )
+  // const data = await cartRes.json()
 
   const cartRes = await sdk.store.cart
     .complete(cartId, {}, headers)
@@ -483,11 +497,21 @@ export async function placeOrder() {
     })
     .catch(medusaError)
 
+  console.log("Cart Response", cartRes)
+
   if (cartRes?.type === "order") {
     const countryCode =
       cartRes.order.shipping_address?.country_code?.toLowerCase()
     removeCartId()
     redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
+  }
+
+  console.log(cartRes.cart.payment_collection?.payment_sessions?.[0].data)
+
+  // @ts-ignore
+  if (cartRes.error) {
+    // @ts-ignore
+    throw new Error("The provided card details are invalid. Please try again.")
   }
 
   return cartRes.cart

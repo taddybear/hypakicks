@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import {
   initiatePaymentSession,
   setAddresses,
+  updateCart,
   // updatePaymentSession,
 } from "@lib/data/cart"
 import compareAddresses from "@lib/util/compare-addresses"
@@ -16,7 +17,7 @@ import {
   Button,
   Tooltip,
 } from "@medusajs/ui"
-// import parse from "html-react-parser"
+import parse from "html-react-parser"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
 import { RadioGroup, Radio } from "@headlessui/react"
@@ -70,21 +71,6 @@ const Addresses = ({
       : true
   )
 
-  const onPaymentCompleted = async () => {
-    await placeOrder()
-      .catch((err) => {
-        setErrorMessage(err.message)
-      })
-      .finally(() => {
-        setSubmitting(false)
-      })
-  }
-
-  const handlePayment = () => {
-    setSubmitting(true)
-    onPaymentCompleted()
-  }
-
   const handleSetShippingMethod = async (id: string) => {
     setError(null)
     setIsLoading(true)
@@ -92,11 +78,48 @@ const Addresses = ({
     setIsLoading(false)
   }
 
+  const onPaymentCompleted = async () => {
+    console.log("Placing order")
+    await placeOrder()
+      .then(() => setButtonText("Order Placed"))
+      .catch((err) => {
+        console.log("Error placing order", err)
+        setErrorMessage(err.message)
+      })
+      .finally(() => {
+        console.log("Finally on place order")
+        setSubmitting(false)
+      })
+  }
+
+  const handlePayment = () => {
+    setSubmitting(true)
+    console.log("On payment completed")
+    onPaymentCompleted()
+  }
+
   const handleSubmitPaymentMethod = async () => {
     setIsLoading(true)
     try {
       // if (!activeSession && cart) {
       if (cart) {
+        console.log("CART", cart)
+        let paymentAttempt = 0
+        if (cart.metadata && "payment_attempt" in cart.metadata) {
+          paymentAttempt = Number(cart.metadata.payment_attempt) + 1
+
+          await updateCart({
+            metadata: {
+              ...cart.metadata,
+              payment_attempt: paymentAttempt,
+            },
+          })
+        } else {
+          console.log("Cart metadata", cart.metadata)
+          await updateCart({
+            metadata: { ...cart.metadata, payment_attempt: 0 },
+          })
+        }
         const response = await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
           context: {
@@ -106,21 +129,32 @@ const Addresses = ({
             security_code: securityCode,
             name_on_card: nameOnCard,
             cart_id: cart?.id,
+            payment_attempt: paymentAttempt,
           },
         })
 
         // console.log("Cart response", response)
         // 3ds data is in response.payment_collection.payment_sessions[0].data
         // if three_d_secure is true, then we need to handle 3ds then we need to handle html
+        // @ts-ignore
+        console.log(
+          "Response from payment provider",
+          // @ts-ignore
+          response.payment_collection
+        )
+        // @ts-ignore
         if (response.payment_collection.payment_sessions[0].data) {
           const threeDSData =
+            // @ts-ignore
             response.payment_collection.payment_sessions[0].data
           if (threeDSData.threeDS) {
             // show html
+            // @ts-ignore
             setThreeDSHtml(threeDSData.html)
           } else {
             // just complete the payment
-            // handlePayment()
+            console.log("Handling payment")
+            handlePayment()
           }
         }
       }
@@ -185,7 +219,6 @@ const Addresses = ({
       setError(err.message || "An error occurred during submission.")
     } finally {
       setSubmitting(false)
-      setButtonText("Order Placed")
     }
   }
 
