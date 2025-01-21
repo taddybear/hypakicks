@@ -245,7 +245,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     amount: number,
     country_code: string
   ) {
-    console.log("Initiate 3DS", cart_id, session_id, amount);
+    console.log("Initiate 3DS", cart_id, session_id, amount, payment_attempt);
     const authToken = this.generateAuthToken();
     const url =
       this.options_.msoUrl +
@@ -255,10 +255,19 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       apiOperation: "INITIATE_AUTHENTICATION",
       correlationId: cart_id,
       order: {
+        reference: `OrdID_${cart_id}_${payment_attempt}`,
         currency: "AED",
+      },
+      transaction: {
+        reference: `TxnID_${cart_id}_${payment_attempt}`,
       },
       session: {
         id: session_id,
+      },
+      authentication: {
+        acceptVersions: "3DS1,3DS2",
+        channel: "PAYER_BROWSER",
+        purpose: "PAYMENT_TRANSACTION",
       },
     };
 
@@ -274,33 +283,22 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     // const data = await response.json();
     // console.log("Initiate 3ds response:", data);
 
+    const data = await response.json();
     if (response.ok) {
-      const data = await response.json();
       console.log("Initiate 3DS Data: ", data);
       const threeDSresponse = data.response;
-      // if (
-      //   threeDSresponse &&
-      //   threeDSresponse.gatewayRecommendation === "PROCEED"
-      // ) {
-      //   console.log("Go to payment");
-      // go directly to payment
-      return {
-        data: {
-          threeDS: false,
-          amount: amount,
-          sessionId: session_id,
-          payment_attempt: payment_attempt,
-        },
-      };
-      // } else {
+      if (threeDSresponse) {
+        return await this.threeDSecureAuthenticate(
+          cart_id,
+          payment_attempt,
+          session_id,
+          amount,
+          country_code
+        );
+      }
+      //  else {
       //   // redirect to 3DS page
-      //   return await this.threeDSecureAuthenticate(
-      //     cart_id,
-      //     payment_attempt,
-      //     session_id,
-      //     amount,
-      //     country_code
-      //   );
+
       // }
     }
   }
@@ -320,10 +318,11 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     const payload = {
       apiOperation: "AUTHENTICATE_PAYER",
       authentication: {
-        redirectResponseUrl: "http://localhost:8000/us/checkout",
+        redirectResponseUrl: `https://insightful-forgiveness-production.up.railway.app/us/checkout?cart_id=${cart_id}&success=true`,
       },
       correlationId: cart_id,
       device: {
+        browser: "MOZILLA",
         browserDetails: {
           "3DSecureChallengeWindowSize": "600_X_400",
           acceptHeaders: "application/json",
@@ -356,7 +355,21 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     console.log("Authenticate 3ds response:", data);
     if (response.ok) {
       console.log("Authenticate 3DS Data: ", data);
-      const authenticationHtml = data.authentication.redirectHtml;
+      const response = data.response;
+      if (
+        response.gatewayRecommendation === "PROCEED" &&
+        response.gatewayCode === "APPROVED"
+      ) {
+        return {
+          data: {
+            threeDS: false,
+            amount: amount,
+            sessionId: session_id,
+            payment_attempt: payment_attempt,
+          },
+        };
+      }
+      const authenticationHtml = data.authentication.redirect.html;
       return {
         data: {
           threeDS: true,

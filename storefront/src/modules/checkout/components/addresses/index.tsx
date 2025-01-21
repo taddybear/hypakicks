@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { use, useEffect, useState, useRef } from "react"
 import {
   initiatePaymentSession,
   setAddresses,
@@ -148,6 +148,7 @@ const Addresses = ({
             // @ts-ignore
             response.payment_collection.payment_sessions[0].data
           if (threeDSData.threeDS) {
+            console.log("ThreeDS data", threeDSData.html)
             // show html
             // @ts-ignore
             setThreeDSHtml(threeDSData.html)
@@ -244,18 +245,40 @@ const Addresses = ({
   //   console.log("cart", cart)
   // }, [cart])
 
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (threeDSHtml) {
+      setTimeout(() => {
+        var e = document.getElementById("threedsChallengeRedirectForm")
+        if (e) {
+          e.submit()
+          if (e.parentNode !== null) {
+            e.parentNode.removeChild(e)
+          }
+        }
+      }, 1500)
+    }
+  }, [threeDSHtml])
+
   return (
     <>
       {threeDSHtml && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg w-[480px] h-[640px] relative">
+          <div className="bg-white rounded-lg shadow-lg w-[600px] h-[400px] relative">
             <button
               onClick={() => setThreeDSHtml(null)}
               className="absolute top-2 right-2 text-gray-600 hover:text-black"
             >
               ✕
             </button>
-            <div className="p-4">{parse(threeDSHtml)}</div>
+            {/* {threeDSHtml}
+            <div className="p-4">{parse(threeDSHtml)}</div> */}
+            <div
+              ref={containerRef}
+              dangerouslySetInnerHTML={{ __html: threeDSHtml }}
+              // style={{ width: "100%", height: "100%", overflow: "hidden" }}
+            ></div>
           </div>
         </div>
       )}
