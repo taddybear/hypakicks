@@ -48,7 +48,7 @@ export default function ExpressCheckout({ cart }: any) {
   const [showApplePay, setShowApplePay] = useState(false)
   const [shippingAddress, setShippingAddress] = useState(null)
   const [loading, isLoading] = useState(false)
-
+  const [showLabel, setShowLabel] = useState(false)
   useEffect(() => {
     const enableApplePayButton = async () => {
       if (window.ApplePaySession) {
@@ -56,6 +56,7 @@ export default function ExpressCheckout({ cart }: any) {
         console.log("Apple pay button..", button)
         if (button) {
           console.log("button exists", button)
+          setShowLabel(true)
           button.style.display = "block" // Make the button visible
           button.disabled = false // Enable the button
         }
@@ -68,13 +69,13 @@ export default function ExpressCheckout({ cart }: any) {
   }, [])
 
   const handleSaveAdress = async (response: any) => {
+    console.log("response.email", response.shippingAddress.payerEmail)
     const email = response.shippingAddress.payerEmail
     const recipient = response.shippingAddress.recipient || ""
     const [firstName, ...lastNameParts] = recipient.split(" ")
     const lastName = lastNameParts.join(" ")
     const country = response.shippingAddress.country
     const address_1 = response.shippingAddress.addressLine?.[0]
-    // const address_2 =
     const city = response.shippingAddress.city
     const zipCode = response.shippingAddress.postalCode
     const phone = response.shippingAddress.phone
@@ -84,7 +85,6 @@ export default function ExpressCheckout({ cart }: any) {
       firstName,
       country,
       address_1,
-      // address_2,
       city,
       zipCode,
       phone,
@@ -226,9 +226,11 @@ export default function ExpressCheckout({ cart }: any) {
 
   return (
     <>
-      <h1 className=" text-center text-sm text-[#707070] Poppins400">
-        Express checkout
-      </h1>
+      {showLabel && (
+        <h1 className=" text-center text-sm text-[#707070] Poppins400">
+          Express checkout
+        </h1>
+      )}
       <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
         <apple-pay-button
           buttonstyle="black"
@@ -237,11 +239,14 @@ export default function ExpressCheckout({ cart }: any) {
           onclick={initiateApplePay}
         ></apple-pay-button>
       </div>
-      <div className="flex items-center my-4 mb-8">
-        <div className="bg-[#eee] h-[1px] w-1/2"></div>
-        <p className="mx-2 text-[#707070]">OR</p>
-        <div className="bg-[#eee] h-[1px] w-1/2"></div>
-      </div>
+
+      {showLabel && (
+        <div className="flex items-center my-4 mb-8">
+          <div className="bg-[#eee] h-[1px] w-1/2"></div>
+          <p className="mx-2 text-[#707070]">OR</p>
+          <div className="bg-[#eee] h-[1px] w-1/2"></div>
+        </div>
+      )}
       {loading && (
         <div className="fixed z-50 top-0 bg-black h-full w-full inset-0 bg-opacity-60 flex items-center justify-center">
           <div className="ml-3 border-gray-100 h-12 w-12 animate-spin rounded-full border-2 border-t-gray-500" />

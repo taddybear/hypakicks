@@ -465,16 +465,14 @@ export async function setAdress(
 
 // set address for appple
 
-// set Adress
 export async function setAppleAddress(
   currentState: unknown,
-  dataa: {
+  response: {
     email: string
     lastName: string
     firstName: string
     country: string
     address_1: string[]
-    // address_2: string
     city: string
     zipCode: any
     phone: string
@@ -488,26 +486,26 @@ export async function setAppleAddress(
 
     const data = {
       shipping_address: {
-        first_name: dataa.firstName,
-        last_name: dataa.lastName,
-        country_code: dataa.country,
-        address_1: dataa.address_1,
-        // address_2: dataa.address_2,
-        postal_code: dataa.zipCode,
-        city: dataa.city,
-        phone: dataa.phone,
+        email: response.email,
+        first_name: response.firstName,
+        last_name: response.lastName,
+        country_code: response.country,
+        address_1: response.address_1,
+        postal_code: response.zipCode,
+        city: response.city,
+        phone: response.phone,
       },
     } as any
 
     data.billing_address = {
-      first_name: dataa.firstName,
-      last_name: dataa.lastName,
-      country_code: dataa.country,
-      address_1: dataa.address_1,
-      // address_2: dataa.address_2,
-      postal_code: dataa.zipCode,
-      city: dataa.city,
-      phone: dataa.phone,
+      email: response.email,
+      first_name: response.firstName,
+      last_name: response.lastName,
+      country_code: response.country,
+      address_1: response.address_1,
+      postal_code: response.zipCode,
+      city: response.city,
+      phone: response.phone,
     }
     const cart = await updateCart(data)
     console.log("cart...", cart)
