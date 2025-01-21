@@ -485,8 +485,8 @@ export async function setAppleAddress(
     }
 
     const data = {
+      email: response.email,
       shipping_address: {
-        email: response.email,
         first_name: response.firstName,
         last_name: response.lastName,
         country_code: response.country,
@@ -498,7 +498,6 @@ export async function setAppleAddress(
     } as any
 
     data.billing_address = {
-      email: response.email,
       first_name: response.firstName,
       last_name: response.lastName,
       country_code: response.country,
