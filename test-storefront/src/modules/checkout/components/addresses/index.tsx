@@ -129,7 +129,7 @@ const Addresses = ({
                     <Text className="txt-medium text-ui-fg-subtle">
                       {cart.shipping_address.phone}
                     </Text>
-                    <Text className="txt-medium text-ui-fg-subtle">
+                    <Text className="txt-medium text-ui-fg-subtle break-words">
                       {cart.email}
                     </Text>
                   </div>
