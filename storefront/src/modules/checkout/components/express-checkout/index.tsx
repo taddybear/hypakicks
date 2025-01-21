@@ -11,9 +11,9 @@ export default function ExpressCheckout({ cart }: any) {
     const enableApplePayButton = async () => {
       if (window.ApplePaySession) {
         const button = document.querySelector("apple-pay-button")
-        console.log("Apple pay button", button)
+        console.log("Apple pay button..", button)
         if (button) {
-          console.log("button exists")
+          console.log("button exists", button)
           button.style.display = "block" // Make the button visible
           button.disabled = false // Enable the button
         }
@@ -120,6 +120,7 @@ export default function ExpressCheckout({ cart }: any) {
             console.log("Placing order")
             const applePayFinalize = await response.complete("success")
             console.log("Apple pay finalize", applePayFinalize)
+            // save email, shipping & billing address to medusa cart
             await placeOrder()
               .then(() => console.log("Order placed"))
               .catch((err) => {
@@ -147,10 +148,6 @@ export default function ExpressCheckout({ cart }: any) {
 
   return (
     <>
-      <Script
-        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
-        strategy="beforeInteractive"
-      />
       <h1 className=" text-center text-sm text-[#707070] Poppins400">
         Express checkout
       </h1>

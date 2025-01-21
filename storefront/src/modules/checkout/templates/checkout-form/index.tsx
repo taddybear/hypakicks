@@ -3,6 +3,7 @@ import { listCartPaymentMethods } from "@lib/data/payment"
 import { HttpTypes } from "@medusajs/types"
 import Addresses from "@modules/checkout/components/addresses"
 import ExpressCheckout from "@modules/checkout/components/express-checkout"
+import Script from "next/script"
 import Payment from "@modules/checkout/components/payment"
 import Review from "@modules/checkout/components/review"
 import Shipping from "@modules/checkout/components/shipping"
@@ -27,6 +28,10 @@ export default async function CheckoutForm({
 
   return (
     <div className="lg:w-[75%] lg:ml-auto py-10">
+      <Script
+        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
+        strategy="afterInteractive"
+      />
       <ExpressCheckout cart={cart} />
 
       <Addresses
