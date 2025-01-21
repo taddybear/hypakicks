@@ -113,7 +113,7 @@ export default function ExpressCheckout({ cart }: any) {
         if (paymentSession.payment_collection.payment_sessions[0].data) {
           const applePayResult =
             // @ts-ignore
-            paymentSession.payment_collection.payment_sessions[0].data
+            paymentSession.payment_collection.payment_sessions[0]
           // @ts-ignore
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
             // show html
