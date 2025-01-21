@@ -509,7 +509,8 @@ export async function setAppleAddress(
       city: dataa.city,
       phone: dataa.phone,
     }
-    await updateCart(data)
+    const cart = await updateCart(data)
+    console.log("cart...", cart)
   } catch (e: any) {
     return e.message
   }
