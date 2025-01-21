@@ -22,6 +22,8 @@ export default async function CheckoutForm({
   const shippingMethods = await listCartShippingMethods(cart.id)
   const paymentMethods = await listCartPaymentMethods(cart.region?.id ?? "")
 
+  console.log("Cart", cart)
+
   if (!shippingMethods || !paymentMethods) {
     return null
   }
@@ -32,7 +34,7 @@ export default async function CheckoutForm({
         src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
         strategy="afterInteractive"
       />
-      <ExpressCheckout cart={cart} />
+      <ExpressCheckout cart={cart} availableShippingMethods={shippingMethods} />
 
       <Addresses
         cart={cart}

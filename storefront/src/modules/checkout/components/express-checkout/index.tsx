@@ -27,7 +27,10 @@ interface Response {
   shippingAddress: ShippingAddress
 }
 
-export default function ExpressCheckout({ cart }: any) {
+export default function ExpressCheckout({
+  cart,
+  availableShippingMethods,
+}: any) {
   const [showApplePay, setShowApplePay] = useState(false)
   const [shippingAddress, setShippingAddress] = useState(null)
   const [loading, isLoading] = useState(false)
@@ -54,6 +57,21 @@ export default function ExpressCheckout({ cart }: any) {
     enableApplePayButton()
   }, [])
 
+  useEffect(() => {
+    console.log("Available shipping methods", availableShippingMethods)
+    if (cart?.shipping_methods?.length) {
+      setShippingMethodId(
+        cart.shipping_methods.at(-1)?.shipping_option_id || null
+      )
+    } else if (availableShippingMethods?.length) {
+      setShippingMethodId(availableShippingMethods[0]?.id || null)
+    }
+  }, [cart, availableShippingMethods])
+
+  useEffect(() => {
+    console.log("SHIPPING METHOD", shippingMethodId)
+  }, [shippingMethodId])
+
   const handleSaveAdress = async (response: any) => {
     console.log("response.email", response.payerEmail)
     const email = response.payerEmail
@@ -79,19 +97,13 @@ export default function ExpressCheckout({ cart }: any) {
 
   const handleSubmitShippingMethod = async (id: string) => {
     console.log("handleSubmitShippingMethod called with id:", id)
-    let currentId: string | null = null
-
-    setShippingMethodId((prev) => {
-      currentId = prev
-      return id
-    })
 
     try {
       await setShippingMethod({ cartId: cart?.id || "", shippingMethodId: id })
       // console.log("Shipping method set successfully")
     } catch (err) {
       console.error("Error setting shipping method:", err)
-      setShippingMethodId(currentId)
+      // setShippingMethodId(currentId)
       // setError(err.message)
     } finally {
       // setIsLoading(false)
@@ -232,13 +244,6 @@ export default function ExpressCheckout({ cart }: any) {
       document.body.classList.remove("h-[100vh]", "overflow-y-hidden")
     }
   }, [open])
-
-  useEffect(() => {
-    console.log("shippingMethodId in useEffect", shippingMethodId)
-  }, [shippingMethodId])
-  useEffect(() => {
-    console.log("Shipping address", shippingAddress)
-  }, [shippingAddress])
 
   return (
     <>

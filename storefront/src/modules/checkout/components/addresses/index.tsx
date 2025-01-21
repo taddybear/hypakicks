@@ -71,10 +71,6 @@ const Addresses = ({
       : true
   )
 
-  useEffect(() => {
-    console.log("cart", cart)
-  }, [cart])
-
   const handleSetShippingMethod = async (id: string) => {
     setError(null)
     setIsLoading(true)
