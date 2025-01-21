@@ -69,8 +69,8 @@ export default function ExpressCheckout({ cart }: any) {
   }, [])
 
   const handleSaveAdress = async (response: any) => {
-    console.log("response.email", response.shippingAddress.payerEmail)
-    const email = response.shippingAddress.payerEmail
+    console.log("response.email", response.payerEmail)
+    const email = response.payerEmail
     const recipient = response.shippingAddress.recipient || ""
     const [firstName, ...lastNameParts] = recipient.split(" ")
     const lastName = lastNameParts.join(" ")
