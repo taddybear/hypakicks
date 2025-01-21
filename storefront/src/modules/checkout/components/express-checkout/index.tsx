@@ -1,5 +1,5 @@
 "use client"
-import { initiatePaymentSession } from "@lib/data/cart"
+import { initiatePaymentSession, placeOrder } from "@lib/data/cart"
 import Script from "next/script"
 import { useState, useEffect } from "react"
 
@@ -101,6 +101,39 @@ export default function ExpressCheckout({ cart }: any) {
             transaction_id: response.details.token.transactionIdentifier,
           },
         })
+
+        console.log(
+          "Response from payment provider",
+          // @ts-ignore
+          response.payment_collection
+        )
+
+        // @ts-ignore
+        if (response.payment_collection.payment_sessions[0].data) {
+          const applePayResult =
+            // @ts-ignore
+            response.payment_collection.payment_sessions[0].data
+          if (applePayResult.data.apple_pay_result === "SUCCESS") {
+            // show html
+            console.log("Placing order")
+            const applePayFinalize = await response.complete("success")
+            console.log("Apple pay finalize", applePayFinalize)
+            await placeOrder()
+              .then(() => console.log("Order placed"))
+              .catch((err) => {
+                console.log("Error placing order", err)
+                // setErrorMessage(err.message)
+              })
+            // .finally(() => {
+            //   console.log("Finally on place order")
+            //   setSubmitting(false)
+            // })
+          } else {
+            // show error
+            const applePayFinalize = await response.complete("fail")
+            console.log("Apple Pay Failed", applePayFinalize)
+          }
+        }
       }
       console.log("Response", response)
     }

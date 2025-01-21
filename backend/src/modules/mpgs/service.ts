@@ -75,13 +75,14 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       const authToken = this.generateAuthToken();
       const url =
         this.options_.msoUrl +
+        // @ts-ignore
         `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/Txn_${context.cart_id}`;
       console.log("\n\napple pay context data", context.apple_pay, "\n\n");
       const body = {
         apiOperation: "AUTHORIZE",
         order: {
           currency: "AED",
-          amount: "5656",
+          amount: Number(amount),
           walletProvider: "APPLE_PAY",
         },
         sourceOfFunds: {
@@ -109,10 +110,19 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       });
 
       const data = await response.json();
+
       console.log("Apple Pay response: ", data);
 
+      if (response.ok) {
+        if (data.result === "SUCCESS") {
+          return {
+            data: { apple_pay_result: data.result },
+          };
+        }
+      }
+
       return {
-        data: {},
+        data: { apple_pay_result: "FAILED" },
       };
     }
 
