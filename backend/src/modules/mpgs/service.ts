@@ -82,7 +82,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         apiOperation: "AUTHORIZE",
         order: {
           currency: "AED",
-          amount: Number(amount),
+          amount: "5656",
           walletProvider: "APPLE_PAY",
         },
         sourceOfFunds: {
