@@ -1,11 +1,53 @@
 "use client"
-import { initiatePaymentSession, placeOrder } from "@lib/data/cart"
+import {
+  initiatePaymentSession,
+  placeOrder,
+  setAppleAddress,
+} from "@lib/data/cart"
 import Script from "next/script"
 import { useState, useEffect } from "react"
+
+interface ShippingAddress {
+  payerEmail: string
+  addressLine: string[]
+  city: string
+  country: string
+  dependentLocality: string
+  organization: string
+  phone: string
+  postalCode: string
+  recipient: string
+  region: string
+  sortingCode: string
+}
+
+interface Response {
+  payerEmail: string
+  shippingAddress: ShippingAddress
+}
+
+// const mapPaymentResponseToResponse = (paymentResponse: PaymentResponse): Response => {
+//   return {
+//     payerEmail: paymentResponse.payerEmail || "", // Default to an empty string if missing
+//     shippingAddress: {
+//       addressLine: paymentResponse.details.addressLine || [],
+//       city: paymentResponse.details.city || "",
+//       country: paymentResponse.details.country || "",
+//       dependentLocality: paymentResponse.details.dependentLocality || "",
+//       organization: paymentResponse.details.organization || "",
+//       phone: paymentResponse.details.phone || "",
+//       postalCode: paymentResponse.details.postalCode || "",
+//       recipient: paymentResponse.details.recipient || "",
+//       region: paymentResponse.details.region || "",
+//       sortingCode: paymentResponse.details.sortingCode || "",
+//     },
+//   };
+// };
 
 export default function ExpressCheckout({ cart }: any) {
   const [showApplePay, setShowApplePay] = useState(false)
   const [shippingAddress, setShippingAddress] = useState(null)
+  const [loading, isLoading] = useState(false)
 
   useEffect(() => {
     const enableApplePayButton = async () => {
@@ -24,6 +66,30 @@ export default function ExpressCheckout({ cart }: any) {
 
     enableApplePayButton()
   }, [])
+
+  const handleSaveAdress = async (response: any) => {
+    const email = response.shippingAddress.payerEmail
+    const recipient = response.shippingAddress.recipient || ""
+    const [firstName, ...lastNameParts] = recipient.split(" ")
+    const lastName = lastNameParts.join(" ")
+    const country = response.shippingAddress.country
+    const address_1 = response.shippingAddress.addressLine?.[0]
+    // const address_2 =
+    const city = response.shippingAddress.city
+    const zipCode = response.shippingAddress.postalCode
+    const phone = response.shippingAddress.phone
+    await setAppleAddress(null, {
+      email,
+      lastName,
+      firstName,
+      country,
+      address_1,
+      // address_2,
+      city,
+      zipCode,
+      phone,
+    })
+  }
 
   async function initiateApplePay() {
     console.log("Initiate Apple Pay")
@@ -93,6 +159,7 @@ export default function ExpressCheckout({ cart }: any) {
       const response = await request.show()
       if (response) {
         console.log("Apple Pay final payment response", response)
+
         // complete the payment on mastercard's side
         const paymentSession = await initiatePaymentSession(cart, {
           provider_id: "pp_mpgs_mpgs",
@@ -116,6 +183,8 @@ export default function ExpressCheckout({ cart }: any) {
             paymentSession.payment_collection.payment_sessions[0]
           // @ts-ignore
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
+            isLoading(true)
+            handleSaveAdress(response)
             // show html
             console.log("Placing order")
             const applePayFinalize = await response.complete("success")
@@ -133,6 +202,7 @@ export default function ExpressCheckout({ cart }: any) {
             // })
           } else {
             // show error
+            isLoading(false)
             const applePayFinalize = await response.complete("fail")
             console.log("Apple Pay Failed", applePayFinalize)
           }
@@ -141,6 +211,14 @@ export default function ExpressCheckout({ cart }: any) {
       console.log("Response", response)
     }
   }
+
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add("h-[100vh]", "overflow-y-hidden")
+    } else {
+      document.body.classList.remove("h-[100vh]", "overflow-y-hidden")
+    }
+  }, [open])
 
   useEffect(() => {
     console.log("Shipping address", shippingAddress)
@@ -164,6 +242,11 @@ export default function ExpressCheckout({ cart }: any) {
         <p className="mx-2 text-[#707070]">OR</p>
         <div className="bg-[#eee] h-[1px] w-1/2"></div>
       </div>
+      {loading && (
+        <div className="fixed z-50 top-0 bg-black h-full w-full inset-0 bg-opacity-60 flex items-center justify-center">
+          <div className="ml-3 border-gray-100 h-12 w-12 animate-spin rounded-full border-2 border-t-gray-500" />
+        </div>
+      )}
     </>
   )
 }

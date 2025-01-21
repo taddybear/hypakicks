@@ -463,6 +463,58 @@ export async function setAdress(
   }
 }
 
+// set address for appple
+
+// set Adress
+export async function setAppleAddress(
+  currentState: unknown,
+  dataa: {
+    email: string
+    lastName: string
+    firstName: string
+    country: string
+    address_1: string[]
+    // address_2: string
+    city: string
+    zipCode: any
+    phone: string
+  }
+) {
+  try {
+    const cartId = getCartId()
+    if (!cartId) {
+      throw new Error("No existing cart found when setting addresses")
+    }
+
+    const data = {
+      shipping_address: {
+        first_name: dataa.firstName,
+        last_name: dataa.lastName,
+        country_code: dataa.country,
+        address_1: dataa.address_1,
+        // address_2: dataa.address_2,
+        postal_code: dataa.zipCode,
+        city: dataa.city,
+        phone: dataa.phone,
+      },
+    } as any
+
+    data.billing_address = {
+      first_name: dataa.firstName,
+      last_name: dataa.lastName,
+      country_code: dataa.country,
+      address_1: dataa.address_1,
+      // address_2: dataa.address_2,
+      postal_code: dataa.zipCode,
+      city: dataa.city,
+      phone: dataa.phone,
+    }
+    await updateCart(data)
+  } catch (e: any) {
+    return e.message
+  }
+}
+
 export async function placeOrder() {
   const cartId = await getCartId()
 
