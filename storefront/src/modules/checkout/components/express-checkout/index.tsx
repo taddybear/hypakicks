@@ -192,8 +192,9 @@ export default function ExpressCheckout({ cart }: any) {
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
             isLoading(true)
             await handleSaveAdress(response)
+            console.log("shippingMethodId...", shippingMethodId)
             if (shippingMethodId) {
-              console.log("shippingMethodId...", shippingMethodId)
+              console.log("Setting shipping method on cart")
               await handleSubmitShippingMethod(shippingMethodId)
             }
 

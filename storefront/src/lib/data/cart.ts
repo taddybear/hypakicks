@@ -231,7 +231,7 @@ export async function setShippingMethod({
     ...(await getAuthHeaders()),
   }
 
-  return sdk.store.cart
+  sdk.store.cart
     .addShippingMethod(cartId, { option_id: shippingMethodId }, {}, headers)
     .then(async () => {
       const cartCacheTag = await getCacheTag("carts")

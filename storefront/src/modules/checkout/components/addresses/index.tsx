@@ -59,7 +59,7 @@ const Addresses = ({
   const [formattedCardNumber, setFormattedCardNumber] = useState("")
   const [formattedExpiryDate, setFormattedExpiryDate] = useState("")
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
-    cart?.shipping_methods?.at(-1)?.shipping_option_id || null
+    cart?.shipping_methods?.[0]?.shipping_option_id || null
   )
   const [PlaceOrder, setPlaceOrder] = useState(false)
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
@@ -70,6 +70,10 @@ const Addresses = ({
       ? compareAddresses(cart?.shipping_address, cart?.billing_address)
       : true
   )
+
+  useEffect(() => {
+    console.log("cart", cart)
+  }, [cart])
 
   const handleSetShippingMethod = async (id: string) => {
     setError(null)
@@ -197,6 +201,7 @@ const Addresses = ({
 
       // await setAddresses(null, formData)
       setPlaceOrder(true)
+      console.log("Shipping Method ID", shippingMethodId)
       if (shippingMethodId) {
         // console.log("shippingMethodId", shippingMethodId)
         await handleSubmitShippingMethod(shippingMethodId)
