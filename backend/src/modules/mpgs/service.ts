@@ -114,13 +114,14 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       console.log("Apple Pay response: ", data);
 
       if (response.ok) {
+        console.log("Sending success response for apple pay", data.result);
         if (data.result === "SUCCESS") {
           return {
             data: { apple_pay_result: data.result },
           };
         }
       }
-
+      console.log("Sending failure response for apple pay", data.result);
       return {
         data: { apple_pay_result: "FAILED" },
       };

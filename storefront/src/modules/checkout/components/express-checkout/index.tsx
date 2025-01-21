@@ -92,6 +92,7 @@ export default function ExpressCheckout({ cart }: any) {
       }
       const response = await request.show()
       if (response) {
+        console.log("Apple Pay final payment response", response)
         // complete the payment on mastercard's side
         const paymentSession = await initiatePaymentSession(cart, {
           provider_id: "pp_mpgs_mpgs",
@@ -105,14 +106,15 @@ export default function ExpressCheckout({ cart }: any) {
         console.log(
           "Response from payment provider",
           // @ts-ignore
-          response.payment_collection
+          paymentSession.payment_collection
         )
 
         // @ts-ignore
-        if (response.payment_collection.payment_sessions[0].data) {
+        if (paymentSession.payment_collection.payment_sessions[0].data) {
           const applePayResult =
             // @ts-ignore
-            response.payment_collection.payment_sessions[0].data
+            paymentSession.payment_collection.payment_sessions[0].data
+          // @ts-ignore
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
             // show html
             console.log("Placing order")
