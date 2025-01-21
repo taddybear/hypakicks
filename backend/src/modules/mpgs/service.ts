@@ -382,6 +382,19 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     console.log("Authorize payment");
     console.log("Payment session data: ", paymentSessionData);
     console.log("Context: ", context);
+
+    if ("apple_pay_result" in paymentSessionData) {
+      if (paymentSessionData.apple_pay_result === "SUCCESS") {
+        return {
+          data: { apple_pay_result: "SUCCESS" },
+          status: "captured",
+        };
+      }
+      return {
+        data: {},
+        status: "pending",
+      };
+    }
     // try {
 
     const authToken = this.generateAuthToken();
@@ -549,7 +562,11 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     try {
       // assuming you have a client that captures the payment
       // const newData = await this.client.capturePayment(externalId);
-
+      if ("apple_pay_result" in paymentData) {
+        return {
+          data: { apple_pay_result: "SUCCESS" },
+        };
+      }
       return {
         // ...newData,
         id: paymentData.session_id,
