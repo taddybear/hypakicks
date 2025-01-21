@@ -3,6 +3,7 @@ import {
   initiatePaymentSession,
   placeOrder,
   setAppleAddress,
+  setShippingMethod,
 } from "@lib/data/cart"
 import Script from "next/script"
 import { useState, useEffect } from "react"
@@ -26,29 +27,14 @@ interface Response {
   shippingAddress: ShippingAddress
 }
 
-// const mapPaymentResponseToResponse = (paymentResponse: PaymentResponse): Response => {
-//   return {
-//     payerEmail: paymentResponse.payerEmail || "", // Default to an empty string if missing
-//     shippingAddress: {
-//       addressLine: paymentResponse.details.addressLine || [],
-//       city: paymentResponse.details.city || "",
-//       country: paymentResponse.details.country || "",
-//       dependentLocality: paymentResponse.details.dependentLocality || "",
-//       organization: paymentResponse.details.organization || "",
-//       phone: paymentResponse.details.phone || "",
-//       postalCode: paymentResponse.details.postalCode || "",
-//       recipient: paymentResponse.details.recipient || "",
-//       region: paymentResponse.details.region || "",
-//       sortingCode: paymentResponse.details.sortingCode || "",
-//     },
-//   };
-// };
-
 export default function ExpressCheckout({ cart }: any) {
   const [showApplePay, setShowApplePay] = useState(false)
   const [shippingAddress, setShippingAddress] = useState(null)
   const [loading, isLoading] = useState(false)
   const [showLabel, setShowLabel] = useState(false)
+  const [shippingMethodId, setShippingMethodId] = useState<string | null>(
+    cart?.shipping_methods?.at(-1)?.shipping_option_id || null
+  )
   useEffect(() => {
     const enableApplePayButton = async () => {
       if (window.ApplePaySession) {
@@ -89,6 +75,27 @@ export default function ExpressCheckout({ cart }: any) {
       zipCode,
       phone,
     })
+  }
+
+  const handleSubmitShippingMethod = async (id: string) => {
+    console.log("handleSubmitShippingMethod called with id:", id)
+    let currentId: string | null = null
+
+    setShippingMethodId((prev) => {
+      currentId = prev
+      return id
+    })
+
+    try {
+      await setShippingMethod({ cartId: cart?.id || "", shippingMethodId: id })
+      // console.log("Shipping method set successfully")
+    } catch (err) {
+      console.error("Error setting shipping method:", err)
+      setShippingMethodId(currentId)
+      // setError(err.message)
+    } finally {
+      // setIsLoading(false)
+    }
   }
 
   async function initiateApplePay() {
@@ -185,6 +192,11 @@ export default function ExpressCheckout({ cart }: any) {
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
             isLoading(true)
             await handleSaveAdress(response)
+            if (shippingMethodId) {
+              console.log("shippingMethodId...", shippingMethodId)
+              await handleSubmitShippingMethod(shippingMethodId)
+            }
+
             // show html
             console.log("Placing order")
             const applePayFinalize = await response.complete("success")
@@ -220,6 +232,9 @@ export default function ExpressCheckout({ cart }: any) {
     }
   }, [open])
 
+  useEffect(() => {
+    console.log("shippingMethodId in useEffect", shippingMethodId)
+  }, [shippingMethodId])
   useEffect(() => {
     console.log("Shipping address", shippingAddress)
   }, [shippingAddress])
