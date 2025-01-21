@@ -7,6 +7,7 @@ export async function GET(
 ): Promise<void> {
   try {
     const cartModule = req.scope.resolve(Modules.CART);
+    const { limit = 10, offset = 0 } = req.query;
 
     const carts = await cartModule.listCarts(
       {
@@ -17,11 +18,12 @@ export async function GET(
         order: {
           created_at: "desc",
         },
+        skip: Number(offset),
+        take: Number(limit),
       }
     );
 
     console.log("Carts:", carts);
-
     res.status(200).send(carts);
   } catch (error) {
     console.log("Error:", error);

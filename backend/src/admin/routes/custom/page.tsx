@@ -1,6 +1,6 @@
 import { defineRouteConfig } from "@medusajs/admin-sdk";
 import { XMark } from "@medusajs/icons";
-import { Container, Heading, Table } from "@medusajs/ui";
+import { Container, Heading, Table, Button } from "@medusajs/ui";
 import { useEffect, useState } from "react";
 
 interface Cart {
@@ -12,22 +12,26 @@ interface Cart {
 
 const AbandonedCartsPage = () => {
   const [abandonedCarts, setAbandonedCarts] = useState<Cart[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const limit = 10;
 
   useEffect(() => {
-    fetch("/admin/cart")
+    loadCarts();
+  }, [currentPage]);
+
+  const loadCarts = () => {
+    fetch(`/admin/cart?limit=${limit}&offset=${currentPage * limit}`)
       .then((response) => response.json())
-      .then((data) => setAbandonedCarts(data))
+      .then((data) => setAbandonedCarts((prev) => [...prev, ...data]))
       .catch((error) => console.error("Error fetching abandoned carts:", error));
-  }, []);
+  };
 
   return (
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center">
-          <Heading level="h2" className="text-xl font-bold mr-2 text-white">
-            Abandoned Carts
-          </Heading>
-        </div>
+        <Heading level="h2" className="text-xl font-bold mr-2 text-white">
+          Abandoned Carts
+        </Heading>
       </div>
 
       <div className="px-6 py-4">
@@ -55,6 +59,10 @@ const AbandonedCartsPage = () => {
             ))}
           </Table.Body>
         </Table>
+
+        <Button onClick={() => setCurrentPage((prev) => prev + 1)} className="mt-4">
+          Load More
+        </Button>
       </div>
     </Container>
   );
