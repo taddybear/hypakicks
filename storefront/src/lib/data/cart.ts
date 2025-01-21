@@ -491,7 +491,7 @@ export async function setAppleAddress(
       shipping_address: {
         first_name: response.firstName,
         last_name: response.lastName,
-        country_code: response.country,
+        country_code: response.country.toLowerCase(),
         address_1: response.address_1,
         postal_code: response.zipCode,
         city: response.city,
@@ -502,7 +502,7 @@ export async function setAppleAddress(
     data.billing_address = {
       first_name: response.firstName,
       last_name: response.lastName,
-      country_code: response.country,
+      country_code: response.country.toLowerCase(),
       address_1: response.address_1,
       postal_code: response.zipCode,
       city: response.city,
