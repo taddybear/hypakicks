@@ -184,7 +184,7 @@ export default function ExpressCheckout({ cart }: any) {
           // @ts-ignore
           if (applePayResult.data.apple_pay_result === "SUCCESS") {
             isLoading(true)
-            handleSaveAdress(response)
+            await handleSaveAdress(response)
             // show html
             console.log("Placing order")
             const applePayFinalize = await response.complete("success")

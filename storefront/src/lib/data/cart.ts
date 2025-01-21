@@ -484,6 +484,8 @@ export async function setAppleAddress(
       throw new Error("No existing cart found when setting addresses")
     }
 
+    console.log("Setting cart with apple address", response)
+
     const data = {
       shipping_address: {
         email: response.email,
