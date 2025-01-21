@@ -28,6 +28,8 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     shipping_subtotal,
   } = totals
 
+  console.log("Totals on completion page", totals)
+
   return (
     <div>
       <div className="flex flex-col gap-y-3 txt-medium text-ui-fg-subtle ">
@@ -92,7 +94,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
           <span
             className="txt-xlarge-plus Poppins600"
             data-testid="cart-total"
-            data-value={total || 0}
+            data-value={total ?? 0}
           >
             {convertToLocale({ amount: total ?? 0, currency_code })}
           </span>
