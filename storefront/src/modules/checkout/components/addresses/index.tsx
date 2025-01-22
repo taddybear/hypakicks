@@ -30,6 +30,7 @@ import { placeOrder } from "@lib/data/cart"
 import MobileCartTotal from "../mobile-cart-total"
 import PaymentForm from "../payment-form"
 import { update } from "lodash"
+import Script from "next/script"
 
 const Addresses = ({
   cart,
@@ -148,6 +149,7 @@ const Addresses = ({
             // @ts-ignore
             response.payment_collection.payment_sessions[0].data
           if (threeDSData.threeDS) {
+            // @ts-ignore
             console.log("ThreeDS data", threeDSData.html)
             // show html
             // @ts-ignore
@@ -252,17 +254,38 @@ const Addresses = ({
       setTimeout(() => {
         var e = document.getElementById("threedsChallengeRedirectForm")
         if (e) {
+          // @ts-ignore
           e.submit()
           if (e.parentNode !== null) {
             e.parentNode.removeChild(e)
           }
         }
-      }, 1500)
+      }, 500)
     }
   }, [threeDSHtml])
 
+  const [iframeLoaded, setIframeLoaded] = useState(false)
+  const [iframe, setIframe] = useState<any>(null)
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const iframe = document.getElementById("challengeFrame") // Replace 'my-iframe' with your iframe's ID
+      if (iframe) {
+        console.log("Iframe found")
+        // iframe.setAttribute(
+        //   "sandbox",
+        //   "allow-same-origin allow-scripts allow-top-navigation"
+        // )
+        clearInterval(intervalId)
+      }
+    }, 100) // Check for iframe every 100ms
+
+    return () => clearInterval(intervalId)
+  }, [])
+
   return (
     <>
+      <div id="three-ds-container"></div>
       {threeDSHtml && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg shadow-lg w-[600px] h-[400px] relative">
@@ -275,7 +298,6 @@ const Addresses = ({
             {/* {threeDSHtml}
             <div className="p-4">{parse(threeDSHtml)}</div> */}
             <div
-              ref={containerRef}
               dangerouslySetInnerHTML={{ __html: threeDSHtml }}
               // style={{ width: "100%", height: "100%", overflow: "hidden" }}
             ></div>

@@ -189,6 +189,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
               "Payment Data: ",
               paymentData.sourceOfFunds.provided.card
             );
+
             const threeDSecure = await this.threeDSecureInitiate(
               // @ts-ignore
               context.cart_id,
@@ -295,6 +296,16 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
           amount,
           country_code
         );
+        // return {
+        //   data: {
+        //     threeDS: false,
+        //     amount: amount,
+        //     sessionId: session_id,
+        //     payment_attempt: payment_attempt,
+        //     order_id: `OrdID_${cart_id}_${payment_attempt}`,
+        //     transaction_id: `TxnID_${cart_id}_${payment_attempt}`,
+        //   },
+        // };
       }
       //  else {
       //   // redirect to 3DS page
@@ -318,16 +329,17 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     const payload = {
       apiOperation: "AUTHENTICATE_PAYER",
       authentication: {
-        redirectResponseUrl: `https://insightful-forgiveness-production.up.railway.app/us/checkout?cart_id=${cart_id}&success=true`,
+        redirectResponseUrl: `http://localhost:8000/us/checkout?cart_id=${cart_id}&success=true`,
       },
+      // `http://localhost:8000/us/checkout?cart_id=${cart_id}&success=true`
       correlationId: cart_id,
       device: {
-        browser: "MOZILLA",
+        browser: "MOZILLA/4.0 (COMPATIBLE; MSIE 5.0; WINDOWS 95)",
         browserDetails: {
-          "3DSecureChallengeWindowSize": "600_X_400",
-          acceptHeaders: "application/json",
+          "3DSecureChallengeWindowSize": "FULL_SCREEN",
           colorDepth: 24,
           javaEnabled: true,
+          javaScriptEnabled: true,
           language: "en-US",
           screenHeight: 640,
           screenWidth: 480,
