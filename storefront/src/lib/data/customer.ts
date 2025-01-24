@@ -5,6 +5,7 @@ import medusaError from "@lib/util/medusa-error"
 import { HttpTypes } from "@medusajs/types"
 import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
+import { removeCartId } from "./cookies"
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -127,6 +128,8 @@ export async function signout(countryCode: string) {
   removeAuthToken()
   revalidateTag("auth")
   revalidateTag("customer")
+  console.log("CLEARING THE CART")
+  await removeCartId(); 
   redirect(`/${countryCode}/account`)
 }
 
