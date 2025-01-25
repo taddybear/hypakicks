@@ -40,7 +40,7 @@ export default function ExpressCheckout({
   )
   useEffect(() => {
     const enableApplePayButton = async () => {
-      if (window.ApplePaySession) {
+      if (window.ApplePaySession && window.PaymentRequest) {
         const button = document.querySelector("apple-pay-button")
         console.log("Apple pay button..", button)
         if (button) {
