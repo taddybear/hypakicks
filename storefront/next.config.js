@@ -42,26 +42,11 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {},
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/us/:path*",
-  //       has: [
-  //         {
-  //           type: "query",
-  //           key: "success",
-  //           // the page value will not be available in the
-  //           // destination since value is provided and doesn't
-  //           // use a named capture group e.g. (?<page>home)
-  //           value: "true",
-  //         },
-  //       ],
-  //       permanent: false,
-  //       destination: "/another/:path*",
-  //     },
-  //   ]
-  // },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["ap.gateway.mastercard.com"],
+    },
+  },
 }
 
 module.exports = nextConfig

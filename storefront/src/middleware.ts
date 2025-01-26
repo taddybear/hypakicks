@@ -104,16 +104,22 @@ async function getCountryCode(
  * Middleware to handle region selection and onboarding status.
  */
 export async function middleware(request: NextRequest) {
-  console.log("Request URL", request.url)
-  // if (request.url.includes("success")) {
-  //   console.log("Redirect redirect redirect")
-  //   // Redirect to the desired page
-  //   return NextResponse.redirect("http://localhost:8000/us/store/success", 307)
-  //   // return NextResponse.redirect(
-  //   //   `${request.nextUrl.origin}/${countryCode}/checkout${request.nextUrl.search}`,
-  //   //   307
-  //   // )
-  // }
+  if (request.headers.get("origin") === "null") {
+    const headers = new Headers(request.headers)
+
+    headers.delete("origin")
+
+    const modifiedRequest = new Request(request.url, {
+      headers,
+      method: request.method,
+      body: request.body,
+      redirect: request.redirect,
+    })
+
+    return NextResponse.next({
+      request: modifiedRequest,
+    })
+  }
 
   let redirectUrl = request.nextUrl.href
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import {
   initiatePaymentSession,
   setAddresses,
@@ -17,20 +17,17 @@ import {
   Button,
   Tooltip,
 } from "@medusajs/ui"
-import parse from "html-react-parser"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
 import { RadioGroup, Radio } from "@headlessui/react"
 import { setShippingMethod } from "@lib/data/cart"
 import MedusaRadio from "@modules/common/components/radio"
 import { convertToLocale } from "@lib/util/money"
-import PaymentContainer from "@modules/checkout/components/payment-container"
-import { isStripe as isStripeFunc, paymentInfoMap } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import MobileCartTotal from "../mobile-cart-total"
 import PaymentForm from "../payment-form"
-import { update } from "lodash"
 import Script from "next/script"
+import { useSearchParams } from "next/navigation"
 
 const Addresses = ({
   cart,
@@ -43,6 +40,20 @@ const Addresses = ({
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
   availablePaymentMethods: any[]
 }) => {
+  const searchParams = useSearchParams()
+
+  const sessionIdMPGS = searchParams.get("session_id")
+  const [paymentHandling, setPaymentHandling] = useState(false)
+  // const paymentAttemptMPGS = searchParams.get("payment_attempt")
+
+  useEffect(() => {
+    if (sessionIdMPGS) {
+      console.log("Session ID", sessionIdMPGS)
+      setPaymentHandling(true)
+      handlePayment()
+    }
+  }, [])
+
   const activeSession = cart?.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending"
   )
@@ -84,8 +95,15 @@ const Addresses = ({
     await placeOrder()
       .then(() => setButtonText("Order Placed"))
       .catch((err) => {
-        console.log("Error placing order", err)
-        setErrorMessage(err.message)
+        if (err.message !== "NEXT_REDIRECT") {
+          setPaymentHandling(false)
+          const element = document.getElementById("payment-error")
+          element?.scrollIntoView({
+            behavior: "smooth",
+          })
+          console.log("Error placing order", err)
+          setErrorMessage(err.message)
+        }
       })
       .finally(() => {
         console.log("Finally on place order")
@@ -104,7 +122,6 @@ const Addresses = ({
     try {
       // if (!activeSession && cart) {
       if (cart) {
-        console.log("CART", cart)
         let paymentAttempt = 0
         if (cart.metadata && "payment_attempt" in cart.metadata) {
           paymentAttempt = Number(cart.metadata.payment_attempt) + 1
@@ -116,7 +133,6 @@ const Addresses = ({
             },
           })
         } else {
-          console.log("Cart metadata", cart.metadata)
           await updateCart({
             metadata: { ...cart.metadata, payment_attempt: 0 },
           })
@@ -134,31 +150,106 @@ const Addresses = ({
           },
         })
 
-        // console.log("Cart response", response)
-        // 3ds data is in response.payment_collection.payment_sessions[0].data
-        // if three_d_secure is true, then we need to handle 3ds then we need to handle html
-        // @ts-ignore
-        console.log(
-          "Response from payment provider",
-          // @ts-ignore
-          response.payment_collection
-        )
         // @ts-ignore
         if (response.payment_collection.payment_sessions[0].data) {
-          const threeDSData =
+          const sessionId =
             // @ts-ignore
-            response.payment_collection.payment_sessions[0].data
-          if (threeDSData.threeDS) {
-            // @ts-ignore
-            console.log("ThreeDS data", threeDSData.html)
-            // show html
-            // @ts-ignore
-            setThreeDSHtml(threeDSData.html)
-          } else {
-            // just complete the payment
-            console.log("Handling payment")
-            handlePayment()
-          }
+            response.payment_collection.payment_sessions[0].data?.session_id
+          console.log("Session ID", sessionId)
+
+          // @ts-ignore
+          ThreeDS.configure({
+            merchantId: process.env.NEXT_PUBLIC_MPGS_MERCHANT_ID,
+            sessionId: sessionId,
+            containerId: "three-ds-container",
+            callback: function () {
+              // @ts-ignore
+              if (ThreeDS.isConfigured()) {
+                console.log("Done with configure")
+
+                // @ts-ignore
+                ThreeDS.initiateAuthentication(
+                  `OrdID_${cart.id}_${paymentAttempt}`,
+                  `TxnID_${cart.id}_${paymentAttempt}`,
+                  function (data: any) {
+                    if (data && data.error) {
+                      var error = data.error
+                      // Something bad happened, the error value will match what is returned by the Authentication API
+                      console.error("error.code : ", error.code)
+                      console.error("error.msg : ", error.msg)
+                      console.error("error.result : ", error.result)
+                      console.error("error.status : ", error.status)
+                    } else {
+                      console.log("After Initiate 3DS ", data)
+
+                      //data.response will contain information like gatewayRecommendation, authentication version, etc.
+                      console.log(
+                        "REST API raw response ",
+                        data.restApiResponse
+                      )
+                      console.log("Correlation Id", data.correlationId)
+                      console.log(
+                        "Gateway Recommendation",
+                        data.gatewayRecommendation
+                      )
+                      console.log("HTML Redirect Code", data.htmlRedirectCode)
+                      console.log(
+                        "Authentication Version",
+                        data.authenticationVersion
+                      )
+
+                      console.log("Initiate DATA", data)
+
+                      switch (data.gatewayRecommendation) {
+                        case "PROCEED":
+                          console.log("Proceed with the transaction")
+                          const orderId = `OrdID_${cart.id}_${paymentAttempt}`
+                          const transactionId = `TxnID_${cart.id}_${paymentAttempt}`
+                          console.log("Order ID", orderId)
+                          console.log("Transaction ID", transactionId)
+
+                          // @ts-ignore
+                          ThreeDS.authenticatePayer(
+                            orderId,
+                            transactionId,
+                            function (data: any) {
+                              console.log("Data", data)
+                              if (!data.error) {
+                                //data.response will contain all the response payload from the AUTHENTICATE_PAYER call.
+                                console.log(
+                                  "REST API response ",
+                                  data.restApiResponse
+                                )
+                                console.log(
+                                  "HTML redirect code ",
+                                  data.htmlRedirectCode
+                                )
+                              }
+                            },
+                            { fullScreenRedirect: true }
+                          )
+                          // authenticatePayer(); //merchant's method
+                          break
+                        case "RESUBMIT_WITH_ALTERNATIVE_PAYMENT_DETAILS":
+                          console.log("Invalid creds")
+                          // tryOtherPayment(); //Card does not support 3DS and transaction filtering rules require 3DS on this transaction: Ask the payer to select a different payment method
+                          break
+                      }
+                    }
+                  },
+                  {
+                    sourceOfFunds: {
+                      type: "CARD",
+                    },
+                  }
+                )
+              }
+            },
+            configuration: {
+              userLanguage: "en-US",
+              wsVersion: 100,
+            },
+          })
         }
       }
     } catch (err: any) {
@@ -221,9 +312,10 @@ const Addresses = ({
       }
     } catch (err: any) {
       setError(err.message || "An error occurred during submission.")
-    } finally {
-      setSubmitting(false)
     }
+    // finally {
+    //   setSubmitting(false)
+    // }
   }
 
   useEffect(() => {
@@ -243,67 +335,24 @@ const Addresses = ({
     }
   }, [cart, availableShippingMethods])
 
-  // useEffect(() => {
-  //   console.log("cart", cart)
-  // }, [cart])
-
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    if (threeDSHtml) {
-      setTimeout(() => {
-        var e = document.getElementById("threedsChallengeRedirectForm")
-        if (e) {
-          // @ts-ignore
-          e.submit()
-          if (e.parentNode !== null) {
-            e.parentNode.removeChild(e)
-          }
-        }
-      }, 500)
-    }
-  }, [threeDSHtml])
-
-  const [iframeLoaded, setIframeLoaded] = useState(false)
-  const [iframe, setIframe] = useState<any>(null)
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const iframe = document.getElementById("challengeFrame") // Replace 'my-iframe' with your iframe's ID
-      if (iframe) {
-        console.log("Iframe found")
-        // iframe.setAttribute(
-        //   "sandbox",
-        //   "allow-same-origin allow-scripts allow-top-navigation"
-        // )
-        clearInterval(intervalId)
-      }
-    }, 100) // Check for iframe every 100ms
-
-    return () => clearInterval(intervalId)
-  }, [])
-
   return (
     <>
-      <div id="three-ds-container"></div>
-      {threeDSHtml && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg w-[600px] h-[400px] relative">
-            <button
-              onClick={() => setThreeDSHtml(null)}
-              className="absolute top-2 right-2 text-gray-600 hover:text-black"
-            >
-              ✕
-            </button>
-            {/* {threeDSHtml}
-            <div className="p-4">{parse(threeDSHtml)}</div> */}
+      {paymentHandling && (
+        <div className="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+          <div className="flex justify-center items-center mt-[50vh]">
             <div
-              dangerouslySetInnerHTML={{ __html: threeDSHtml }}
-              // style={{ width: "100%", height: "100%", overflow: "hidden" }}
-            ></div>
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            >
+              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                Loading...
+              </span>
+            </div>
           </div>
         </div>
       )}
+      <Script src="https://ap-gateway.mastercard.com/static/threeDS/1.3.0/three-ds.min.js" />
+      <div id="three-ds-container"></div>
 
       <form onSubmit={handlePlaceOrder}>
         <div className="pb-8">
@@ -413,10 +462,12 @@ const Addresses = ({
           >
             {buttonText}
           </Button>
-          <ErrorMessage
-            error={errorMessage}
-            data-testid="manual-payment-error-message"
-          />
+          <div id="payment-error">
+            <ErrorMessage
+              error={errorMessage}
+              data-testid="manual-payment-error-message"
+            />
+          </div>
 
           <p className="mt-4 text-[#707070] text-sm Poppins400">
             Your info will be saved to a Shop account. By continuing, you agree

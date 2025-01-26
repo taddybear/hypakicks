@@ -509,7 +509,7 @@ export async function setAppleAddress(
       phone: response.phone,
     }
     const cart = await updateCart(data)
-    console.log("cart...", cart)
+    // console.log("cart...", cart)
   } catch (e: any) {
     return e.message
   }
@@ -549,7 +549,7 @@ export async function placeOrder() {
     })
     .catch(medusaError)
 
-  console.log("Cart Response", cartRes)
+  // console.log("Cart Response", cartRes)
 
   if (cartRes?.type === "order") {
     const countryCode =
@@ -558,15 +558,16 @@ export async function placeOrder() {
     redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
   }
 
-  console.log(cartRes.cart.payment_collection?.payment_sessions?.[0].data)
+  // console.log(cartRes.cart.payment_collection?.payment_sessions?.[0].data)
 
   // @ts-ignore
   if (cartRes.error) {
     // @ts-ignore
     throw new Error("The provided card details are invalid. Please try again.")
   }
-
-  return cartRes.cart
+  if (cartRes?.type === "cart") {
+    return cartRes.cart
+  }
 }
 
 /**

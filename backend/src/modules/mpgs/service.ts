@@ -71,12 +71,16 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
   ): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
     const { amount, currency_code, context } = Context;
 
+    console.log("Initiate payment context: ", Context);
+
+    // @ts-ignore
+    const cartId = context.cart_id;
+
     if (context && "apple_pay" in context) {
       const authToken = this.generateAuthToken();
       const url =
         this.options_.msoUrl +
-        // @ts-ignore
-        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${context.cart_id}/transaction/Txn_${context.cart_id}`;
+        `/api/rest/version/100/merchant/${this.options_.merchantId}/order/Ord_${cartId}/transaction/Txn_${cartId}`;
       console.log("\n\napple pay context data", context.apple_pay, "\n\n");
       const body = {
         apiOperation: "AUTHORIZE",
@@ -127,7 +131,17 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       };
     }
 
-    console.log("Initiate payment context: ", Context);
+    // @ts-ignore
+    const paymentAttempt = context.payment_attempt;
+    // @ts-ignore
+    const cardNumber = context.card_number.replace(/ /g, "");
+    // @ts-ignore
+    const expiryDate = context.expiry_date.replace(/ /g, "");
+    // @ts-ignore
+    const nameOnCard = context.name_on_card;
+    // @ts-ignore
+    const securityCode = context.security_code;
+
     try {
       const authToken = this.generateAuthToken();
       const url =
@@ -142,38 +156,44 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         },
       });
 
-      // console.log("Payment session initiate response: ", response);
-
       if (response.ok) {
         const data = await response.json();
         console.log("Session Data: ", data);
         if (data.result === "SUCCESS") {
           const paymentUrl = url + `/${data.session.id}`;
-          // @ts-ignore
-          const cardNumber = context.card_number.replace(/ /g, "");
-          // @ts-ignore
-          const expiryDate = context.expiry_date.replace(/ /g, "");
           const payerData = {
             sourceOfFunds: {
               provided: {
                 card: {
-                  // @ts-ignore
-                  nameOnCard: context.name_on_card,
-                  // @ts-ignore
+                  nameOnCard: nameOnCard,
                   number: cardNumber,
                   expiry: {
-                    // @ts-ignore
                     month: expiryDate.substring(0, 2),
-                    // @ts-ignore
                     year: expiryDate.substring(3, 5),
                   },
-                  // @ts-ignore
-                  securityCode: context.security_code,
+                  securityCode: securityCode,
                 },
               },
             },
+            order: {
+              id: "OrdID_" + cartId + "_" + paymentAttempt,
+              amount: amount,
+              currency: "AED",
+            },
+            transaction: {
+              id: "TxnID_" + cartId + "_" + paymentAttempt,
+            },
+            authentication: {
+              channel: "PAYER_BROWSER",
+              redirectResponseUrl: `${process.env.STORE_CORS}/us/checkout?cart_id=${cartId}&session_id=${data.session.id}`,
+            },
           };
-          console.log("Payer Data: ", payerData.sourceOfFunds.provided.card);
+
+          console.log(
+            "Update MPGS Session: ",
+            payerData.sourceOfFunds.provided
+          );
+
           const paymentResponse = await fetch(paymentUrl, {
             method: "PUT",
             body: JSON.stringify(payerData),
@@ -183,42 +203,15 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
             },
           });
 
+          const paymentData = await paymentResponse.json();
+          console.log("Payment response: ", paymentData);
           if (paymentResponse.ok) {
-            const paymentData = await paymentResponse.json();
-            console.log(
-              "Payment Data: ",
-              paymentData.sourceOfFunds.provided.card
-            );
-
-            const threeDSecure = await this.threeDSecureInitiate(
-              // @ts-ignore
-              context.cart_id,
-              // @ts-ignore
-              context.payment_attempt,
-              paymentData.session.id,
-              Number(amount),
-              currency_code
-            );
-
-            if (threeDSecure) {
-              console.log("Three3d secure data", threeDSecure);
-              // paymentSessionData = {
-              //   payment_attempt,
-              //   sessionId,
-              //   amount,
-              // }
-
-              // context = {
-              //   cart_id
-              // }
-              return { data: threeDSecure.data };
-            }
-
             return {
               data: {
-                payment_id: paymentData.session.id,
+                session_id: paymentData.session.id,
                 amount: amount,
                 currency_code: currency_code,
+                payment_attempt: paymentAttempt,
               },
             };
           }
@@ -408,6 +401,9 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     console.log("Payment session data: ", paymentSessionData);
     console.log("Context: ", context);
 
+    const cartId = context.cart_id;
+    const paymentAttempt = paymentSessionData.payment_attempt;
+
     if ("apple_pay_result" in paymentSessionData) {
       if (paymentSessionData.apple_pay_result === "SUCCESS") {
         return {
@@ -425,25 +421,23 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
     const authToken = this.generateAuthToken();
     const url =
       this.options_.msoUrl +
-      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${context.cart_id}_${paymentSessionData.payment_attempt}/transaction/Pay_${context.cart_id}_${paymentSessionData.payment_attempt}`;
+      `/api/rest/version/100/merchant/${this.options_.merchantId}/order/OrdID_${cartId}_${paymentAttempt}/transaction/TxnId_${cartId}_${paymentAttempt}`;
 
     const payload = {
       apiOperation: "PAY",
       authentication: {
-        transactionId:
-          "TxnID_" + context.cart_id + "_" + paymentSessionData.payment_attempt,
+        transactionId: "TxnID_" + cartId + "_" + paymentAttempt,
       },
       order: {
         amount: paymentSessionData.amount,
-        // currency: String(paymentSessionData.currency_code).toUpperCase(),
         currency: "AED",
-        reference: "OrdID_" + context.cart_id,
+        // reference: "OrdID_" + cartId,
       },
-      transaction: {
-        reference: context.cart_id,
-      },
+      // transaction: {
+      //   reference: cartId,
+      // },
       session: {
-        id: paymentSessionData.sessionId,
+        id: paymentSessionData.session_id,
       },
       sourceOfFunds: {
         type: "CARD",
@@ -478,7 +472,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         threeDS: false,
         amount: paymentSessionData.amount,
         sessionId: paymentSessionData.sessionId,
-        payment_attempt: paymentSessionData.payment_attempt,
+        payment_attempt: paymentAttempt,
       },
       status: "canceled",
     };
