@@ -43,15 +43,6 @@ export default function ExpressCheckout({
       // @ts-ignore
       if (window.ApplePaySession && window.PaymentRequest) {
         setShowLabel(true)
-        const button = document.querySelector("apple-pay-button")
-        console.log("Apple pay button..", button)
-        if (button) {
-          console.log("button exists", button)
-          // @ts-ignore
-          button.style.display = "block" // Make the button visible
-          // @ts-ignore
-          button.disabled = false // Enable the button
-        }
       } else {
         console.log("Apple Pay is not available on this device or browser.")
       }
@@ -59,6 +50,20 @@ export default function ExpressCheckout({
 
     enableApplePayButton()
   }, [])
+
+  useEffect(() => {
+    if (showLabel) {
+      const button = document.querySelector("apple-pay-button")
+      console.log("Apple pay button..", button)
+      if (button) {
+        console.log("button exists", button)
+        // @ts-ignore
+        button.style.display = "block" // Make the button visible
+        // @ts-ignore
+        button.disabled = false // Enable the button
+      }
+    }
+  }, [showLabel])
 
   useEffect(() => {
     console.log("Available shipping methods", availableShippingMethods)
@@ -259,7 +264,7 @@ export default function ExpressCheckout({
       )}
       {/* 
 // @ts-ignore */}
-      {window.ApplePaySession && window.PaymentRequest && (
+      {showLabel && (
         <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
           {/* 
 // @ts-ignore */}
@@ -282,6 +287,7 @@ export default function ExpressCheckout({
           <div className="bg-[#eee] h-[1px] w-1/2"></div>
         </div>
       )}
+
       {loading && (
         <div className="fixed z-50 top-0 bg-black h-full w-full inset-0 bg-opacity-60 flex items-center justify-center">
           <div className="ml-3 border-gray-100 h-12 w-12 animate-spin rounded-full border-2 border-t-gray-500" />
