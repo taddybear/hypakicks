@@ -40,13 +40,16 @@ export default function ExpressCheckout({
   )
   useEffect(() => {
     const enableApplePayButton = async () => {
+      // @ts-ignore
       if (window.ApplePaySession && window.PaymentRequest) {
+        setShowLabel(true)
         const button = document.querySelector("apple-pay-button")
         console.log("Apple pay button..", button)
         if (button) {
           console.log("button exists", button)
-          setShowLabel(true)
+          // @ts-ignore
           button.style.display = "block" // Make the button visible
+          // @ts-ignore
           button.disabled = false // Enable the button
         }
       } else {
@@ -144,6 +147,7 @@ export default function ExpressCheckout({
       const request = new PaymentRequest(methods, details, options)
       console.log("Request", request)
 
+      // @ts-ignore
       request.onmerchantvalidation = (event: any) => {
         const merchantSessionPromise = fetch(
           "https://hypakicks-production.up.railway.app/store/pay",
@@ -164,6 +168,7 @@ export default function ExpressCheckout({
 
       request.onshippingaddresschange = (event: any) => {
         console.log("Shipping address change", request.shippingAddress)
+        // @ts-ignore
         setShippingAddress(request.shippingAddress)
         event.updateWith({
           total: {
@@ -252,14 +257,23 @@ export default function ExpressCheckout({
           Express checkout
         </h1>
       )}
-      <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
-        <apple-pay-button
-          buttonstyle="black"
-          type="buy"
-          locale="en-US"
-          onclick={initiateApplePay}
-        ></apple-pay-button>
-      </div>
+      {/* 
+// @ts-ignore */}
+      {window.ApplePaySession && window.PaymentRequest && (
+        <div className="flex space-x-3 w-full mt-4 mb-6 !Poppins500">
+          {/* 
+// @ts-ignore */}
+          <apple-pay-button
+            buttonstyle="black"
+            type="buy"
+            locale="en-US"
+            onclick={initiateApplePay}
+          >
+            {/* 
+            // @ts-ignore */}
+          </apple-pay-button>
+        </div>
+      )}
 
       {showLabel && (
         <div className="flex items-center my-4 mb-8">
