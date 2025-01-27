@@ -102,7 +102,9 @@ const Addresses = ({
             behavior: "smooth",
           })
           console.log("Error placing order", err)
-          setErrorMessage(err.message)
+          setErrorMessage(
+            "The provided card details are invalid. Please try again."
+          )
         }
       })
       .finally(() => {
@@ -179,6 +181,11 @@ const Addresses = ({
                       console.error("error.msg : ", error.msg)
                       console.error("error.result : ", error.result)
                       console.error("error.status : ", error.status)
+                      setSubmitting(false)
+                      setPaymentHandling(false)
+                      setErrorMessage(
+                        "The provided card details are invalid. Please try again."
+                      )
                     } else {
                       console.log("After Initiate 3DS ", data)
 
@@ -213,7 +220,6 @@ const Addresses = ({
                             orderId,
                             transactionId,
                             function (data: any) {
-                              console.log("Data", data)
                               if (!data.error) {
                                 //data.response will contain all the response payload from the AUTHENTICATE_PAYER call.
                                 console.log(
@@ -232,6 +238,11 @@ const Addresses = ({
                           break
                         case "RESUBMIT_WITH_ALTERNATIVE_PAYMENT_DETAILS":
                           console.log("Invalid creds")
+                          setSubmitting(false)
+                          setPaymentHandling(false)
+                          setErrorMessage(
+                            "The provided card details are invalid. Please try again."
+                          )
                           // tryOtherPayment(); //Card does not support 3DS and transaction filtering rules require 3DS on this transaction: Ask the payer to select a different payment method
                           break
                       }
