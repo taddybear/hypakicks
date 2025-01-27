@@ -41,39 +41,65 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   const cardNameRef = useRef<HTMLInputElement>(null)
   const [formError, setFormError] = useState(false)
 
-  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "")
+  const [errors, setErrors] = useState({
+    cardNumber: "",
+    expiryDate: "",
+    securityCode: "",
+    nameOnCard: "",
+  });
 
-    if (value.length > 16) {
-      value = value.slice(0, 16)
+  const validateCardNumber = (value: string) => {
+    if (value.replace(/\s+/g, "").length !== 16) {
+      return "Card number must be 16 digits.";
     }
+    return "";
+  };
 
-    value = value.replace(/(\d{4})(?=\d)/g, "$1 ")
+  const validateSecurityCode = (value: string) => {
+    if (value.length < 3 || value.length > 4) {
+      return "Security code must be 3 or 4 digits.";
+    }
+    return "";
+  };
 
-    setCardNumber(value)
-  }
+  const validateExpiryDate = (value: string) => {
+    const regex = /^(0[1-9]|1[0-2]) \/ \d{2}$/;
+    if (!regex.test(value)) {
+      return "Expiry date must be in MM/YY format.";
+    }
+    return "";
+  };
+
+  const validateNameOnCard = (value: string) => {
+    if (value.length < 3) {
+      return "Name must be at least 3 characters.";
+    }
+    return "";
+  };
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ");
+    setCardNumber(value);
+    setErrors((prev) => ({ ...prev, cardNumber: validateCardNumber(value) }));
+  };
 
   const handleSecurityCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "")
+    const value = e.target.value.replace(/\D/g, "").slice(0, 4);
+    setSecurityCode(value);
+    setErrors((prev) => ({ ...prev, securityCode: validateSecurityCode(value) }));
+  };
 
-    if (value.length > 4) {
-      value = value.slice(0, 4)
-    }
-
-    setSecurityCode(value)
-  }
   const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "")
+    const value = e.target.value.replace(/\D/g, "").slice(0, 4).replace(/(\d{2})(?=\d)/, "$1 / ");
+    setExpiryDate(value);
+    setErrors((prev) => ({ ...prev, expiryDate: validateExpiryDate(value) }));
+  };
 
-    if (value.length > 4) {
-      value = value.slice(0, 4)
-    }
-    if (value.length > 2) {
-      value = value.slice(0, 2) + " / " + value.slice(2)
-    }
-
-    setExpiryDate(value)
-  }
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNameOnCard(value);
+    setErrors((prev) => ({ ...prev, nameOnCard: validateNameOnCard(value) }));
+  };
 
   return (
     <>
@@ -159,7 +185,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       {/* <PopoverPanel static> */}
       {paymentOption === "credit_card" && (
         <div className="bg-[#f4f4f4] p-4 space-y-4 border-[#DDDDDD]">
-          <div className="flex relative z-0 w-full txt-compact-medium">
+          <div className="flex flex-col relative z-0 w-full txt-compact-medium">
             <input
               type="text"
               name="card-number"
@@ -168,7 +194,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               onChange={handleCardNumberChange}
               placeholder={""}
               className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
-                formError ? "border-red-600" : "border-[#DEDEDE]"
+                errors.cardNumber ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
               }`}
               ref={cardNumberRef}
               tabIndex={1}
@@ -207,15 +234,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 </g>
               </svg>
             </div>
-            {formError && (
-              <p className="text-red-600 text-sm mt-1 Poppins400">
-                Enter a card number
-              </p>
-            )}
+            {errors.cardNumber && <p className="text-red-500 text-xs">{errors.cardNumber}</p>}
           </div>
 
           <div className="flex space-x-4">
-            <div className="flex relative z-0 w-1/2 txt-compact-medium">
+            <div className="flex flex-col relative z-0 w-1/2 txt-compact-medium">
               <input
                 type="text"
                 name="expiration-date"
@@ -224,7 +247,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 value={expiryDate}
                 onChange={handleExpirationChange}
                 className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
-                  formError ? "border-red-600" : "border-[#DEDEDE]"
+                  errors.expiryDate ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                  : "border-[#DEDEDE]"
                 }`}
                 ref={expiryDateRef}
                 tabIndex={2}
@@ -237,13 +261,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 Expiry date
               </label>
 
-              {formError && (
-                <p className="text-red-600 text-sm mt-1 Poppins400">
-                  Enter a valid expiration date
-                </p>
-              )}
+              {errors.expiryDate && <p className="text-red-500 text-xs">{errors.expiryDate}</p>}
             </div>
-            <div className="flex relative z-0 w-1/2 txt-compact-medium">
+            <div className="flex flex-col relative z-0 w-1/2 txt-compact-medium">
               <input
                 type="number"
                 name="security-code"
@@ -252,7 +272,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 onChange={handleSecurityCodeChange}
                 placeholder={""}
                 className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
-                  formError ? "border-red-600" : "border-[#DEDEDE]"
+                  errors.securityCode ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                  : "border-[#DEDEDE]"
                 }`}
                 ref={securityCodeRef}
                 tabIndex={3}
@@ -290,23 +311,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   </div>
                 </div>
               </div>
-              {formError && (
-                <p className="text-red-600 text-sm mt-1 Poppins400">
-                  Enter the CVV or security code on your card
-                </p>
-              )}
+              {errors.securityCode && <p className="text-red-500 text-xs">{errors.securityCode}</p>}
             </div>
           </div>
-          <div className="flex relative z-0 w-full txt-compact-medium">
+          <div className="flex flex-col relative z-0 w-full txt-compact-medium">
             <input
               type="text"
               name="card-name"
               id="card-name"
               value={nameOnCard}
-              onChange={(e) => setNameOnCard(e.target.value)}
+              onChange={handleNameChange}
               placeholder={""}
               className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
-                formError ? "border-red-600" : "border-[#DEDEDE]"
+                errors.nameOnCard ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
+                : "border-[#DEDEDE]"
               }`}
               ref={cardNameRef}
               tabIndex={4}
@@ -319,11 +337,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               Name on Card
             </label>
 
-            {formError && (
-              <p className="text-red-600 text-sm mt-1 Poppins400">
-                Enter your name exactly as it’s written on your card
-              </p>
-            )}
+            {errors.nameOnCard && <p className="text-red-500 text-xs">{errors.nameOnCard}</p>}
           </div>
         </div>
       )}
@@ -361,3 +375,5 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 }
 
 export default PaymentForm
+
+
