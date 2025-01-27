@@ -16,6 +16,13 @@ module.exports = defineConfig({
   },
   admin: {
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
+    vite: () => {
+      return {
+        server: {
+          allowedHosts: [".hypakicks-production.up.railway.app"], // replace ".medusa-server-testing.com" with ".yourdomain.com"
+        },
+      };
+    },
   },
   modules: [
     {
