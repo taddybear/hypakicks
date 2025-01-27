@@ -80,25 +80,37 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ");
     setCardNumber(value);
-    setErrors((prev) => ({ ...prev, cardNumber: validateCardNumber(value) }));
+  };
+  
+  const handleCardNumberBlur = () => {
+    setErrors((prev) => ({ ...prev, cardNumber: validateCardNumber(cardNumber) }));
   };
 
   const handleSecurityCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 4);
     setSecurityCode(value);
-    setErrors((prev) => ({ ...prev, securityCode: validateSecurityCode(value) }));
+  };
+
+  const handleSecurityCodeBlur = () => {
+    setErrors((prev) => ({ ...prev, securityCode: validateSecurityCode(securityCode) }));
   };
 
   const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 4).replace(/(\d{2})(?=\d)/, "$1 / ");
     setExpiryDate(value);
-    setErrors((prev) => ({ ...prev, expiryDate: validateExpiryDate(value) }));
+  };
+
+  const handleExpiryDateBlur = () => {
+    setErrors((prev) => ({ ...prev, expiryDate: validateExpiryDate(expiryDate) }));
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setNameOnCard(value);
-    setErrors((prev) => ({ ...prev, nameOnCard: validateNameOnCard(value) }));
+  };
+
+  const handleNameOnCardBlur = () => {
+    setErrors((prev) => ({ ...prev, nameOnCard: validateNameOnCard(nameOnCard) }));
   };
 
   return (
@@ -192,6 +204,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               id="card-number"
               value={cardNumber}
               onChange={handleCardNumberChange}
+              onBlur={handleCardNumberBlur}
               placeholder={""}
               className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
                 errors.cardNumber ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
@@ -246,6 +259,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 placeholder={""}
                 value={expiryDate}
                 onChange={handleExpirationChange}
+                onBlur={handleExpiryDateBlur}
                 className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
                   errors.expiryDate ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
                   : "border-[#DEDEDE]"
@@ -270,6 +284,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 id="security-code"
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
+                onBlur={handleSecurityCodeBlur}
                 placeholder={""}
                 className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
                   errors.securityCode ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
@@ -321,6 +336,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               id="card-name"
               value={nameOnCard}
               onChange={handleNameChange}
+              onBlur={handleNameOnCardBlur}
               placeholder={""}
               className={`Poppins400 px-4 pt-5 pb-2 h-12 bg-white border-[1px] w-full rounded-md ${
                 errors.nameOnCard ? "border-red-500  border-[3px] focus:ring-0 focus:outline-none"
