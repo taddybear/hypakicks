@@ -23,7 +23,6 @@ export async function GET(
       }
     );
 
-    console.log("Carts:", carts);
     res.status(200).send(carts);
   } catch (error) {
     console.log("Error:", error);

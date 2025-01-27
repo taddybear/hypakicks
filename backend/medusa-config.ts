@@ -30,6 +30,7 @@ module.exports = defineConfig({
               msoUrl: process.env.MPGS_MSO_URL,
               merchantId: process.env.MPGS_MERCHANT_ID,
               apiPassword: process.env.MPGS_API_PASSWORD,
+              currency: process.env.MPGS_CURRENCY,
             },
           },
         ],

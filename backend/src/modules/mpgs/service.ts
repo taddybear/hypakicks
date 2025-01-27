@@ -19,6 +19,7 @@ type Options = {
   msoUrl: string;
   merchantId: string;
   apiPassword: string;
+  currency: string;
 };
 
 type InjectedDependencies = {
@@ -58,6 +59,12 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         "MPGS MSO Url is required in the provider's options."
       );
     }
+    if (!options.currency) {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        "MPGS Currency is required in the provider's options."
+      );
+    }
   }
 
   generateAuthToken = () => {
@@ -85,7 +92,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       const body = {
         apiOperation: "AUTHORIZE",
         order: {
-          currency: "AED",
+          currency: this.options_.currency,
           amount: "5656",
           walletProvider: "APPLE_PAY",
         },
@@ -178,7 +185,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
             order: {
               id: "OrdID_" + cartId + "_" + paymentAttempt,
               amount: amount,
-              currency: "AED",
+              currency: this.options_.currency,
             },
             transaction: {
               id: "TxnID_" + cartId + "_" + paymentAttempt,
@@ -250,7 +257,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       correlationId: cart_id,
       order: {
         reference: `OrdID_${cart_id}_${payment_attempt}`,
-        currency: "AED",
+        currency: this.options_.currency,
       },
       transaction: {
         reference: `TxnID_${cart_id}_${payment_attempt}`,
@@ -341,7 +348,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       },
       order: {
         amount: amount,
-        currency: "AED",
+        currency: this.options_.currency,
       },
       session: {
         id: session_id,
@@ -430,7 +437,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       },
       order: {
         amount: paymentSessionData.amount,
-        currency: "AED",
+        currency: this.options_.currency,
         // reference: "OrdID_" + cartId,
       },
       // transaction: {
