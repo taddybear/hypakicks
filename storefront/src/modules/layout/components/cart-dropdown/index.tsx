@@ -36,8 +36,13 @@ const CartDropdown = ({
     setCartDropdownOpen(false)
   }, [])
 
+  // const handleRedirectUrl = async () => {
+  //   router.push(`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`)
+  // }
   const handleRedirectUrl = async () => {
-    router.push(`http://localhost:8000/us/checkout?cart_id=${cartState?.id}`)
+    close()
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+    router.push(`${baseUrl}/us/checkout?cart_id=${cartState?.id}`)
   }
 
   const totalItems =
@@ -289,25 +294,25 @@ const CartDropdown = ({
                       ))}
                   </div>
                   <div className="bg-white px-[1.875rem] pt-5 pb-4">
-                    <LocalizedClientLink
+                    {/* <LocalizedClientLink
                       href={`/checkout/?cart_id=${cartState?.id}`}
+                    > */}
+                    <button
+                      onClick={handleRedirectUrl}
+                      // onClick={close}
+                      data-testid="checkout-button"
+                      className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
                     >
-                      <button
-                        // onClick={handleRedirectUrl}
-                        onClick={close}
-                        data-testid="checkout-button"
-                        className="py-[0.625rem] w-full uppercase bg-[#44b865] rounded-[0.313rem] Poppins600 text-lg	 text-white hover:bg-white hover:border-2 hover:border-[#44b865] hover:text-[#44b865]"
-                      >
-                        Checkout
-                      </button>
-                      {/* <Image
+                      Checkout
+                    </button>
+                    {/* <Image
                         src={Mastercard}
                         alt=""
                         width={225}
                         height={39}
                         className="w-full mt-3"
                       /> */}
-                    </LocalizedClientLink>
+                    {/* </LocalizedClientLink> */}
                   </div>
 
                   {/* <div className="p-4 flex flex-col  text-small-regular">
