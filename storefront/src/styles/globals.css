@@ -305,6 +305,8 @@ apple-pay-button {
 @media (min-width: 550px) {
   .meetOurTeam {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem;
+    /* margin-right: 0.5rem; */
   }
 }
 
@@ -314,5 +316,7 @@ apple-pay-button {
   }
   .meetOurTeam {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.8rem;
+    /* margin-right: 0.5rem; */
   }
 }

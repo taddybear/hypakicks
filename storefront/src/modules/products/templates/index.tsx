@@ -42,7 +42,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <ProductTabs product={product} />
         </div> */}
 
-        <div className="mt-3 lg:mt-0 productDetailWidth">
+        <div className="px-3 lg:px-0 mt-3 lg:mt-0 productDetailWidth">
           <Image
             src={product?.thumbnail || ""}
             alt=""

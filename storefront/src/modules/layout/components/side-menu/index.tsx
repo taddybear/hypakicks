@@ -29,48 +29,16 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
       url: "/contact-us",
     },
     {
+      title: "Shipping & Delivery",
+      url: "/shipping-and-delivery",
+    },
+    {
       title: "FAQ",
       url: "/faq",
     },
     {
       title: "Order Tracking",
       url: "/orders-tracking",
-    },
-    {
-      title: "Shipping & Delivery",
-      url: "/shipping-and-delivery",
-    },
-    {
-      title: "Trending Now",
-      url: "/shop",
-    },
-    {
-      title: "Women's Shoes",
-      url: "/shop",
-    },
-    {
-      title: "Men's Shoes",
-      url: "/shop",
-    },
-    {
-      title: "New",
-      url: "/shop",
-    },
-    {
-      title: "Winter collection",
-      url: "/shop",
-    },
-    {
-      title: "Adidas",
-      url: "/shop",
-    },
-    {
-      title: "New Balance",
-      url: "/shop",
-    },
-    {
-      title: "Nike",
-      url: "/shop",
     },
   ]
 
@@ -143,7 +111,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
               >
                 <div>
                   <div className="flex justify-between">
-                    <h1 className="text-xl	py-[0.625rem] Poppins500">
+                    <h1 className="text-xl text-[#404040]	py-[0.625rem] Poppins600">
                       Mobile Menu
                     </h1>
                     <div className=" rounded-full border-2 border-[#44b865] ">
