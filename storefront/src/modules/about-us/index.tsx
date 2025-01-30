@@ -98,14 +98,14 @@ const AboutUs = () => {
             {teamMembers.map((member) => (
               <div
                 key={member.id}
-                className="my-5 lg:my-[0.625rem] lg:mx-2 rounded-[0.5rem] border-[1px] border-[#efefef]"
+                className="my-5 lg:my-[0.625rem] rounded-[0.5rem] border-[1px] border-[#efefef]"
               >
                 <Image
                   src={member.imageSrc}
                   alt={member.name}
                   width={500}
                   height={500}
-                  className="rounded-[0.5rem] object-cover w-full h-[407px] small:h-[600px] large:h-[407px]"
+                  className="rounded-[0.5rem] object-cover w-full h-[547px] small:h-[600px] large:h-[547px]"
                 />
                 <div className="p-4">
                   <p className="pb-2 text-[#212529] Poppins500 text-[1.25rem]">
