@@ -7,6 +7,21 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
 
+export const updateProductPopularity = async (productHandle: string) => {
+  return sdk.client
+    .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
+      `/store/products/popularity/${productHandle}`,
+      {
+        method: "POST",
+      }
+    )
+    .then((res) => {
+      return {
+        response: res,
+      }
+    })
+}
+
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
