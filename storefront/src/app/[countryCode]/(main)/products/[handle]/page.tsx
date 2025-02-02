@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { listProducts } from "@lib/data/products"
+import { listProducts, updateProductPopularity } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
 
@@ -87,6 +87,8 @@ export default async function ProductPage(props: Props) {
   if (!pricedProduct) {
     notFound()
   }
+
+  const popularity = await updateProductPopularity(pricedProduct.handle)
 
   return (
     <ProductTemplate

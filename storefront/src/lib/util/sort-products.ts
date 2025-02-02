@@ -46,5 +46,17 @@ export function sortProducts(
     })
   }
 
+  if (sortBy === "popularity") {
+    sortedProducts.sort((a, b) => {
+      // Use optional chaining to safely access `metadata` and `popularity`
+      // Provide a default value of 0 if `metadata` is null or `popularity` is undefined
+      const popularityA = (a.metadata?.popularity as number) ?? 0
+      const popularityB = (b.metadata?.popularity as number) ?? 0
+
+      // Sort in descending order (most popular first)
+      return popularityB - popularityA
+    })
+  }
+
   return sortedProducts
 }
