@@ -20,7 +20,10 @@ module.exports = defineConfig({
     vite: () => {
       return {
         server: {
-          allowedHosts: [".hypakicks-production.up.railway.app"], // replace ".medusa-server-testing.com" with ".yourdomain.com"
+          allowedHosts: [
+            ".hypakicks-production.up.railway.app",
+            "hypakicks-production-ce3d.up.railway.app",
+          ], // replace ".medusa-server-testing.com" with ".yourdomain.com"
         },
       };
     },
