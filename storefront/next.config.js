@@ -38,7 +38,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "hypakicks-production.up.railway.app",
+        hostname: "bucket-production-ce8f.up.railway.app",
       },
     ],
   },
