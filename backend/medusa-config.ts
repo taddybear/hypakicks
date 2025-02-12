@@ -22,7 +22,7 @@ module.exports = defineConfig({
         server: {
           allowedHosts: [
             ".hypakicks-production.up.railway.app",
-            "hypakicks-production-ce3d.up.railway.app",
+            ".hypakicks-production-ce3d.up.railway.app",
           ], // replace ".medusa-server-testing.com" with ".yourdomain.com"
         },
       };
