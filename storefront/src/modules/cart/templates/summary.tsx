@@ -34,7 +34,7 @@ const Summary = ({ cart }: SummaryProps) => {
       </Heading>
       <DiscountCode cart={cart} />
       <Divider />
-      <CartTotals totals={cart} />
+      <CartTotals totals={cart} shippingMethods={null} />
       <LocalizedClientLink
         href={"/checkout?step=" + step}
         data-testid="checkout-button"
