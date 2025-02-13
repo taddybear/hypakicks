@@ -41,8 +41,8 @@ const CartDropdown = ({
   // }
   const handleRedirectUrl = async () => {
     close()
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-    router.push(`${baseUrl}/us/checkout?cart_id=${cartState?.id}`)
+    const redirectionLink = process.env.NEXT_PUBLIC_REDIRECTION_LINK
+    router.push(`${redirectionLink}/us/checkout?cart_id=${cartState?.id}`)
   }
 
   const totalItems =
