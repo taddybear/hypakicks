@@ -192,7 +192,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
             },
             authentication: {
               channel: "PAYER_BROWSER",
-              redirectResponseUrl: `${process.env.STORE_CORS}/us/checkout?cart_id=${cartId}&session_id=${data.session.id}`,
+              redirectResponseUrl: `${process.env.MAIN_STORE_CORS}/us/checkout?cart_id=${cartId}&session_id=${data.session.id}`,
             },
           };
 
