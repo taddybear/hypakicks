@@ -1,5 +1,6 @@
 import { retrieveCart, setRedirectCartId } from "@lib/data/cart"
 import { retrieveCustomer } from "@lib/data/customer"
+import { listCartShippingMethods } from "@lib/data/fulfillment"
 import PaymentWrapper from "@modules/checkout/components/payment-wrapper"
 import RedirectComponent from "@modules/checkout/components/redirect-component"
 import CheckoutForm from "@modules/checkout/templates/checkout-form"
@@ -26,6 +27,7 @@ export default async function Checkout({
   }
 
   const customer = await retrieveCustomer()
+  const shippingMethods = await listCartShippingMethods(cart.id)
 
   return (
     <>
@@ -37,7 +39,7 @@ export default async function Checkout({
           </PaymentWrapper>
         </div>
         <div className="lg:w-[46%] bg-[#eee]">
-          <CheckoutSummary cart={cart} />
+          <CheckoutSummary cart={cart} shippingMethods={shippingMethods} />
         </div>
       </div>
     </>

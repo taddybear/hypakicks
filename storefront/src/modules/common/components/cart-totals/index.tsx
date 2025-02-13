@@ -2,6 +2,7 @@
 
 import { convertToLocale } from "@lib/util/money"
 import React from "react"
+import { HttpTypes } from "@medusajs/types"
 
 type CartTotalsProps = {
   totals: {
@@ -15,9 +16,10 @@ type CartTotalsProps = {
     currency_code: string
     shipping_subtotal?: number | null
   }
+  shippingMethods: HttpTypes.StoreCartShippingOption[] | null
 }
 
-const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
+const CartTotals: React.FC<CartTotalsProps> = ({ totals, shippingMethods }) => {
   const {
     currency_code,
     total,
@@ -28,8 +30,12 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     shipping_subtotal,
   } = totals
 
-  console.log("Totals on completion page", totals)
+  // console.log("Totals on completion page", totals)
+  const shippingMethodsAmount = shippingMethods?.map((item) =>
+    Number(item.amount)
+  )
 
+  console.log("shippingMethodss...", shippingMethodsAmount)
   return (
     <div>
       <div className="flex flex-col gap-y-3 txt-medium text-ui-fg-subtle ">
@@ -60,9 +66,24 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
         )}
         <div className="flex items-center justify-between text-black Poppins400">
           <span>Shipping</span>
-          <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
-            {convertToLocale({ amount: shipping_subtotal ?? 0, currency_code })}
-          </span>
+          {shipping_subtotal !== 0 ? (
+            <span
+              data-testid="cart-shipping"
+              data-value={shipping_subtotal || 0}
+            >
+              {convertToLocale({
+                amount: shipping_subtotal ?? 0,
+                currency_code,
+              })}
+            </span>
+          ) : (
+            <span data-testid="cart-shipping">
+              {convertToLocale({
+                amount: shippingMethodsAmount?.[0] ?? 0,
+                currency_code,
+              })}
+            </span>
+          )}
         </div>
         <div className="flex justify-between text-black Poppins400">
           <span className="flex gap-x-1 items-center ">Estimated taxes</span>

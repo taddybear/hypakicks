@@ -60,7 +60,7 @@ const MobileCheckoutSummary = ({ cart }: { cart: any }) => {
             <>
               <ItemsPreviewTemplate cart={cart} className="bg-[#eee]" />
               <DiscountCode cart={cart} />
-              <CartTotals totals={cart} />
+              <CartTotals totals={cart} shippingMethods={null} />
             </>
           )}
         </div>
