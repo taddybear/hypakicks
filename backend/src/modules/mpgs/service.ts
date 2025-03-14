@@ -15,11 +15,58 @@ import {
   WebhookActionResult,
 } from "@medusajs/framework/types";
 
+import { PaymentProviderContext } from "@medusajs/framework/types";
+
+import { sendCancelationEmail } from "src/utils/klaviyo/sendEmail";
+
 type Options = {
   msoUrl: string;
   merchantId: string;
   apiPassword: string;
   currency: string;
+};
+
+export type CartItem = {
+  id: string;
+  title: string;
+  subtitle: string;
+  quantity: number;
+  cart_id: string;
+  unit_price: number;
+  subtotal: number;
+  total: number;
+};
+
+export type ShippingMethod = {
+  amount: number;
+  is_tax_inclusive: boolean;
+  shipping_option_id: string;
+  id: string;
+};
+
+export type ShippingAddress = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  address_1: string;
+  address_2: string;
+  city: string;
+  postal_code: string;
+  phone: string;
+};
+
+export type ExtendedPaymentProviderContext = PaymentProviderContext & {
+  cart?: {
+    id: string;
+    currency_code: string;
+    email: string;
+    total: number;
+    subtotal: number;
+    shipping_total: number;
+    items: CartItem[];
+    shipping_methods: ShippingMethod[];
+    shipping_address: ShippingAddress | null;
+  };
 };
 
 type InjectedDependencies = {
@@ -82,6 +129,13 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 
     // @ts-ignore
     const cartId = context.cart_id;
+    const cart_ = (context as ExtendedPaymentProviderContext).cart;
+    // console.log(
+    //   cart_,
+    //   cart_?.items,
+    //   cart_?.shipping_methods,
+    //   cart_?.shipping_address
+    // );
 
     if (context && "apple_pay" in context) {
       const authToken = this.generateAuthToken();
@@ -219,6 +273,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
                 amount: amount,
                 currency_code: currency_code,
                 payment_attempt: paymentAttempt,
+                cart: cart_,
               },
             };
           }
@@ -474,6 +529,8 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       }
     }
     console.log("Returning same data");
+    const cart_ = paymentSessionData.cart;
+    await sendCancelationEmail(cart_);
     return {
       data: {
         threeDS: false,
