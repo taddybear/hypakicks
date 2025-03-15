@@ -228,6 +228,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
       console.log(228);
 
       if (response.ok) {
+        console.log("Response", response);
         const data = await response.json();
         console.log("Session Data: ", data);
         if (data.result === "SUCCESS") {
