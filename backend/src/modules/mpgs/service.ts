@@ -129,7 +129,9 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
 
     // @ts-ignore
     const cartId = context.cart_id;
+    console.log(132);
     const cart_ = (context as ExtendedPaymentProviderContext).cart;
+    console.log(134);
     // console.log(
     //   cart_,
     //   cart_?.items,
@@ -191,20 +193,27 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
         data: { apple_pay_result: "FAILED" },
       };
     }
+    console.log(196);
 
     // @ts-ignore
     const paymentAttempt = context.payment_attempt;
+    console.log(199);
     // @ts-ignore
     const cardNumber = context.card_number.replace(/ /g, "");
+    console.log(201);
     // @ts-ignore
     const expiryDate = context.expiry_date.replace(/ /g, "");
+    console.log(203);
     // @ts-ignore
     const nameOnCard = context.name_on_card;
+    console.log(205);
     // @ts-ignore
     const securityCode = context.security_code;
+    console.log(208);
 
     try {
       const authToken = this.generateAuthToken();
+      console.log(212);
       const url =
         this.options_.msoUrl +
         `/api/rest/version/100/merchant/${this.options_.merchantId}/session`;
@@ -216,6 +225,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
           "Content-Type": "application/json",
         },
       });
+      console.log(228);
 
       if (response.ok) {
         const data = await response.json();

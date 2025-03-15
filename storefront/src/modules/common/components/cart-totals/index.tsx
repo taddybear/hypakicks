@@ -35,7 +35,6 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals, shippingMethods }) => {
     Number(item.amount)
   )
 
-  console.log("shippingMethodss...", shippingMethodsAmount)
   return (
     <div>
       <div className="flex flex-col gap-y-3 txt-medium text-ui-fg-subtle ">
