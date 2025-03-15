@@ -1,66 +1,70 @@
-import { login } from "@lib/data/customer";
-import { LOGIN_VIEW } from "@modules/account/templates/login-template";
-import ErrorMessage from "@modules/checkout/components/error-message";
-import { SubmitButton } from "@modules/checkout/components/submit-button";
-import Input from "@modules/common/components/input";
-import Eye from "@modules/common/icons/eye";
-import EyeOff from "@modules/common/icons/eye-off";
-import { redirect } from "next/navigation";
-import { useState } from "react";
+import { login } from "@lib/data/customer"
+import { LOGIN_VIEW } from "@modules/account/templates/login-template"
+import ErrorMessage from "@modules/checkout/components/error-message"
+import { SubmitButton } from "@modules/checkout/components/submit-button"
+import Input from "@modules/common/components/input"
+import Eye from "@modules/common/icons/eye"
+import EyeOff from "@modules/common/icons/eye-off"
+import { redirect } from "next/navigation"
+import { useState } from "react"
 
 type Props = {
-  setCurrentView: (view: LOGIN_VIEW) => void;
-};
+  setCurrentView: (view: LOGIN_VIEW) => void
+}
 
 const Login = ({ setCurrentView }: Props) => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [passwordError, setPasswordError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [inputType, setInputType] = useState("password");
+  const [formData, setFormData] = useState({ email: "", password: "" })
+  const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [message, setMessage] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [inputType, setInputType] = useState("password")
 
   const handleTogglePassword = () => {
-    setShowPassword((prevState) => !prevState);
+    setShowPassword((prevState) => !prevState)
     setInputType((prevState) =>
       prevState === "password" ? "text" : "password"
-    );
-  };
+    )
+  }
 
   const forgotPassword = () => {
-    redirect("/reset-password");
-  };
+    redirect("/reset-password")
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
     if (name === "password") {
-      setPasswordError(null);
+      setPasswordError(null)
     }
-  };
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPasswordError(null);
+    e.preventDefault()
+    setPasswordError(null)
 
     try {
-        const signedinCustomer = await login(null, new FormData(e.target as HTMLFormElement));
+      const signedinCustomer = await login(
+        null,
+        new FormData(e.target as HTMLFormElement)
+      )
 
-        if (typeof signedinCustomer === "string" && signedinCustomer.includes("password")) {
-            setPasswordError("This password is incorrect. Please try again.");
-            setFormData((prev) => ({ ...prev, password: "" }));
-            return;
-        }
+      if (
+        typeof signedinCustomer === "string" &&
+        signedinCustomer.includes("password")
+      ) {
+        setPasswordError("This password is incorrect. Please try again.")
+        setFormData((prev) => ({ ...prev, password: "" }))
+        return
+      }
 
-        // Handle successful login
-        // console.log("User signed in successfully:", signedinCustomer);
-
+      // Handle successful login
+      // console.log("User signed in successfully:", signedinCustomer);
     } catch (error) {
-        console.error("Signin failed:", error);
-        setMessage("An error occurred during login. Please try again.");
+      console.error("Signin failed:", error)
+      setMessage("An error occurred during login. Please try again.")
     }
-};
-
+  }
 
   return (
     <>
@@ -73,9 +77,15 @@ const Login = ({ setCurrentView }: Props) => {
         </h1>
       </section>
 
-      <form onSubmit={handleSubmit} className="px-3 mt-4 lg:mt-0 w-full lg:w-1/2 m-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="px-3 mt-4 lg:mt-0 w-full lg:w-1/2 m-auto"
+      >
         <div className="flex flex-col w-full">
-          <label htmlFor="email" className="!text-base text-[#404040] Poppins500">
+          <label
+            htmlFor="email"
+            className="!text-base text-[#404040] Poppins500"
+          >
             Email Address
           </label>
           <input
@@ -91,7 +101,10 @@ const Login = ({ setCurrentView }: Props) => {
             className="Poppins400 bg-[#F5F5F5] rounded-md p-3"
           />
 
-          <label htmlFor="password" className="mt-6 -mb-1 !text-base text-[#404040] Poppins500">
+          <label
+            htmlFor="password"
+            className="mt-6 -mb-1 !text-base text-[#404040] Poppins500"
+          >
             Password
           </label>
           <div className="relative w-full">
@@ -109,8 +122,8 @@ const Login = ({ setCurrentView }: Props) => {
             <button
               type="button"
               onClick={(e) => {
-                e.preventDefault();
-                handleTogglePassword();
+                e.preventDefault()
+                handleTogglePassword()
               }}
               className="absolute top-0 right-3 h-full items-center flex"
             >
@@ -120,7 +133,10 @@ const Login = ({ setCurrentView }: Props) => {
         </div>
 
         {/* Error Message */}
-        <ErrorMessage error={passwordError || message} data-testid="login-error-message" />
+        <ErrorMessage
+          error={passwordError || message}
+          data-testid="login-error-message"
+        />
 
         {/* Submit Button */}
         <SubmitButton
@@ -143,8 +159,15 @@ const Login = ({ setCurrentView }: Props) => {
         </button>
         .
       </span>
+      <button
+        onClick={() => forgotPassword()}
+        className="underline"
+        data-testid="reset-button"
+      >
+        Forgot Password?
+      </button>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
