@@ -225,7 +225,7 @@ class MPGSProviderService extends AbstractPaymentProvider<Options> {
           "Content-Type": "application/json",
         },
       });
-      console.log(228);
+      console.log(228, response);
 
       if (response.ok) {
         console.log("Response", response);
